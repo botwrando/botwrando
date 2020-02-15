@@ -1,0 +1,49 @@
+@import "fontsizes";
+
+@mixin f-main {
+  font-style: normal;
+  font-weight: bold;
+  @include fz-24;
+}
+
+@mixin f-sub {
+  font-style: normal;
+  font-weight: normal;
+  @include fz-15;
+  line-height: 120%;
+}
+
+@mixin f-reg {
+  font-style: normal;
+  font-weight: normal;
+  @include fz-16;
+}
+
+@mixin f-sec {
+  font-style: normal;
+  font-weight: normal;
+  @include fz-24;
+
+  @media (max-width: 480px) {
+    @include fz-18;
+  }
+}
+
+@mixin f-maj {
+  font-style: normal;
+  font-weight: bold;
+  @include fz-32;
+
+  @media (max-width: 480px) {
+    @include fz-18;
+  }
+}
+
+@mixin f-majsec {
+  font-style: normal;
+  font-weight: normal;
+  @include fz-32;
+  @media (max-width: 480px) {
+    @include fz-24;
+  }
+}
