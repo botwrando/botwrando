@@ -1,3 +1,5 @@
+import { groupBy } from "./utils";
+
 export type KeyMap = {
 	add_split: Function,
 	undo_split: Function,
@@ -18,7 +20,9 @@ export const register_callbacks = (map: KeyMap) => {
 	callbacks = map;
 }
 
-const teetow_profile: any = {
+type Hotkey = { [key: string]: Function }
+
+const teetow_profile: Hotkey = {
 	"Space": () => callbacks.add_split(),
 	"Backspace": () => callbacks.undo_split(),
 	"Period": () => callbacks.skip_split(),
@@ -26,7 +30,7 @@ const teetow_profile: any = {
 	"KeyP": () => callbacks.pause(),
 }
 
-const livesplit_profile: any = {
+const livesplit_profile: Hotkey = {
 	"Numpad1": () => callbacks.add_split(),
 	"Numpad8": () => callbacks.undo_split(),
 	"Numpad2": () => callbacks.skip_split(),
@@ -34,7 +38,7 @@ const livesplit_profile: any = {
 	"Numpad5": () => callbacks.pause(),
 }
 
-const specs_profile: any = {
+const specs_profile: Hotkey = {
 	"NumpadAdd": () => callbacks.add_split(),
 	"NumpadSubtract": () => callbacks.undo_split(),
 	"NumpadDivide": () => callbacks.skip_split(),
@@ -42,7 +46,7 @@ const specs_profile: any = {
 	"NumpadMultiply": () => callbacks.pause(),
 }
 
-const dj_profile: any = {
+const dj_profile: Hotkey = {
 	"F1": () => callbacks.add_split(),
 	"F4": () => callbacks.undo_split(),
 	"F5": () => callbacks.skip_split(),
@@ -50,13 +54,75 @@ const dj_profile: any = {
 	"F6": () => callbacks.pause(),
 }
 
-const keyboard_profile = {
+const keyboard_profile: Hotkey = {
 	...teetow_profile,
 	...livesplit_profile,
 	...specs_profile,
 	...dj_profile,
 }
 
+export const getProfile = () => keyboard_profile
+
 export const parse_keypress = (code: string): Function => {
 	return keyboard_profile[code];
+}
+
+type HotkeyDescription = {
+	[key: string]: string
+}
+const hotkey_descriptions: HotkeyDescription = {
+	"add_split": "Start the run / add a split",
+	"undo_split": "Undo last split",
+	"skip_split": "Skip a split",
+	"reset_splits": "Reset the run",
+	"pause": "Pause the timer",
+}
+
+const re_fn_name = /\(\) => callbacks\.(.+?)\(\)/;
+
+const getHotkeyDescription = (fn: Function) => {
+	const matches = re_fn_name.exec(fn.toString());
+	if (matches && matches.length > 0) {
+		const hotkeyfunc = matches[1];
+		if (hotkeyfunc in hotkey_descriptions)
+			return hotkey_descriptions[hotkeyfunc];
+	}
+}
+
+const re_shortkeynames = /Key(.+)/;
+const re_shortnumpadnames = /Numpad(.+)/;
+const stringsubst: any = {
+	"Add": "+",
+	"Subtract": "-",
+	"Divide": "/",
+	"Multiply": "*",
+	"Period": ".",
+}
+
+export const getShortKeyname = (keyname: string) => {
+	let outstr = keyname;
+
+	outstr = outstr.replace(/(.+)/, (m, g1:string) => (g1 in stringsubst) ? stringsubst[g1]: g1)
+
+	const alphanum_matches = re_shortkeynames.exec(outstr);
+	if (alphanum_matches && alphanum_matches.length > 0) {
+		return alphanum_matches[1];
+	}
+
+	const numpad_matches = re_shortnumpadnames.exec(outstr);
+	if (numpad_matches && numpad_matches.length > 0) {
+		let outstr = numpad_matches[1];
+		return `Num ${outstr}`;
+	}
+
+	return outstr;
+}
+
+export const getKeyMap = () => {
+	const keys = getProfile();
+	const grouped = groupBy(Object.entries(keys), (value: any) => {
+		const [key, fn] = value;
+		return getHotkeyDescription(fn);
+	})
+	return grouped;
 }

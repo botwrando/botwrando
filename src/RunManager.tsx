@@ -4,6 +4,7 @@ import { SplitHistory } from "./SplitHistory";
 import { SplitTimer } from "./SplitTimer";
 import { WorldMap } from "./WorldMap";
 import { parse_keypress, register_callbacks } from "./lib/keyboard";
+import { HotkeyList } from "./HotkeyList";
 
 export enum RunState {
 	Default,
@@ -55,7 +56,7 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const add_split = () => {
 		if (run.state === RunState.Running) {
-			if (shrineCount >= run.shrine_ids.length -1) {
+			if (shrineCount >= run.shrine_ids.length - 1) {
 				run.state = RunState.Ended;
 			}
 
@@ -132,6 +133,9 @@ export const RunManager = (props: RunManagerProps) => {
 				onUpdatePausedTime={onUpdatePausedTime}
 			/>
 			<WorldMap shrine={get_current_shrine()} />
+			<div className="hotkeys">
+				<HotkeyList />
+			</div>
 		</div>
 	);
 }
