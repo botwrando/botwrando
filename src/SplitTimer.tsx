@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Run, RunState } from './RunManager';
-import { getShrine } from './shrines';
-import { RunTimer } from './RunTimer';
+import React, { useState, useEffect } from "react";
+import { Run, RunState } from "./RunManager";
+import { getShrine } from "./shrines";
+import { RunTimer } from "./RunTimer";
 
 export type SplitTimerProps = {
 	run: Run;
 	currentShrine: number;
 	onUpdatePausedTime: (paused_time: number) => void;
-}
+};
 
 export const SplitTimer = (props: SplitTimerProps) => {
 	const [timestamp, setTimestamp] = useState(-1);
@@ -31,7 +31,6 @@ export const SplitTimer = (props: SplitTimerProps) => {
 			time_classes.push("is-paused");
 		}
 		setTimeclasses(time_classes);
-
 	}, [run.state]);
 
 	return (
@@ -45,7 +44,9 @@ export const SplitTimer = (props: SplitTimerProps) => {
 			</div>
 
 			<div className="desc">
-				{current_shrine?.desc ? current_shrine.desc : "Start the timer to reveal the first shrine!"}
+				{current_shrine?.desc
+					? current_shrine.desc
+					: "Start the timer to reveal the first shrine!"}
 			</div>
 
 			<div className={timeclasses.join(" ")}>
@@ -56,5 +57,5 @@ export const SplitTimer = (props: SplitTimerProps) => {
 				/>
 			</div>
 		</div>
-	)
-}
+	);
+};

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { shrines, Shrine } from "./shrines";
+import { shrines, Shrine, BLOOD_MOON_SHRINE } from "./shrines";
 import { SplitHistory } from "./SplitHistory";
 import { SplitTimer } from "./SplitTimer";
 import { WorldMap } from "./WorldMap";
@@ -17,17 +17,18 @@ export type Run = {
 	state: RunState;
 	runner: string;
 	rundate: number;
+	is_blood_moon: Boolean;
 	paused_time: number;
 	seed: string;
 	shrine_ids: number[];
 	splits: Map<number, number>;
 	wr_splits: Map<number, number>;
 	pb_splits: Map<number, number>;
-}
+};
 
 type RunManagerProps = {
 	run: Run;
-}
+};
 
 export const RunManager = (props: RunManagerProps) => {
 	const [run, setRun] = useState(props.run);
@@ -36,11 +37,11 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const onUpdatePausedTime = (paused_time: number) => {
 		setRun(prev => ({ ...prev, paused_time }));
-	}
+	};
 
 	const update_splits = (splits: Map<number, number>) => {
 		setRun(prev => ({ ...prev, splits: splits }));
-	}
+	};
 
 	const set_run_state = (state: RunState) => {
 		setRun(prev => ({ ...prev, state: state }));
@@ -53,7 +54,7 @@ export const RunManager = (props: RunManagerProps) => {
 				setShrineCount(0);
 			}
 		}
-	}
+	};
 
 	const add_split = () => {
 		if (run.state === RunState.Running) {
@@ -65,16 +66,26 @@ export const RunManager = (props: RunManagerProps) => {
 			splits.set(shrineCount, Date.now() - run.rundate - run.paused_time);
 			update_splits(splits);
 			setShrineCount(prev => prev + 1);
-		}
-		else {
+		} else {
 			set_run_state(RunState.Running);
 		}
-	}
+	};
+
+	const toggle_blood_moon = () => {
+		const { shrine_ids, splits } = run;
+		if (splits.get(shrineCount) == BLOOD_MOON_SHRINE) {
+			shrine_ids.splice(shrineCount, 1);
+			// remove it
+		} else {
+			// add it
+			shrine_ids.splice(shrineCount, 0, BLOOD_MOON_SHRINE);
+		}
+	};
 
 	const undo_split = () => {
 		const splits = run.splits;
 		if (splits.size < 1) {
-			return
+			return;
 		}
 		splits.delete(shrineCount - 1);
 		setShrineCount(prev => prev - 1);
@@ -99,31 +110,43 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const pause = () => set_run_state(RunState.Paused);
 
-
 	const show_help = () => setShowHelp(!showHelp);
 
 	const handle_keyboard = (event: KeyboardEvent) => {
 		const callback = parse_keypress(event.code);
 		if (callback) callback();
-	}
+	};
 
 	React.useEffect(() => {
-		register_callbacks({ add_split, undo_split, skip_split, reset_splits, pause, show_help });
+		register_callbacks({
+			add_split,
+			undo_split,
+			skip_split,
+			reset_splits,
+			pause,
+			show_help
+		});
 	});
 
 	React.useEffect(() => {
 		document.addEventListener("keydown", handle_keyboard, false);
 
 		return () => {
-			document.removeEventListener("keydown", handle_keyboard, false)
+			document.removeEventListener("keydown", handle_keyboard, false);
 		};
 	});
 
-
+	const get_classes = () => {
+		const classes = ["main"];
+		if (run.is_blood_moon) classes.push("is-blood-moon");
+		return classes.join(" ");
+	};
 	const get_current_shrine = (): Shrine | undefined => {
-		const current_shrine = shrines.find(item => item.index === run.shrine_ids[shrineCount]);
+		const current_shrine = shrines.find(
+			item => item.index === run.shrine_ids[shrineCount]
+		);
 		return current_shrine;
-	}
+	};
 
 	return (
 		<div className="main">
@@ -137,7 +160,7 @@ export const RunManager = (props: RunManagerProps) => {
 			/>
 			<WorldMap shrine={get_current_shrine()} />
 			<div className={`help ${showHelp ? "is-visible" : ""}`}>
-				{!showHelp &&
+				{!showHelp && (
 					<>
 						<div className="helphint">
 							<span className="key">Space</span> to start / split
@@ -145,8 +168,8 @@ export const RunManager = (props: RunManagerProps) => {
 							<span className="key">H</span> to show / hide help
 						</div>
 					</>
-				}
-				{showHelp &&
+				)}
+				{showHelp && (
 					<>
 						<div className="instructions">
 							<Instructions run={run} />
@@ -156,20 +179,24 @@ export const RunManager = (props: RunManagerProps) => {
 							<HotkeyList />
 						</div>
 					</>
-				}
-
+				)}
 			</div>
 		</div>
 	);
-}
+};
 
 const Instructions = (props: { run: Run }) => {
 	const { run } = props;
 	return (
 		<>
-			All shrines except the Blood Moon shrine has been shuffled
-			using the seed {run.seed}. When then Blood Moon shrine is
-			completed, hit <span className="key">B</span> to insert a split.
+			<p>
+				All shrines except the Blood Moon shrine has been shuffled using
+				the seed {run.seed}.
+			</p>
+			<p>
+				Hit <span className="key">B</span> to insert a Blood Moon shrine
+				split.
+			</p>
 		</>
-	)
-}
+	);
+};

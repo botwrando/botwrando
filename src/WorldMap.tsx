@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Shrine } from "./shrines";
 
 export type WorldMapProps = {
-	shrine?: Shrine,
-}
+	shrine?: Shrine;
+};
 
 export const WorldMap = (props: WorldMapProps) => {
 	const [location, setLocation] = useState("");
@@ -29,12 +29,12 @@ export const WorldMap = (props: WorldMapProps) => {
 				{showMap && <MapFrame location={location} />}
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 type MapFrameProps = {
-	location: string
-}
+	location: string;
+};
 
 const MapFrame = (props: MapFrameProps) => {
 	return (
@@ -42,7 +42,7 @@ const MapFrame = (props: MapFrameProps) => {
 			title="BOTW map"
 			key={props.location}
 			className="mapframe"
-			src={`https://objmap.zeldamods.org/#/map/${props.location}`}>
-		</iframe>
-	)
-}
+			src={`https://objmap.zeldamods.org/#/map/${props.location}`}
+		></iframe>
+	);
+};

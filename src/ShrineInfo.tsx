@@ -1,17 +1,17 @@
-import './shrineinfo.scss'
-import React from 'react';
-import { getShrine } from './shrines'
+import "./shrineinfo.scss";
+import React from "react";
+import { getShrine } from "./shrines";
 import { format_time } from "./lib/time";
 
 export type ShrineInfoProps = {
-	counter: number
-	shrine_id: number
-	timestamp: number
-	is_main?: boolean
-	diff?: number
-	is_ahead?: boolean
-	is_pb?: boolean
-}
+	counter: number;
+	shrine_id: number;
+	timestamp: number;
+	is_main?: boolean;
+	diff?: number;
+	is_ahead?: boolean;
+	is_pb?: boolean;
+};
 
 export const ShrineInfo = (props: ShrineInfoProps) => {
 	const current_shrine = getShrine(props.shrine_id);
@@ -20,10 +20,8 @@ export const ShrineInfo = (props: ShrineInfoProps) => {
 	const timestamp_label = format_time(props.timestamp);
 
 	const diff_classes = ["diff"];
-	if (props.is_ahead)
-		diff_classes.push("is-ahead");
-	if (props.is_pb)
-		diff_classes.push("is-pb");
+	if (props.is_ahead) diff_classes.push("is-ahead");
+	if (props.is_pb) diff_classes.push("is-pb");
 
 	return (
 		<div className="shrine infolog">
@@ -32,5 +30,5 @@ export const ShrineInfo = (props: ShrineInfoProps) => {
 			<div className={diff_classes.join(" ")}>{diff_label}</div>
 			<div className="time">{timestamp_label}</div>
 		</div>
-	)
-}
+	);
+};
