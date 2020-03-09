@@ -32,6 +32,7 @@ type RunManagerProps = {
 export const RunManager = (props: RunManagerProps) => {
 	const [run, setRun] = useState(props.run);
 	const [shrineCount, setShrineCount] = useState(-1);
+	const [showHelp, setShowHelp] = useState(false);
 
 	const onUpdatePausedTime = (paused_time: number) => {
 		setRun(prev => ({ ...prev, paused_time }));
@@ -99,13 +100,15 @@ export const RunManager = (props: RunManagerProps) => {
 	const pause = () => set_run_state(RunState.Paused);
 
 
+	const show_help = () => setShowHelp(!showHelp);
+
 	const handle_keyboard = (event: KeyboardEvent) => {
 		const callback = parse_keypress(event.code);
 		if (callback) callback();
 	}
 
 	React.useEffect(() => {
-		register_callbacks({ add_split, undo_split, skip_split, reset_splits, pause });
+		register_callbacks({ add_split, undo_split, skip_split, reset_splits, pause, show_help });
 	});
 
 	React.useEffect(() => {
@@ -133,9 +136,40 @@ export const RunManager = (props: RunManagerProps) => {
 				onUpdatePausedTime={onUpdatePausedTime}
 			/>
 			<WorldMap shrine={get_current_shrine()} />
-			<div className="hotkeys">
-				<HotkeyList />
+			<div className={`help ${showHelp ? "is-visible" : ""}`}>
+				{!showHelp &&
+					<>
+						<div className="helphint">
+							<span className="key">Space</span> to start / split
+							&nbsp;
+							<span className="key">H</span> to show / hide help
+						</div>
+					</>
+				}
+				{showHelp &&
+					<>
+						<div className="instructions">
+							<Instructions run={run} />
+						</div>
+
+						<div className="hotkeys">
+							<HotkeyList />
+						</div>
+					</>
+				}
+
 			</div>
 		</div>
 	);
+}
+
+const Instructions = (props: { run: Run }) => {
+	const { run } = props;
+	return (
+		<>
+			All shrines except the Blood Moon shrine has been shuffled
+			using the seed {run.seed}. When then Blood Moon shrine is
+			completed, hit <span className="key">B</span> to insert a split.
+		</>
+	)
 }

@@ -6,6 +6,7 @@ export type KeyMap = {
 	skip_split: Function,
 	reset_splits: Function,
 	pause: Function,
+	show_help: Function,
 }
 
 let callbacks: KeyMap = {
@@ -14,6 +15,7 @@ let callbacks: KeyMap = {
 	skip_split: () => console.log("skip_split"),
 	reset_splits: () => console.log("reset_splits"),
 	pause: () => console.log("pause"),
+	show_help: () => console.log("show_help"),
 }
 
 export const register_callbacks = (map: KeyMap) => {
@@ -28,6 +30,7 @@ const teetow_profile: Hotkey = {
 	"Period": () => callbacks.skip_split(),
 	"KeyR": () => callbacks.reset_splits(),
 	"KeyP": () => callbacks.pause(),
+	"KeyH": () => callbacks.show_help(),
 }
 
 const livesplit_profile: Hotkey = {
@@ -76,6 +79,7 @@ const hotkey_descriptions: HotkeyDescription = {
 	"skip_split": "Skip a split",
 	"reset_splits": "Reset the run",
 	"pause": "Pause the timer",
+	"show_help": "Show / hide help",
 }
 
 const re_fn_name = /\(\) => callbacks\.(.+?)\(\)/;
@@ -102,7 +106,10 @@ const stringsubst: any = {
 export const getShortKeyname = (keyname: string) => {
 	let outstr = keyname;
 
-	outstr = outstr.replace(/(.+)/, (m, g1:string) => (g1 in stringsubst) ? stringsubst[g1]: g1)
+	Object.entries(stringsubst).map(value => {
+		const [search, replace] = value;
+		outstr = outstr.replace(search, replace as string);
+	});
 
 	const alphanum_matches = re_shortkeynames.exec(outstr);
 	if (alphanum_matches && alphanum_matches.length > 0) {
