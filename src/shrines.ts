@@ -17,6 +17,8 @@ export type Shrine = {
 export const getShrine = (shrine_id: number): Shrine | undefined =>
 	shrines.find(item => item.index === shrine_id);
 
+export const BLOOD_MOON_SHRINE = 78;
+export const PLATEAU_SHRINES = [38, 41, 9, 65];
 
 export const shrines = [
 	{

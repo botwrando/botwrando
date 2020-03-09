@@ -1,6 +1,12 @@
 @import "./styles/colors";
 
 .help {
+  p {
+    margin: 0;
+    & + p {
+      margin: 16px 0 0;
+    }
+  }
   &.is-visible {
     display: grid;
     grid-template-columns: 3fr 5fr;
@@ -25,7 +31,8 @@
     color: $milky-white;
     display: inline-block;
     font-size: 13px;
-    margin: 8px 4px;
+    line-height: 13px;
+    margin: 4px 4px;
     padding: 4px;
     text-transform: capitalize;
   }
@@ -39,5 +46,8 @@
   margin: -8px 0;
   .hotkey {
     display: contents;
+  }
+  .desc {
+    margin: 8px 0;
   }
 }

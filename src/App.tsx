@@ -10,6 +10,7 @@ function App() {
     runner: "Test Runner",
 		rundate: -1,
 		paused_time: -1,
+		is_blood_moon: false,
 		seed: testSeed,
 		shrine_ids: getShrines(testSeed),
 		splits: new Map([]),

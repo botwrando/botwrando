@@ -7,6 +7,7 @@ export type KeyMap = {
 	reset_splits: Function;
 	pause: Function;
 	show_help: Function;
+	toggle_blood_moon: Function;
 };
 
 let callbacks: KeyMap = {
@@ -15,7 +16,8 @@ let callbacks: KeyMap = {
 	skip_split: () => console.log("skip_split"),
 	reset_splits: () => console.log("reset_splits"),
 	pause: () => console.log("pause"),
-	show_help: () => console.log("show_help")
+	show_help: () => console.log("show_help"),
+	toggle_blood_moon: () => console.log("toggle_blood_moon"),
 };
 
 export const register_callbacks = (map: KeyMap) => {
@@ -30,7 +32,8 @@ const teetow_profile: Hotkey = {
 	Period: () => callbacks.skip_split(),
 	KeyR: () => callbacks.reset_splits(),
 	KeyP: () => callbacks.pause(),
-	KeyH: () => callbacks.show_help()
+	KeyH: () => callbacks.show_help(),
+	KeyB: () => callbacks.toggle_blood_moon(),
 };
 
 const livesplit_profile: Hotkey = {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { shrines, Shrine, BLOOD_MOON_SHRINE } from "./shrines";
+import { HotkeyList } from "./HotkeyList";
+import { parse_keypress, register_callbacks } from "./lib/keyboard";
+import { BLOOD_MOON_SHRINE, Shrine, shrines } from "./shrines";
 import { SplitHistory } from "./SplitHistory";
 import { SplitTimer } from "./SplitTimer";
 import { WorldMap } from "./WorldMap";
-import { parse_keypress, register_callbacks } from "./lib/keyboard";
-import { HotkeyList } from "./HotkeyList";
 
 export enum RunState {
 	Default,
@@ -15,9 +15,9 @@ export enum RunState {
 
 export type Run = {
 	state: RunState;
+	is_blood_moon: Boolean;
 	runner: string;
 	rundate: number;
-	is_blood_moon: Boolean;
 	paused_time: number;
 	seed: string;
 	shrine_ids: number[];
@@ -34,6 +34,7 @@ export const RunManager = (props: RunManagerProps) => {
 	const [run, setRun] = useState(props.run);
 	const [shrineCount, setShrineCount] = useState(-1);
 	const [showHelp, setShowHelp] = useState(false);
+	const [bloodMoonDone, setBloodMoonDone] = useState(false);
 
 	const onUpdatePausedTime = (paused_time: number) => {
 		setRun(prev => ({ ...prev, paused_time }));
@@ -41,6 +42,10 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const update_splits = (splits: Map<number, number>) => {
 		setRun(prev => ({ ...prev, splits: splits }));
+	};
+
+	const update_shrines = (shrine_ids: number[]) => {
+		setRun(prev => ({ ...prev, shrine_ids: shrine_ids }));
 	};
 
 	const set_run_state = (state: RunState) => {
@@ -65,6 +70,11 @@ export const RunManager = (props: RunManagerProps) => {
 			const splits = run.splits;
 			splits.set(shrineCount, Date.now() - run.rundate - run.paused_time);
 			update_splits(splits);
+			if (run.shrine_ids[shrineCount] == BLOOD_MOON_SHRINE) {
+				setBloodMoonDone(true);
+				setRun(prev => ({ ...prev, is_blood_moon: false }));
+			}
+
 			setShrineCount(prev => prev + 1);
 		} else {
 			set_run_state(RunState.Running);
@@ -73,12 +83,17 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const toggle_blood_moon = () => {
 		const { shrine_ids, splits } = run;
-		if (splits.get(shrineCount) == BLOOD_MOON_SHRINE) {
+		// if (run.state == RunState.Default) return;
+
+		if (bloodMoonDone) return;
+		if (shrine_ids[Math.max(0, shrineCount)] === BLOOD_MOON_SHRINE) {
+			setRun(prev => ({...prev, is_blood_moon: false}))
 			shrine_ids.splice(shrineCount, 1);
-			// remove it
+			update_shrines(shrine_ids);
 		} else {
-			// add it
-			shrine_ids.splice(shrineCount, 0, BLOOD_MOON_SHRINE);
+			setRun(prev => ({...prev, is_blood_moon: true}))
+			shrine_ids.splice(Math.max(0, shrineCount), 0, BLOOD_MOON_SHRINE);
+			update_shrines(shrine_ids);
 		}
 	};
 
@@ -124,7 +139,8 @@ export const RunManager = (props: RunManagerProps) => {
 			skip_split,
 			reset_splits,
 			pause,
-			show_help
+			show_help,
+			toggle_blood_moon
 		});
 	});
 
@@ -137,10 +153,11 @@ export const RunManager = (props: RunManagerProps) => {
 	});
 
 	const get_classes = () => {
-		const classes = ["main"];
+		const classes = ["bg"];
 		if (run.is_blood_moon) classes.push("is-blood-moon");
 		return classes.join(" ");
 	};
+
 	const get_current_shrine = (): Shrine | undefined => {
 		const current_shrine = shrines.find(
 			item => item.index === run.shrine_ids[shrineCount]
@@ -149,37 +166,40 @@ export const RunManager = (props: RunManagerProps) => {
 	};
 
 	return (
-		<div className="main">
-			<div className="header">Botw All Shrines Randomizer</div>
-			<div className="seedinfo">Seed: {run.seed}</div>
-			<SplitHistory run={run} />
-			<SplitTimer
-				run={run}
-				currentShrine={shrineCount}
-				onUpdatePausedTime={onUpdatePausedTime}
-			/>
-			<WorldMap shrine={get_current_shrine()} />
-			<div className={`help ${showHelp ? "is-visible" : ""}`}>
-				{!showHelp && (
-					<>
-						<div className="helphint">
-							<span className="key">Space</span> to start / split
-							&nbsp;
-							<span className="key">H</span> to show / hide help
-						</div>
-					</>
-				)}
-				{showHelp && (
-					<>
-						<div className="instructions">
-							<Instructions run={run} />
-						</div>
+		<div className={get_classes()}>
+			<div className="main">
+				<div className="header">Botw All Shrines Randomizer</div>
+				<div className="seedinfo">Seed: {run.seed}</div>
+				<SplitHistory run={run} />
+				<SplitTimer
+					run={run}
+					currentShrine={shrineCount}
+					onUpdatePausedTime={onUpdatePausedTime}
+				/>
+				<WorldMap shrine={get_current_shrine()} />
+				<div className={`help ${showHelp ? "is-visible" : ""}`}>
+					{!showHelp && (
+						<>
+							<div className="helphint">
+								<span className="key">Space</span> to start /
+								split &nbsp;
+								<span className="key">H</span> to show / hide
+								help
+							</div>
+						</>
+					)}
+					{showHelp && (
+						<>
+							<div className="instructions">
+								<Instructions run={run} />
+							</div>
 
-						<div className="hotkeys">
-							<HotkeyList />
-						</div>
-					</>
-				)}
+							<div className="hotkeys">
+								<HotkeyList />
+							</div>
+						</>
+					)}
+				</div>
 			</div>
 		</div>
 	);
