@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/botwrando/precache-manifest.ff43b173fecdf78b2067cd7111ed6cdd.js"
+  "/botwrando/precache-manifest.739ddf9fcf26f8e06ff2a4a3ac50579c.js"
 );
 
 self.addEventListener('message', (event) => {
