@@ -1,6 +1,6 @@
 import React from "react";
 import ScrollableFeed from "react-scrollable-feed";
-import { Run } from "./RunManager";
+import { Run } from "./Run";
 import { ShrineInfo } from "./ShrineInfo";
 
 const ShrineList = (

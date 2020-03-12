@@ -22,6 +22,8 @@ body {
 .bg {
 	height: 100%;
 	background-color: $darker-green;
+	background-position: center top;
+	background-size: cover;
 	&.is-blood-moon {
 		background-color: $darker-red;
 		background-image: url(../assets/bloodmoon.svg);

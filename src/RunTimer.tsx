@@ -1,6 +1,6 @@
 import React from "react";
 import { format_time_full } from "./lib/time";
-import { RunState } from "./RunManager";
+import { RunState } from "./Run";
 
 type ToggleTimer = {
 	startedAt: number;
@@ -14,6 +14,7 @@ export type RunTimerProps = {
 };
 
 export const RunTimer = (props: RunTimerProps) => {
+	const { timestamp, runstate, onUpdatePausedTime } = props;
 	const [toggleTimer, setToggleTimer] = React.useState<ToggleTimer>({
 		startedAt: -1,
 		pausedAt: -1
@@ -24,11 +25,11 @@ export const RunTimer = (props: RunTimerProps) => {
 	const request_ref = React.useRef<number>(-1);
 
 	const update_time = (time: number) => {
-		if (props.runstate === RunState.Default) {
+		if (runstate === RunState.Default) {
 			setTimerDisplay(0);
 			setPausedTime(-1);
 		}
-		if (props.runstate === RunState.Running) {
+		if (runstate === RunState.Running) {
 			if (toggleTimer.startedAt === -1) {
 				setToggleTimer(prev => ({ ...prev, startedAt: Date.now() }));
 			}
@@ -37,8 +38,8 @@ export const RunTimer = (props: RunTimerProps) => {
 				props.onUpdatePausedTime(pausedTime);
 				setToggleTimer(prev => ({ ...prev, pausedAt: -1 }));
 			}
-			setTimerDisplay(Date.now() - props.timestamp - pausedTime);
-		} else if (props.runstate === RunState.Paused) {
+			setTimerDisplay(Date.now() - timestamp - pausedTime);
+		} else if (runstate === RunState.Paused) {
 			if (toggleTimer.startedAt !== -1) {
 			}
 			if (toggleTimer.pausedAt === -1) {
@@ -56,7 +57,7 @@ export const RunTimer = (props: RunTimerProps) => {
 	});
 
 	React.useEffect(() => {
-		props.onUpdatePausedTime(pausedTime);
+		onUpdatePausedTime(pausedTime);
 	}, [pausedTime]);
 
 	return <>{format_time_full(timerDisplay)}</>;

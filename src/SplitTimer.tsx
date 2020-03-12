@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Run, RunState } from "./RunManager";
-import { getShrine } from "./shrines";
+import React, { useEffect, useState } from "react";
+import { Run, RunState } from "./Run";
 import { RunTimer } from "./RunTimer";
+import { getShrine } from "./shrines";
 
 export type SplitTimerProps = {
 	run: Run;

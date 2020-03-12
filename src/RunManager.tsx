@@ -1,30 +1,11 @@
 import React, { useState } from "react";
 import { HotkeyList } from "./HotkeyList";
 import { parse_keypress, register_callbacks } from "./lib/keyboard";
+import { Run, RunState } from "./Run";
 import { BLOOD_MOON_SHRINE, Shrine, shrines } from "./shrines";
 import { SplitHistory } from "./SplitHistory";
 import { SplitTimer } from "./SplitTimer";
 import { WorldMap } from "./WorldMap";
-
-export enum RunState {
-	Default,
-	Running,
-	Paused,
-	Ended
-}
-
-export type Run = {
-	state: RunState;
-	is_blood_moon: Boolean;
-	runner: string;
-	rundate: number;
-	paused_time: number;
-	seed: string;
-	shrine_ids: number[];
-	splits: Map<number, number>;
-	wr_splits: Map<number, number>;
-	pb_splits: Map<number, number>;
-};
 
 type RunManagerProps = {
 	run: Run;
@@ -70,7 +51,7 @@ export const RunManager = (props: RunManagerProps) => {
 			const splits = run.splits;
 			splits.set(shrineCount, Date.now() - run.rundate - run.paused_time);
 			update_splits(splits);
-			if (run.shrine_ids[shrineCount] == BLOOD_MOON_SHRINE) {
+			if (run.shrine_ids[shrineCount] === BLOOD_MOON_SHRINE) {
 				setBloodMoonDone(true);
 				setRun(prev => ({ ...prev, is_blood_moon: false }));
 			}
@@ -82,16 +63,15 @@ export const RunManager = (props: RunManagerProps) => {
 	};
 
 	const toggle_blood_moon = () => {
-		const { shrine_ids, splits } = run;
-		// if (run.state == RunState.Default) return;
+		const { shrine_ids } = run;
 
 		if (bloodMoonDone) return;
 		if (shrine_ids[Math.max(0, shrineCount)] === BLOOD_MOON_SHRINE) {
-			setRun(prev => ({...prev, is_blood_moon: false}))
+			setRun(prev => ({ ...prev, is_blood_moon: false }));
 			shrine_ids.splice(shrineCount, 1);
 			update_shrines(shrine_ids);
 		} else {
-			setRun(prev => ({...prev, is_blood_moon: true}))
+			setRun(prev => ({ ...prev, is_blood_moon: true }));
 			shrine_ids.splice(Math.max(0, shrineCount), 0, BLOOD_MOON_SHRINE);
 			update_shrines(shrine_ids);
 		}
@@ -140,7 +120,7 @@ export const RunManager = (props: RunManagerProps) => {
 			reset_splits,
 			pause,
 			show_help,
-			toggle_blood_moon,
+			toggle_blood_moon
 		});
 	});
 

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { getKeyMap, getShortKeyname } from "./lib/keyboard";
+import React from "react";
 import "./HotkeyList.scss";
+import { getKeyMap, getShortKeyname } from "./lib/keyboard";
 
 export type HotkeyListProps = {};
 

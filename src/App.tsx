@@ -1,13 +1,14 @@
 import React from "react";
 import { getShrines } from "./lib/rando";
-import { Run, RunManager, RunState } from "./RunManager";
+import { Run, RunState } from "./Run";
+import { RunManager } from "./RunManager";
 import "./styles/style.scss";
 
 function App() {
 	const testSeed = "1A39SPECSNLUL71F";
 	const run: Run = {
 		state: RunState.Default,
-    runner: "Test Runner",
+		runner: "Test Runner",
 		rundate: -1,
 		paused_time: -1,
 		is_blood_moon: false,

@@ -32,10 +32,8 @@ let bindings: BindingMap = {
 	toggle_blood_moon: { desc: "Toggle Blood Moon shrine" }
 };
 
-let descriptions = {};
-
 export const register_callbacks = (map: FunctionMap) => {
-	Object.entries(map).map(value => {
+	Object.entries(map).forEach(value => {
 		const [key, fn] = value;
 		bindings[key].callback = fn;
 	});
@@ -104,7 +102,7 @@ const stringsubst: any = {
 export const getShortKeyname = (keyname: string) => {
 	let outstr = keyname;
 
-	Object.entries(stringsubst).map(value => {
+	Object.entries(stringsubst).forEach(value => {
 		const [search, replace] = value;
 		outstr = outstr.replace(search, replace as string);
 	});
