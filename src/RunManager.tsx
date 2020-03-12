@@ -161,6 +161,16 @@ export const RunManager = (props: RunManagerProps) => {
 		return current_shrine;
 	};
 
+	const isTouch = window.matchMedia("(pointer: coarse)").matches;
+	const touchProps = {
+		run: run,
+		onSplit: add_split,
+		onUndo: undo_split,
+		onReset: reset_splits,
+		onPause: pause,
+		onBloodMoon: toggle_blood_moon
+	};
+
 	return (
 		<div className={get_classes()}>
 			<div className="main">
@@ -173,30 +183,63 @@ export const RunManager = (props: RunManagerProps) => {
 					onUpdatePausedTime={onUpdatePausedTime}
 				/>
 				<WorldMap shrine={get_current_shrine()} />
-				<div className={`help ${showHelp ? "is-visible" : ""}`}>
-					{!showHelp && (
-						<>
-							<div className="helphint">
-								<span className="key">Space</span> to start /
-								split &nbsp;
-								<span className="key">H</span> to show / hide
-								help
-							</div>
-						</>
-					)}
-					{showHelp && (
-						<>
-							<div className="instructions">
-								<Instructions run={run} />
-							</div>
-
-							<div className="hotkeys">
-								<HotkeyList />
-							</div>
-						</>
-					)}
-				</div>
+				{isTouch && <MobileControls {...touchProps} />}
+				{!isTouch && <DesktopHelp run={run} showHelp={showHelp} />}
 			</div>
+		</div>
+	);
+};
+
+type MobileProps = {
+	run: Run;
+	onSplit: (event: React.MouseEvent) => void;
+	onUndo: (event: React.MouseEvent) => void;
+	onReset: (event: React.MouseEvent) => void;
+	onPause: (event: React.MouseEvent) => void;
+	onBloodMoon: (event: React.MouseEvent) => void;
+};
+
+const MobileControls = (props: MobileProps) => {
+	return (
+		<div className="touchpanel">
+			<button className="split" onClick={props.onSplit}>Split</button>
+			<button className="undo" onClick={props.onUndo}>Undo</button>
+			<button className="pause" onClick={props.onPause}>Pause</button>
+			<button className="reset" onClick={props.onReset}>Reset</button>
+			<button className="bloodmoon" onClick={props.onBloodMoon}>Blood Moon</button>
+		</div>
+	);
+};
+
+type DesktopProps = {
+	run: Run;
+	showHelp: boolean;
+};
+
+const DesktopHelp = (props: DesktopProps) => {
+	const { run, showHelp } = props;
+	return (
+		<div className={`help ${showHelp ? "is-visible" : ""}`}>
+			{!showHelp && (
+				<>
+					<div className="helphint">
+						<span className="key">Space</span> to start / split
+						&nbsp;
+						<span className="key">H</span> to show / hide help
+					</div>
+				</>
+			)}
+			{showHelp && (
+				<>
+					<div className="instructions">
+						<Instructions run={run} />
+					</div>
+
+					<div className="hotkeys">
+						<HotkeyList />
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
