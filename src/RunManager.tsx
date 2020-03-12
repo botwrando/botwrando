@@ -140,7 +140,7 @@ export const RunManager = (props: RunManagerProps) => {
 			reset_splits,
 			pause,
 			show_help,
-			toggle_blood_moon
+			toggle_blood_moon,
 		});
 	});
 
