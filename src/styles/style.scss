@@ -21,12 +21,29 @@ body {
 
 .bg {
 	height: 100%;
-	background-color: $darker-green;
-	background-position: center top;
-	background-size: cover;
-	&.is-blood-moon {
+	&:before,
+	&:after {
+		content: "";
+		height: 100%;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: -1;
+		transition: background-color 0.2s, opacity 0.2s;
+	}
+	&:before {
+		background-color: $darker-green;
+	}
+	&:after {
+		opacity: 0;
+	}
+
+	&.is-blood-moon:after {
 		background-color: $darker-red;
 		background-image: url(../assets/bloodmoon.svg);
+		background-position: center top;
+		background-size: cover;
+		opacity: 1;
 	}
 }
 

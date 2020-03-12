@@ -6,16 +6,25 @@ import { BLOOD_MOON_SHRINE, Shrine, shrines } from "./shrines";
 import { SplitHistory } from "./SplitHistory";
 import { SplitTimer } from "./SplitTimer";
 import { WorldMap } from "./WorldMap";
+import "./assets/bloodmoon.svg";
 
 type RunManagerProps = {
 	run: Run;
+};
+
+type BloodMoonState = {
+	isDone: boolean;
+	isActive: boolean;
 };
 
 export const RunManager = (props: RunManagerProps) => {
 	const [run, setRun] = useState(props.run);
 	const [shrineCount, setShrineCount] = useState(-1);
 	const [showHelp, setShowHelp] = useState(false);
-	const [bloodMoonDone, setBloodMoonDone] = useState(false);
+	const [bloodMoonState, setBloodMoonState] = useState<BloodMoonState>({
+		isDone: false,
+		isActive: false
+	});
 
 	const onUpdatePausedTime = (paused_time: number) => {
 		setRun(prev => ({ ...prev, paused_time }));
@@ -52,8 +61,11 @@ export const RunManager = (props: RunManagerProps) => {
 			splits.set(shrineCount, Date.now() - run.rundate - run.paused_time);
 			update_splits(splits);
 			if (run.shrine_ids[shrineCount] === BLOOD_MOON_SHRINE) {
-				setBloodMoonDone(true);
-				setRun(prev => ({ ...prev, is_blood_moon: false }));
+				setBloodMoonState(prev => ({
+					...prev,
+					isActive: false,
+					isDone: true
+				}));
 			}
 
 			setShrineCount(prev => prev + 1);
@@ -65,14 +77,18 @@ export const RunManager = (props: RunManagerProps) => {
 	const toggle_blood_moon = () => {
 		const { shrine_ids } = run;
 
-		if (bloodMoonDone) return;
-		if (shrine_ids[Math.max(0, shrineCount)] === BLOOD_MOON_SHRINE) {
-			setRun(prev => ({ ...prev, is_blood_moon: false }));
-			shrine_ids.splice(shrineCount, 1);
+		if (bloodMoonState.isDone) {
+			return;
+		}
+		const currentShrine = Math.max(0, shrineCount);
+
+		if (shrine_ids[currentShrine] === BLOOD_MOON_SHRINE) {
+			setBloodMoonState(prev => ({ ...prev, isActive: false }));
+			shrine_ids.splice(currentShrine, 1);
 			update_shrines(shrine_ids);
 		} else {
-			setRun(prev => ({ ...prev, is_blood_moon: true }));
-			shrine_ids.splice(Math.max(0, shrineCount), 0, BLOOD_MOON_SHRINE);
+			setBloodMoonState(prev => ({ ...prev, isActive: true }));
+			shrine_ids.splice(currentShrine, 0, BLOOD_MOON_SHRINE);
 			update_shrines(shrine_ids);
 		}
 	};
@@ -134,7 +150,7 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const get_classes = () => {
 		const classes = ["bg"];
-		if (run.is_blood_moon) classes.push("is-blood-moon");
+		if (bloodMoonState.isActive) classes.push("is-blood-moon");
 		return classes.join(" ");
 	};
 

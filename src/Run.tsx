@@ -7,7 +7,6 @@ export enum RunState {
 
 export type Run = {
 	state: RunState;
-	is_blood_moon: Boolean;
 	runner: string;
 	rundate: number;
 	paused_time: number;
