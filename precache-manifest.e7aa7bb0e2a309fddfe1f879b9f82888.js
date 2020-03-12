@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b187aab072c50bee95e30436dc22a5c3",
+    "revision": "71a8af5e463096538ba64714fc94379c",
     "url": "/botwrando/index.html"
   },
   {
-    "revision": "e4a7fc432b8636672a56",
+    "revision": "b6bb26bd01daa8a4e5f0",
     "url": "/botwrando/static/css/main.f29692fe.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/botwrando/static/js/2.5504aff8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e4a7fc432b8636672a56",
-    "url": "/botwrando/static/js/main.c77e5181.chunk.js"
+    "revision": "b6bb26bd01daa8a4e5f0",
+    "url": "/botwrando/static/js/main.64b2e880.chunk.js"
   },
   {
     "revision": "99b8a340d19aedeeb6b0",
