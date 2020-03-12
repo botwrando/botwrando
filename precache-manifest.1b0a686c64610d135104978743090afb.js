@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "71a8af5e463096538ba64714fc94379c",
+    "revision": "53c3d64609357c7155b7181e12e11cad",
     "url": "/botwrando/index.html"
   },
   {
-    "revision": "b6bb26bd01daa8a4e5f0",
-    "url": "/botwrando/static/css/main.f29692fe.chunk.css"
+    "revision": "946b95a186caf160665e",
+    "url": "/botwrando/static/css/main.43e0742f.chunk.css"
   },
   {
     "revision": "89a156966194ee9e71ea",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/botwrando/static/js/2.5504aff8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b6bb26bd01daa8a4e5f0",
-    "url": "/botwrando/static/js/main.64b2e880.chunk.js"
+    "revision": "946b95a186caf160665e",
+    "url": "/botwrando/static/js/main.2fcb8b6f.chunk.js"
   },
   {
     "revision": "99b8a340d19aedeeb6b0",
@@ -28,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/botwrando/static/media/background.326de383.png"
   },
   {
-    "revision": "6639a1394a758141cd19364f3c02cb60",
-    "url": "/botwrando/static/media/bloodmoon.6639a139.svg"
+    "revision": "e2157dd1a091bb7077cead0d0e29618a",
+    "url": "/botwrando/static/media/bloodmoon.e2157dd1.svg"
   }
 ]);

@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/botwrando/static/css/main.f29692fe.chunk.css",
-    "main.js": "/botwrando/static/js/main.64b2e880.chunk.js",
-    "main.js.map": "/botwrando/static/js/main.64b2e880.chunk.js.map",
+    "main.css": "/botwrando/static/css/main.43e0742f.chunk.css",
+    "main.js": "/botwrando/static/js/main.2fcb8b6f.chunk.js",
+    "main.js.map": "/botwrando/static/js/main.2fcb8b6f.chunk.js.map",
     "runtime-main.js": "/botwrando/static/js/runtime-main.5ab1b9f3.js",
     "runtime-main.js.map": "/botwrando/static/js/runtime-main.5ab1b9f3.js.map",
     "static/js/2.5504aff8.chunk.js": "/botwrando/static/js/2.5504aff8.chunk.js",
     "static/js/2.5504aff8.chunk.js.map": "/botwrando/static/js/2.5504aff8.chunk.js.map",
     "index.html": "/botwrando/index.html",
-    "precache-manifest.e7aa7bb0e2a309fddfe1f879b9f82888.js": "/botwrando/precache-manifest.e7aa7bb0e2a309fddfe1f879b9f82888.js",
+    "precache-manifest.1b0a686c64610d135104978743090afb.js": "/botwrando/precache-manifest.1b0a686c64610d135104978743090afb.js",
     "service-worker.js": "/botwrando/service-worker.js",
-    "static/css/main.f29692fe.chunk.css.map": "/botwrando/static/css/main.f29692fe.chunk.css.map",
+    "static/css/main.43e0742f.chunk.css.map": "/botwrando/static/css/main.43e0742f.chunk.css.map",
     "static/js/2.5504aff8.chunk.js.LICENSE.txt": "/botwrando/static/js/2.5504aff8.chunk.js.LICENSE.txt",
-    "static/media/style.scss": "/botwrando/static/media/bloodmoon.6639a139.svg"
+    "static/media/style.scss": "/botwrando/static/media/bloodmoon.e2157dd1.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.5ab1b9f3.js",
     "static/js/2.5504aff8.chunk.js",
-    "static/css/main.f29692fe.chunk.css",
-    "static/js/main.64b2e880.chunk.js"
+    "static/css/main.43e0742f.chunk.css",
+    "static/js/main.2fcb8b6f.chunk.js"
   ]
 }
