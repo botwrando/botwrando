@@ -3,6 +3,7 @@ import { getShrines } from "./lib/rando";
 import { Run, RunState } from "./Run";
 import { RunManager } from "./RunManager";
 import "./styles/style.scss";
+import "./assets/bloodmoon.svg";
 
 function App() {
 	const testSeed = "1A39SPECSNLUL71F";
@@ -36,6 +37,11 @@ function App() {
 
 	return (
 		<>
+			<link
+				rel="preload"
+				href="assets/bloodmoon.svg"
+				as="image"
+			></link>
 			<RunManager run={run} />
 		</>
 	);

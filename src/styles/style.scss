@@ -1,6 +1,14 @@
 @import "colors";
 @import "fonts";
 
+html {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
 html,
 body {
 	overflow: hidden;
@@ -11,7 +19,6 @@ body {
 	font-family: "Calamity", Roboto, sans-serif;
 	height: 100vh;
 	margin: 0;
-	overscroll-behavior: none;
 }
 
 #root {
@@ -55,6 +62,9 @@ body {
 	max-width: 960px;
 	overflow: hidden;
 	padding: 0 32px;
+	@media (max-width: 480px) {
+		padding: 0 16px;
+	}
 	.header {
 		@include f-main;
 		align-items: center;
@@ -72,11 +82,11 @@ body {
 		height: 32px;
 	}
 	.history {
-		flex: 1 0 auto;
-		max-height: 32vh;
+		flex: 1 1 auto;
 		overflow: hidden;
 		.historylist {
 			width: calc(100% + 17px);
+			height: 100%;
 			overflow-x: hidden;
 			overflow-y: scroll;
 		}
@@ -97,8 +107,16 @@ body {
 		width: calc(100% - 16px);
 		@media (max-width: 480px) {
 			grid-template-columns: 40px 1fr 32px 128px;
+			line-height: 32px;
 		}
 	}
+}
+
+.splashscreen {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .worldmap {
@@ -106,8 +124,9 @@ body {
 	flex: 1 1 auto;
 	min-height: 1px;
 	max-height: 256px;
-	@media (max-height: 480px) {
+	@media (max-width: 480px) {
 		flex: 0 0 auto;
+		max-width: initial;
 	}
 
 	.mapframe {
@@ -120,20 +139,8 @@ body {
 		background-image: url(../assets/background.png);
 		border-radius: 8px;
 		height: 100%;
-		max-height: 480px;
 		overflow: hidden;
 		width: 100%;
-		&:after {
-			content: "Get ready...";
-			display: flex;
-			flex-flow: row nowrap;
-			justify-content: center;
-			align-items: center;
-			margin: auto;
-			position: relative;
-			top: 50%;
-			transform: 0, -50%;
-		}
 	}
 }
 

@@ -176,13 +176,20 @@ export const RunManager = (props: RunManagerProps) => {
 			<div className="main">
 				<div className="header">Botw All Shrines Randomizer</div>
 				<div className="seedinfo">Seed: {run.seed}</div>
-				<SplitHistory run={run} />
-				<SplitTimer
-					run={run}
-					currentShrine={shrineCount}
-					onUpdatePausedTime={onUpdatePausedTime}
-				/>
-				<WorldMap shrine={get_current_shrine()} />
+				{run.state == RunState.Default && (
+					<div className="splashscreen">Ready to rock!</div>
+				)}
+				{run.state != RunState.Default && (
+					<>
+						<SplitHistory run={run} />
+						<SplitTimer
+							run={run}
+							currentShrine={shrineCount}
+							onUpdatePausedTime={onUpdatePausedTime}
+						/>
+						<WorldMap shrine={get_current_shrine()} />
+					</>
+				)}
 				{isTouch && <MobileControls {...touchProps} />}
 				{!isTouch && <DesktopHelp run={run} showHelp={showHelp} />}
 			</div>
@@ -202,11 +209,21 @@ type MobileProps = {
 const MobileControls = (props: MobileProps) => {
 	return (
 		<div className="touchpanel">
-			<button className="split" onClick={props.onSplit}>Split</button>
-			<button className="undo" onClick={props.onUndo}>Undo</button>
-			<button className="pause" onClick={props.onPause}>Pause</button>
-			<button className="reset" onClick={props.onReset}>Reset</button>
-			<button className="bloodmoon" onClick={props.onBloodMoon}>Blood Moon</button>
+			<button className="split" onClick={props.onSplit}>
+				Split
+			</button>
+			<button className="undo" onClick={props.onUndo}>
+				Undo
+			</button>
+			<button className="pause" onClick={props.onPause}>
+				Pause
+			</button>
+			<button className="reset" onClick={props.onReset}>
+				Reset
+			</button>
+			<button className="bloodmoon" onClick={props.onBloodMoon}>
+				Blood Moon
+			</button>
 		</div>
 	);
 };
@@ -234,7 +251,6 @@ const DesktopHelp = (props: DesktopProps) => {
 					<div className="instructions">
 						<Instructions run={run} />
 					</div>
-
 					<div className="hotkeys">
 						<HotkeyList />
 					</div>
