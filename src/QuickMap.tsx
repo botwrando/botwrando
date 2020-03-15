@@ -8,7 +8,6 @@ export type QuickMapProps = {
 export const QuickMap = (props: QuickMapProps) => {
 	const { shrine } = props;
 	if (!shrine) {
-		console.log("invalid shrine.");
 		return <></>;
 	}
 	// const imgPath = `./map/${shrine?.index}.jpg`;

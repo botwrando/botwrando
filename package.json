@@ -17,6 +17,7 @@
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-keyboard-event-handler": "^1.5.4",
     "react-scripts": "3.4.0",
     "react-scrollable-feed": "^1.1.2",
     "shuffle-seed": "^1.1.6",
