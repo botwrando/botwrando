@@ -10,17 +10,9 @@ export type SplitTimerProps = {
 };
 
 export const SplitTimer = (props: SplitTimerProps) => {
-	const [timestamp, setTimestamp] = useState(-1);
 	const [timeclasses, setTimeclasses] = useState(["time"]);
 
-	const { run, currentShrine } = props;
-
-	const shrine_id = run.shrine_ids[currentShrine];
-	const current_shrine = getShrine(shrine_id);
-
-	useEffect(() => {
-		setTimestamp(run.rundate);
-	}, [run.rundate]);
+	const { run } = props;
 
 	useEffect(() => {
 		const time_classes = ["time"];
@@ -30,8 +22,41 @@ export const SplitTimer = (props: SplitTimerProps) => {
 		if (run.state === RunState.Paused) {
 			time_classes.push("is-paused");
 		}
+		if (run.state === RunState.Ended) {
+			time_classes.push("is-ended");
+		}
 		setTimeclasses(time_classes);
 	}, [run.state]);
+
+	let out = <></>;
+
+	if (run.state == RunState.Default) {
+		out = <NotStarted />;
+	} else if (run.state == RunState.Paused) {
+		out = <Paused />;
+	} else if (run.state == RunState.Ended) {
+		out = <Ended />;
+	} else {
+		out = <RunDisplay {...props} />;
+	}
+
+	return <div className={timeclasses.join(" ")}>{out}</div>;
+};
+
+const NotStarted = () => <>Not started</>;
+const Paused = () => <>Paused</>;
+const Ended = () => <>Ended</>;
+
+const RunDisplay = (props: SplitTimerProps) => {
+	const { run, currentShrine } = props;
+	const shrine_id = run.shrine_ids[currentShrine];
+	const current_shrine = getShrine(shrine_id);
+
+	const [timestamp, setTimestamp] = useState(-1);
+
+	useEffect(() => {
+		setTimestamp(run.rundate);
+	}, [run.rundate]);
 
 	return (
 		<div className="shrine current">
@@ -49,13 +74,11 @@ export const SplitTimer = (props: SplitTimerProps) => {
 					: "Start the timer to reveal the first shrine!"}
 			</div>
 
-			<div className={timeclasses.join(" ")}>
-				<RunTimer
-					timestamp={timestamp}
-					runstate={run.state}
-					onUpdatePausedTime={props.onUpdatePausedTime}
-				/>
-			</div>
+			<RunTimer
+				timestamp={timestamp}
+				runstate={run.state}
+				onUpdatePausedTime={props.onUpdatePausedTime}
+			/>
 		</div>
 	);
 };

@@ -13,7 +13,7 @@ function App() {
 		rundate: -1,
 		paused_time: -1,
 		seed: testSeed,
-		shrine_ids: getShrines(testSeed),
+		shrine_ids: getShrines(testSeed).slice(0, 12), // TODO: debug setting, remove later
 		splits: new Map([]),
 		pb_splits: new Map([
 			[0, 13999],

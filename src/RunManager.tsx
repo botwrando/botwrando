@@ -47,22 +47,23 @@ export const RunManager = (props: RunManagerProps) => {
 			if (run.rundate === -1) {
 				setRun(prev => ({ ...prev, rundate: Date.now() }));
 			}
-			if (shrinePtr === -1) {
-				setShrinePtr(0);
-			}
+			// if (shrinePtr === -1) {
+			// 	setShrinePtr(0);
+			// }
 		}
 	};
 
 	const add_split = () => {
+		if (run.state === RunState.Ended) return;
+		if (run.state === RunState.Default) {
+			setShrinePtr(0);
+			set_run_state(RunState.Running);
+		}
 		if (run.state === RunState.Running) {
 			const splits = run.splits;
 			splits.set(shrinePtr, Date.now() - run.rundate - run.paused_time);
 			update_splits(splits);
 			setShrinePtr(prev => prev + 1);
-		} else if (shrinePtr >= run.shrine_ids.length - 1) {
-			run.state = RunState.Ended;
-		} else {
-			set_run_state(RunState.Running);
 		}
 	};
 
@@ -76,7 +77,17 @@ export const RunManager = (props: RunManagerProps) => {
 		setShrinePtr(prev => prev - 1);
 	};
 
+	React.useEffect(() => {
+		if (shrinePtr >= run.shrine_ids.length - 1) {
+			set_run_state(RunState.Ended);
+		} else if (shrinePtr > -1 && shrinePtr <= run.shrine_ids.length) {
+			set_run_state(RunState.Running);
+		}
+	}, [shrinePtr]);
+
 	const skip_split = () => {
+		if (run.state == RunState.Ended) return;
+
 		const splits = run.splits;
 		splits.set(shrinePtr, -1);
 		update_splits(splits);
@@ -88,7 +99,6 @@ export const RunManager = (props: RunManagerProps) => {
 		splits.clear();
 		update_splits(splits);
 		setRun(prev => ({ ...prev, paused_time: -1, rundate: -1 }));
-		set_run_state(RunState.Default);
 		setShrinePtr(-1);
 	};
 
@@ -164,7 +174,7 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const handleKey = (key: string, event: KeyboardEvent) => {
 		let ts = Date.now();
-		if (ts - lastCall < 60) {
+		if (ts - lastCall < 16) {
 			return;
 		}
 		lastCall = ts;
