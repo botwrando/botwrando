@@ -11,7 +11,11 @@
 		{
 			"type": "yarn",
 			"task": "start",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }

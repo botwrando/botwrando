@@ -7,6 +7,7 @@ import { SplitHistory } from "./SplitHistory";
 import { SplitTimer } from "./SplitTimer";
 import { WorldMap } from "./WorldMap";
 import "./assets/bloodmoon.svg";
+import { QuickMap } from "./QuickMap";
 
 type RunManagerProps = {
 	run: Run;
@@ -32,6 +33,11 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const update_splits = (splits: Map<number, number>) => {
 		setRun(prev => ({ ...prev, splits: splits }));
+		if (run.shrine_ids[shrineCount] === BLOOD_MOON_SHRINE) {
+			setBloodMoonState(prev => ({ ...prev, isActive: true }));
+		} else {
+			setBloodMoonState(prev => ({ ...prev, isActive: false }));
+		}
 	};
 
 	const update_shrines = (shrine_ids: number[]) => {
@@ -61,11 +67,7 @@ export const RunManager = (props: RunManagerProps) => {
 			splits.set(shrineCount, Date.now() - run.rundate - run.paused_time);
 			update_splits(splits);
 			if (run.shrine_ids[shrineCount] === BLOOD_MOON_SHRINE) {
-				setBloodMoonState(prev => ({
-					...prev,
-					isActive: false,
-					isDone: true
-				}));
+				setBloodMoonState(prev => ({ ...prev, isDone: true }));
 			}
 
 			setShrineCount(prev => prev + 1);
@@ -83,11 +85,9 @@ export const RunManager = (props: RunManagerProps) => {
 		const currentShrine = Math.max(0, shrineCount);
 
 		if (shrine_ids[currentShrine] === BLOOD_MOON_SHRINE) {
-			setBloodMoonState(prev => ({ ...prev, isActive: false }));
 			shrine_ids.splice(currentShrine, 1);
 			update_shrines(shrine_ids);
 		} else {
-			setBloodMoonState(prev => ({ ...prev, isActive: true }));
 			shrine_ids.splice(currentShrine, 0, BLOOD_MOON_SHRINE);
 			update_shrines(shrine_ids);
 		}
@@ -187,7 +187,7 @@ export const RunManager = (props: RunManagerProps) => {
 							currentShrine={shrineCount}
 							onUpdatePausedTime={onUpdatePausedTime}
 						/>
-						<WorldMap shrine={get_current_shrine()} />
+						<QuickMap shrine={get_current_shrine()} />
 					</>
 				)}
 				{isTouch && <MobileControls {...touchProps} />}

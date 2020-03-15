@@ -9,9 +9,11 @@
   }
   &.is-visible {
     display: grid;
+    background-color: $dark-green;
     grid-template-columns: 3fr 5fr;
     gap: 32px;
-    margin: 32px 0;
+    padding: 16px;
+    margin: 16px 0;
   }
   &:not(.is-visible) {
     display: grid;
@@ -30,10 +32,10 @@
     border: 1px solid $milky-white;
     color: $milky-white;
     display: inline-block;
-    font-size: 13px;
-    line-height: 13px;
+    font-size: 12px;
+    line-height: 11px;
     margin: 4px 4px;
-    padding: 4px;
+    padding: 3px 5px;
     text-transform: capitalize;
   }
 }
@@ -48,6 +50,6 @@
     display: contents;
   }
   .desc {
-    margin: 8px 0;
+    margin: 6px 0;
   }
 }

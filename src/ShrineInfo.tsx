@@ -1,4 +1,4 @@
-import "./shrineinfo.scss";
+import "./ShrineInfo.scss";
 import React from "react";
 import { getShrine } from "./shrines";
 import { format_time } from "./lib/time";

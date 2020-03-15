@@ -1,0 +1,154 @@
+@import "styles/colors";
+@import "styles/fonts";
+
+.worldmap {
+	margin: 24px 0 0;
+	flex: 1 1 auto;
+	min-height: 1px;
+	max-height: 256px;
+	@media (max-width: 480px) {
+		flex: 0 0 auto;
+		max-width: initial;
+		margin: 8px 0;
+	}
+
+	.mapframe {
+		background-color: transparent;
+		border: none;
+		width: 100%;
+		height: 100%;
+	}
+
+	.mapwrapper {
+		background-position: center;
+		border-radius: 8px;
+		height: 100%;
+		overflow: hidden;
+		width: 100%;
+	}
+}
+.mapwrapper {
+	background-image: url(./assets/background.png);
+}
+
+.mapwrapper {
+	&.bg-1   { background-image: url(map/1.jpg);  }
+	&.bg-2   { background-image: url(map/2.jpg);  }
+	&.bg-3   { background-image: url(map/3.jpg);  }
+	&.bg-4   { background-image: url(map/4.jpg);  }
+	&.bg-5   { background-image: url(map/5.jpg);  }
+	&.bg-6   { background-image: url(map/6.jpg);  }
+	&.bg-7   { background-image: url(map/7.jpg);  }
+	&.bg-8   { background-image: url(map/8.jpg);  }
+	&.bg-9   { background-image: url(map/9.jpg);  }
+	&.bg-10  { background-image: url(map/10.jpg); }
+	&.bg-11  { background-image: url(map/11.jpg); }
+	&.bg-12  { background-image: url(map/12.jpg); }
+	&.bg-13  { background-image: url(map/13.jpg); }
+	&.bg-14  { background-image: url(map/14.jpg); }
+	&.bg-15  { background-image: url(map/15.jpg); }
+	&.bg-16  { background-image: url(map/16.jpg); }
+	&.bg-17  { background-image: url(map/17.jpg); }
+	&.bg-18  { background-image: url(map/18.jpg); }
+	&.bg-19  { background-image: url(map/19.jpg); }
+	&.bg-20  { background-image: url(map/20.jpg); }
+	&.bg-21  { background-image: url(map/21.jpg); }
+	&.bg-22  { background-image: url(map/22.jpg); }
+	&.bg-23  { background-image: url(map/23.jpg); }
+	&.bg-24  { background-image: url(map/24.jpg); }
+	&.bg-25  { background-image: url(map/25.jpg); }
+	&.bg-26  { background-image: url(map/26.jpg); }
+	&.bg-27  { background-image: url(map/27.jpg); }
+	&.bg-28  { background-image: url(map/28.jpg); }
+	&.bg-29  { background-image: url(map/29.jpg); }
+	&.bg-30  { background-image: url(map/30.jpg); }
+	&.bg-31  { background-image: url(map/31.jpg); }
+	&.bg-32  { background-image: url(map/32.jpg); }
+	&.bg-33  { background-image: url(map/33.jpg); }
+	&.bg-34  { background-image: url(map/34.jpg); }
+	&.bg-35  { background-image: url(map/35.jpg); }
+	&.bg-36  { background-image: url(map/36.jpg); }
+	&.bg-37  { background-image: url(map/37.jpg); }
+	&.bg-38  { background-image: url(map/38.jpg); }
+	&.bg-39  { background-image: url(map/39.jpg); }
+	&.bg-40  { background-image: url(map/40.jpg); }
+	&.bg-41  { background-image: url(map/41.jpg); }
+	&.bg-42  { background-image: url(map/42.jpg); }
+	&.bg-43  { background-image: url(map/43.jpg); }
+	&.bg-44  { background-image: url(map/44.jpg); }
+	&.bg-45  { background-image: url(map/45.jpg); }
+	&.bg-46  { background-image: url(map/46.jpg); }
+	&.bg-47  { background-image: url(map/47.jpg); }
+	&.bg-48  { background-image: url(map/48.jpg); }
+	&.bg-49  { background-image: url(map/49.jpg); }
+	&.bg-50  { background-image: url(map/50.jpg); }
+	&.bg-51  { background-image: url(map/51.jpg); }
+	&.bg-52  { background-image: url(map/52.jpg); }
+	&.bg-53  { background-image: url(map/53.jpg); }
+	&.bg-54  { background-image: url(map/54.jpg); }
+	&.bg-55  { background-image: url(map/55.jpg); }
+	&.bg-56  { background-image: url(map/56.jpg); }
+	&.bg-57  { background-image: url(map/57.jpg); }
+	&.bg-58  { background-image: url(map/58.jpg); }
+	&.bg-59  { background-image: url(map/59.jpg); }
+	&.bg-60  { background-image: url(map/60.jpg); }
+	&.bg-61  { background-image: url(map/61.jpg); }
+	&.bg-62  { background-image: url(map/62.jpg); }
+	&.bg-63  { background-image: url(map/63.jpg); }
+	&.bg-64  { background-image: url(map/64.jpg); }
+	&.bg-65  { background-image: url(map/65.jpg); }
+	&.bg-66  { background-image: url(map/66.jpg); }
+	&.bg-67  { background-image: url(map/67.jpg); }
+	&.bg-68  { background-image: url(map/68.jpg); }
+	&.bg-69  { background-image: url(map/69.jpg); }
+	&.bg-70  { background-image: url(map/70.jpg); }
+	&.bg-71  { background-image: url(map/71.jpg); }
+	&.bg-72  { background-image: url(map/72.jpg); }
+	&.bg-73  { background-image: url(map/73.jpg); }
+	&.bg-74  { background-image: url(map/74.jpg); }
+	&.bg-75  { background-image: url(map/75.jpg); }
+	&.bg-76  { background-image: url(map/76.jpg); }
+	&.bg-77  { background-image: url(map/77.jpg); }
+	&.bg-78  { background-image: url(map/78.jpg); }
+	&.bg-79  { background-image: url(map/79.jpg); }
+	&.bg-80  { background-image: url(map/80.jpg); }
+	&.bg-81  { background-image: url(map/81.jpg); }
+	&.bg-82  { background-image: url(map/82.jpg); }
+	&.bg-83  { background-image: url(map/83.jpg); }
+	&.bg-84  { background-image: url(map/84.jpg); }
+	&.bg-85  { background-image: url(map/85.jpg); }
+	&.bg-86  { background-image: url(map/86.jpg); }
+	&.bg-87  { background-image: url(map/87.jpg); }
+	&.bg-88  { background-image: url(map/88.jpg); }
+	&.bg-89  { background-image: url(map/89.jpg); }
+	&.bg-90  { background-image: url(map/90.jpg); }
+	&.bg-91  { background-image: url(map/91.jpg); }
+	&.bg-92  { background-image: url(map/92.jpg); }
+	&.bg-93  { background-image: url(map/93.jpg); }
+	&.bg-94  { background-image: url(map/94.jpg); }
+	&.bg-95  { background-image: url(map/95.jpg); }
+	&.bg-96  { background-image: url(map/96.jpg); }
+	&.bg-97  { background-image: url(map/97.jpg); }
+	&.bg-98  { background-image: url(map/98.jpg); }
+	&.bg-99  { background-image: url(map/99.jpg); }
+	&.bg-100 { background-image: url(map/100.jpg);}
+	&.bg-101 { background-image: url(map/101.jpg);}
+	&.bg-102 { background-image: url(map/102.jpg);}
+	&.bg-103 { background-image: url(map/103.jpg);}
+	&.bg-104 { background-image: url(map/104.jpg);}
+	&.bg-105 { background-image: url(map/105.jpg);}
+	&.bg-106 { background-image: url(map/106.jpg);}
+	&.bg-107 { background-image: url(map/107.jpg);}
+	&.bg-108 { background-image: url(map/108.jpg);}
+	&.bg-109 { background-image: url(map/109.jpg);}
+	&.bg-110 { background-image: url(map/110.jpg);}
+	&.bg-111 { background-image: url(map/111.jpg);}
+	&.bg-112 { background-image: url(map/112.jpg);}
+	&.bg-113 { background-image: url(map/113.jpg);}
+	&.bg-114 { background-image: url(map/114.jpg);}
+	&.bg-115 { background-image: url(map/115.jpg);}
+	&.bg-116 { background-image: url(map/116.jpg);}
+	&.bg-117 { background-image: url(map/117.jpg);}
+	&.bg-118 { background-image: url(map/118.jpg);}
+	&.bg-119 { background-image: url(map/119.jpg);}
+}
