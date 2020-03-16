@@ -10,10 +10,30 @@ export type SplitTimerProps = {
 };
 
 export const SplitTimer = (props: SplitTimerProps) => {
-	const [timeclasses, setTimeclasses] = useState(["time"]);
-
 	const { run } = props;
 
+	let out = <></>;
+
+	if (run.state == RunState.Ended) {
+		out = <Ended />;
+	} else {
+		out = <RunDisplay {...props} />;
+	}
+
+	return <>{out}</>;
+};
+
+const NotStarted = () => <>Not started</>;
+const Paused = () => <>Paused</>;
+const Ended = () => <>Ended</>;
+
+const RunDisplay = (props: SplitTimerProps) => {
+	const { run, currentShrine } = props;
+	const shrine_id = run.shrine_ids[currentShrine];
+	const current_shrine = getShrine(shrine_id);
+
+	const [timestamp, setTimestamp] = useState(-1);
+	const [timeclasses, setTimeclasses] = useState(["time"]);
 	useEffect(() => {
 		const time_classes = ["time"];
 		if (run.state === RunState.Default) {
@@ -27,32 +47,6 @@ export const SplitTimer = (props: SplitTimerProps) => {
 		}
 		setTimeclasses(time_classes);
 	}, [run.state]);
-
-	let out = <></>;
-
-	if (run.state == RunState.Default) {
-		out = <NotStarted />;
-	} else if (run.state == RunState.Paused) {
-		out = <Paused />;
-	} else if (run.state == RunState.Ended) {
-		out = <Ended />;
-	} else {
-		out = <RunDisplay {...props} />;
-	}
-
-	return <div className={timeclasses.join(" ")}>{out}</div>;
-};
-
-const NotStarted = () => <>Not started</>;
-const Paused = () => <>Paused</>;
-const Ended = () => <>Ended</>;
-
-const RunDisplay = (props: SplitTimerProps) => {
-	const { run, currentShrine } = props;
-	const shrine_id = run.shrine_ids[currentShrine];
-	const current_shrine = getShrine(shrine_id);
-
-	const [timestamp, setTimestamp] = useState(-1);
 
 	useEffect(() => {
 		setTimestamp(run.rundate);
@@ -73,12 +67,13 @@ const RunDisplay = (props: SplitTimerProps) => {
 					? current_shrine.desc
 					: "Start the timer to reveal the first shrine!"}
 			</div>
-
-			<RunTimer
-				timestamp={timestamp}
-				runstate={run.state}
-				onUpdatePausedTime={props.onUpdatePausedTime}
-			/>
+			<div className={timeclasses.join(" ")}>
+				<RunTimer
+					timestamp={timestamp}
+					runstate={run.state}
+					onUpdatePausedTime={props.onUpdatePausedTime}
+				/>
+			</div>
 		</div>
 	);
 };

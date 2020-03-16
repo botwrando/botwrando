@@ -10,10 +10,6 @@ export const QuickMap = (props: QuickMapProps) => {
 	if (!shrine) {
 		return <></>;
 	}
-	// const imgPath = `./map/${shrine?.index}.jpg`;
-	// console.log(imgPath);
-	// const imgUrl = require(imgPath);
-	// console.log(imgUrl);
 	const bgClasses = ["mapwrapper"];
 	if (shrine) bgClasses.push(`bg-${shrine.index}`);
 	return (
