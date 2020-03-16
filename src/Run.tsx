@@ -9,10 +9,10 @@ export type Run = {
 	state: RunState;
 	runner: string;
 	rundate: number;
-	paused_time: number;
+	pausedTime: number;
 	seed: string;
-	shrine_ids: number[];
+	shrineIds: number[];
 	splits: Map<number, number>;
-	wr_splits: Map<number, number>;
-	pb_splits: Map<number, number>;
+	wrSplits: Map<number, number>;
+	pbSplits: Map<number, number>;
 };

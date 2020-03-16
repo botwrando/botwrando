@@ -37,7 +37,7 @@ export const SplitHistory = (props: SplitHistoryProps) => {
 
 	const get_diff = (rando_id: number): number => {
 		const curr_split = run.splits.get(rando_id);
-		const other_split = run.wr_splits.get(rando_id);
+		const other_split = run.wrSplits.get(rando_id);
 		if (curr_split && other_split) return curr_split - other_split;
 
 		return -1;
@@ -45,7 +45,7 @@ export const SplitHistory = (props: SplitHistoryProps) => {
 
 	const get_is_pb = (rando_id: number) => {
 		const curr_split = run.splits.get(rando_id);
-		const pb_split = run.pb_splits.get(rando_id);
+		const pb_split = run.pbSplits.get(rando_id);
 		if (curr_split && pb_split) return curr_split - pb_split < 0;
 
 		return false;
@@ -54,7 +54,7 @@ export const SplitHistory = (props: SplitHistoryProps) => {
 	return (
 		<div className="history">
 			<ScrollableFeed forceScroll={true} className="historylist">
-				{run.shrine_ids
+				{run.shrineIds
 					.filter((shrine_id, rando_id) => has_split(rando_id))
 					.map((shrine_id, rando_id) =>
 						ShrineList(

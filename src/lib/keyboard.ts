@@ -1,13 +1,13 @@
 import { groupBy } from "./utils";
 
 type Effect =
-	| "add_split"
-	| "undo_split"
-	| "skip_split"
-	| "reset_splits"
+	| "addSplit"
+	| "undoSplit"
+	| "skipSplit"
+	| "resetSplits"
 	| "pause"
-	| "show_help"
-	| "toggle_blood_moon";
+	| "toggleHelp"
+	| "toggleBloodMoon";
 
 export type FunctionMap = {
 	[key in Effect]: Function;
@@ -23,16 +23,16 @@ type BindingMap = {
 };
 
 let bindings: BindingMap = {
-	add_split: { desc: "Start the run / add a split" },
-	undo_split: { desc: "Undo last split" },
-	skip_split: { desc: "Skip a split" },
-	reset_splits: { desc: "Reset the run" },
+	addSplit: { desc: "Start the run / add a split" },
+	undoSplit: { desc: "Undo last split" },
+	skipSplit: { desc: "Skip a split" },
+	resetSplits: { desc: "Reset the run" },
 	pause: { desc: "Pause the timer" },
-	show_help: { desc: "Show / hide help" },
-	toggle_blood_moon: { desc: "Toggle Blood Moon shrine" }
+	toggleHelp: { desc: "Show / hide help" },
+	toggleBloodMoon: { desc: "Toggle Blood Moon shrine" }
 };
 
-export const register_callbacks = (map: FunctionMap) => {
+export const registerCallbacks = (map: FunctionMap) => {
 	Object.entries(map).forEach(value => {
 		const [key, fn] = value;
 		bindings[key].callback = fn;
@@ -41,45 +41,45 @@ export const register_callbacks = (map: FunctionMap) => {
 
 type Profile = { [key: string]: Effect };
 
-const teetow_profile: Profile = {
-	Space: "add_split",
-	Backspace: "undo_split",
-	Period: "skip_split",
-	KeyR: "reset_splits",
+const profileTeetow: Profile = {
+	Space: "addSplit",
+	Backspace: "undoSplit",
+	Period: "skipSplit",
+	KeyR: "resetSplits",
 	KeyP: "pause",
-	KeyH: "show_help",
-	KeyB: "toggle_blood_moon"
+	KeyH: "toggleHelp",
+	KeyB: "toggleBloodMoon"
 };
 
-const livesplit_profile: Profile = {
-	Numpad1: "add_split",
-	Numpad8: "undo_split",
-	Numpad2: "skip_split",
-	Numpad3: "reset_splits",
+const profileLivesplit: Profile = {
+	Numpad1: "addSplit",
+	Numpad8: "undoSplit",
+	Numpad2: "skipSplit",
+	Numpad3: "resetSplits",
 	Numpad5: "pause"
 };
 
-const specs_profile: Profile = {
-	NumpadAdd: "add_split",
-	NumpadSubtract: "undo_split",
-	NumpadDivide: "skip_split",
-	KeyQ: "reset_splits",
+const profileSpecs: Profile = {
+	NumpadAdd: "addSplit",
+	NumpadSubtract: "undoSplit",
+	NumpadDivide: "skipSplit",
+	KeyQ: "resetSplits",
 	NumpadMultiply: "pause"
 };
 
-const dj_profile: Profile = {
-	F1: "add_split",
-	F4: "undo_split",
-	F5: "skip_split",
-	F3: "reset_splits",
+const profileDj: Profile = {
+	F1: "addSplit",
+	F4: "undoSplit",
+	F5: "skipSplit",
+	F3: "resetSplits",
 	F6: "pause"
 };
 
 const keyboard_profile: Profile = {
-	...teetow_profile,
-	...livesplit_profile,
-	...specs_profile,
-	...dj_profile
+	...profileTeetow,
+	...profileLivesplit,
+	...profileSpecs,
+	...profileDj
 };
 
 export const getProfile = () => keyboard_profile;

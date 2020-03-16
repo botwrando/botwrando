@@ -29,7 +29,7 @@ const Ended = () => <>Ended</>;
 
 const RunDisplay = (props: SplitTimerProps) => {
 	const { run, currentShrine } = props;
-	const shrine_id = run.shrine_ids[currentShrine];
+	const shrine_id = run.shrineIds[currentShrine];
 	const current_shrine = getShrine(shrine_id);
 
 	const [timestamp, setTimestamp] = useState(-1);

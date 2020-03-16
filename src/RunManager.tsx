@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import "./assets/bloodmoon.svg";
 import { DesktopHelp, MobileControls } from "./Help";
-import { parse_keypress, register_callbacks } from "./lib/keyboard";
+import { parse_keypress, registerCallbacks } from "./lib/keyboard";
 import { QuickMap } from "./QuickMap";
 import { Run, RunState } from "./Run";
 import { BLOOD_MOON_SHRINE, Shrine, shrines } from "./shrines";
@@ -28,15 +28,15 @@ export const RunManager = (props: RunManagerProps) => {
 	});
 
 	const onUpdatePausedTime = (pausedTime: number) => {
-		setRun(prev => ({ ...prev, paused_time: pausedTime }));
+		setRun(prev => ({ ...prev, pausedTime }));
 	};
 
 	const updateSplits = (splits: Map<number, number>) => {
-		setRun(prev => ({ ...prev, splits: splits }));
+		setRun(prev => ({ ...prev, splits }));
 	};
 
-	const updateShrines = (shrine_ids: number[]) => {
-		setRun(prev => ({ ...prev, shrine_ids: shrine_ids }));
+	const updateShrines = (shrineIds: number[]) => {
+		setRun(prev => ({ ...prev, shrineIds }));
 	};
 
 	const setRunState = (state: RunState) => {
@@ -60,7 +60,7 @@ export const RunManager = (props: RunManagerProps) => {
 		}
 		if (run.state === RunState.Running) {
 			const splits = run.splits;
-			splits.set(shrinePtr, Date.now() - run.rundate - run.paused_time);
+			splits.set(shrinePtr, Date.now() - run.rundate - run.pausedTime);
 			updateSplits(splits);
 			setShrinePtr(prev => prev + 1);
 		}
@@ -77,9 +77,9 @@ export const RunManager = (props: RunManagerProps) => {
 	};
 
 	React.useEffect(() => {
-		if (shrinePtr >= run.shrine_ids.length) {
+		if (shrinePtr >= run.shrineIds.length) {
 			setRunState(RunState.Ended);
-		} else if (shrinePtr > -1 && shrinePtr < run.shrine_ids.length) {
+		} else if (shrinePtr > -1 && shrinePtr < run.shrineIds.length) {
 			setRunState(RunState.Running);
 		}
 	}, [shrinePtr]);
@@ -97,37 +97,37 @@ export const RunManager = (props: RunManagerProps) => {
 		const splits = run.splits;
 		splits.clear();
 		updateSplits(splits);
-		setRun(prev => ({ ...prev, paused_time: -1, rundate: -1 }));
+		setRun(prev => ({ ...prev, pausedTime: -1, rundate: -1 }));
 		setShrinePtr(-1);
 		setRunState(RunState.Default);
 	};
 
 	const pause = () => setRunState(RunState.Paused);
 
-	const show_help = () => setShowHelp(!showHelp);
+	const toggleHelp = () => setShowHelp(!showHelp);
 
 	const toggleBloodMoon = () => {
-		const { shrine_ids } = run;
+		const { shrineIds } = run;
 
 		if (bloodMoonState.isDone) {
 			return;
 		}
 		const currentShrine = Math.max(0, shrinePtr);
 
-		if (shrine_ids[currentShrine] === BLOOD_MOON_SHRINE) {
-			shrine_ids.splice(currentShrine, 1);
-			updateShrines(shrine_ids);
+		if (shrineIds[currentShrine] === BLOOD_MOON_SHRINE) {
+			shrineIds.splice(currentShrine, 1);
+			updateShrines(shrineIds);
 		} else {
-			shrine_ids.splice(currentShrine, 0, BLOOD_MOON_SHRINE);
-			updateShrines(shrine_ids);
+			shrineIds.splice(currentShrine, 0, BLOOD_MOON_SHRINE);
+			updateShrines(shrineIds);
 		}
 	};
 
 	React.useEffect(() => {
 		const state = {
 			isActive:
-				run.shrine_ids[Math.max(0, shrinePtr)] === BLOOD_MOON_SHRINE,
-			isDone: run.splits.has(run.shrine_ids.indexOf(BLOOD_MOON_SHRINE))
+				run.shrineIds[Math.max(0, shrinePtr)] === BLOOD_MOON_SHRINE,
+			isDone: run.splits.has(run.shrineIds.indexOf(BLOOD_MOON_SHRINE))
 		};
 		setBloodMoonState(prev => ({
 			...prev,
@@ -136,14 +136,14 @@ export const RunManager = (props: RunManagerProps) => {
 	}, [run, shrinePtr]);
 
 	React.useEffect(() => {
-		register_callbacks({
-			add_split: addSplit,
-			undo_split: undoSplit,
-			skip_split: skipSplit,
-			reset_splits: resetSplits,
+		registerCallbacks({
+			addSplit,
+			undoSplit,
+			skipSplit,
+			resetSplits,
 			pause,
-			show_help,
-			toggle_blood_moon: toggleBloodMoon
+			toggleHelp,
+			toggleBloodMoon
 		});
 	});
 
@@ -155,7 +155,7 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const getCurrentShrine = (): Shrine | undefined => {
 		const current_shrine = shrines.find(
-			item => item.index === run.shrine_ids[shrinePtr]
+			item => item.index === run.shrineIds[shrinePtr]
 		);
 		return current_shrine;
 	};
