@@ -9,39 +9,19 @@ function App() {
 	const testSeed = "420SPECSNLUL69";
 	const run: Run = {
 		state: RunState.Default,
-		runner: "Test Runner",
+		runner: "Probably Specs",
 		rundate: -1,
 		pausedTime: -1,
 		seed: testSeed,
 		shrineIds: getShrines(testSeed),
 		splits: new Map([]),
-		pbSplits: new Map([
-			[0, 13999],
-			[1, 117123],
-			[2, 261102],
-			[3, 358000],
-			[4, 458000],
-			[5, 558000],
-			[6, 658000]
-		]),
-		wrSplits: new Map([
-			[0, 16000],
-			[1, 115000],
-			[2, 270000],
-			[3, 361000],
-			[4, 458000],
-			[5, 558000],
-			[6, 658000]
-		])
+		pbSplits: new Map([]),
+		wrSplits: new Map([])
 	};
 
 	return (
 		<>
-			<link
-				rel="preload"
-				href="assets/bloodmoon.svg"
-				as="image"
-			></link>
+			<link rel="preload" href="assets/bloodmoon.svg" as="image"></link>
 			<RunManager run={run} />
 		</>
 	);
