@@ -3,6 +3,7 @@
 
 .shrine {
 	line-height: 48px;
+	font-size: 24px;
 	.counter {
 		text-align: right;
 	}
@@ -17,6 +18,7 @@
 	}
 	.time {
 		@include f-reg;
+		font-size: 24px;
 		text-align: right;
 		color: $pale-blue;
 		padding: 0 4px 0 0;
