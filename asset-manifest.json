@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/botwrando/static/css/main.ed93bfe2.chunk.css",
-    "main.js": "/botwrando/static/js/main.1bc2bcec.chunk.js",
-    "main.js.map": "/botwrando/static/js/main.1bc2bcec.chunk.js.map",
+    "main.css": "/botwrando/static/css/main.108d1301.chunk.css",
+    "main.js": "/botwrando/static/js/main.1692f0be.chunk.js",
+    "main.js.map": "/botwrando/static/js/main.1692f0be.chunk.js.map",
     "runtime-main.js": "/botwrando/static/js/runtime-main.5ab1b9f3.js",
     "runtime-main.js.map": "/botwrando/static/js/runtime-main.5ab1b9f3.js.map",
-    "static/js/2.f0b945e2.chunk.js": "/botwrando/static/js/2.f0b945e2.chunk.js",
-    "static/js/2.f0b945e2.chunk.js.map": "/botwrando/static/js/2.f0b945e2.chunk.js.map",
+    "static/js/2.c6423c28.chunk.js": "/botwrando/static/js/2.c6423c28.chunk.js",
+    "static/js/2.c6423c28.chunk.js.map": "/botwrando/static/js/2.c6423c28.chunk.js.map",
     "index.html": "/botwrando/index.html",
-    "precache-manifest.8e7d7aecb9cbf17be4bfb8108585a1c9.js": "/botwrando/precache-manifest.8e7d7aecb9cbf17be4bfb8108585a1c9.js",
+    "precache-manifest.71c95eb22aef49dec344405480de0f31.js": "/botwrando/precache-manifest.71c95eb22aef49dec344405480de0f31.js",
     "service-worker.js": "/botwrando/service-worker.js",
-    "static/css/main.ed93bfe2.chunk.css.map": "/botwrando/static/css/main.ed93bfe2.chunk.css.map",
-    "static/js/2.f0b945e2.chunk.js.LICENSE.txt": "/botwrando/static/js/2.f0b945e2.chunk.js.LICENSE.txt",
+    "static/css/main.108d1301.chunk.css.map": "/botwrando/static/css/main.108d1301.chunk.css.map",
+    "static/js/2.c6423c28.chunk.js.LICENSE.txt": "/botwrando/static/js/2.c6423c28.chunk.js.LICENSE.txt",
     "static/media/WorldMap.scss": "/botwrando/static/media/background.326de383.png",
     "static/media/style.scss": "/botwrando/static/media/bloodmoon.e2157dd1.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.5ab1b9f3.js",
-    "static/js/2.f0b945e2.chunk.js",
-    "static/css/main.ed93bfe2.chunk.css",
-    "static/js/main.1bc2bcec.chunk.js"
+    "static/js/2.c6423c28.chunk.js",
+    "static/css/main.108d1301.chunk.css",
+    "static/js/main.1692f0be.chunk.js"
   ]
 }
