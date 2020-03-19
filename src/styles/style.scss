@@ -126,6 +126,23 @@ body {
 	justify-content: center;
 }
 
+.seedpicker {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	label {
+		margin: 16px;
+	}
+	input {
+		margin: 16px;
+	}
+	button {
+		margin: 16px;
+	}
+	
+}
+
 .touchpanel {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;

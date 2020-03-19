@@ -1,5 +1,6 @@
 export enum RunState {
-	Default,
+	None,
+	Init,
 	Running,
 	Paused,
 	Ended

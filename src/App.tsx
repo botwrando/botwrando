@@ -7,13 +7,14 @@ import "./assets/bloodmoon.svg";
 
 function App() {
 	const testSeed = "420SPECSNLUL69";
+	// getShrines(testSeed)
 	const run: Run = {
-		state: RunState.Default,
+		state: RunState.None,
 		runner: "Probably Specs",
 		rundate: -1,
 		pausedTime: -1,
-		seed: testSeed,
-		shrineIds: getShrines(testSeed),
+		seed: "",
+		shrineIds: [],
 		splits: new Map([]),
 		pbSplits: new Map([]),
 		wrSplits: new Map([])

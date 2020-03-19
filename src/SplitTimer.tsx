@@ -36,7 +36,7 @@ const RunDisplay = (props: SplitTimerProps) => {
 	const [timeclasses, setTimeclasses] = useState(["time"]);
 	useEffect(() => {
 		const time_classes = ["time"];
-		if (run.state === RunState.Default) {
+		if (run.state === RunState.Init) {
 			time_classes.push("is-initial");
 		}
 		if (run.state === RunState.Paused) {
