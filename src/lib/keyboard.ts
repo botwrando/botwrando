@@ -10,7 +10,7 @@ export type KeyMap = {
 	toggle_blood_moon: Function;
 };
 
-let callbacks: KeyMap = {
+export let callbacks: KeyMap = {
 	add_split: () => console.log("add_split"),
 	undo_split: () => console.log("undo_split"),
 	skip_split: () => console.log("skip_split"),
@@ -82,7 +82,8 @@ const hotkey_descriptions: HotkeyDescription = {
 	skip_split: "Skip a split",
 	reset_splits: "Reset the run",
 	pause: "Pause the timer",
-	show_help: "Show / hide help"
+	show_help: "Show / hide help",
+	toggle_blood_moon: "Toggle the Blood Moon"
 };
 
 const re_fn_name = /\(\) => callbacks\.(.+?)\(\)/;
@@ -98,7 +99,7 @@ const getHotkeyDescription = (fn: Function) => {
 
 const re_shortkeynames = /Key(.+)/;
 const re_shortnumpadnames = /Numpad(.+)/;
-const stringsubst: any = {
+const stringsubst: Record<string, string> = {
 	Add: "+",
 	Subtract: "-",
 	Divide: "/",
@@ -109,7 +110,7 @@ const stringsubst: any = {
 export const getShortKeyname = (keyname: string) => {
 	let outstr = keyname;
 
-	Object.entries(stringsubst).map(value => {
+	Object.entries(stringsubst).forEach((value: Array<string>) => {
 		const [search, replace] = value;
 		outstr = outstr.replace(search, replace as string);
 	});
@@ -130,8 +131,8 @@ export const getShortKeyname = (keyname: string) => {
 
 export const getKeyMap = () => {
 	const keys = getProfile();
-	const grouped = groupBy(Object.entries(keys), (value: any) => {
-		const [key, fn] = value;
+	const grouped = groupBy(Object.entries(keys), (value: [string, Function]) => {
+		const fn = value[1];
 		return getHotkeyDescription(fn);
 	});
 	return grouped;
