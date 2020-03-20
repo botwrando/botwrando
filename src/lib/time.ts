@@ -32,10 +32,10 @@ const getTimestamp = (ts: number): Timestamp => {
 
 const smart_format = (
 	timestamp: number,
-	pos_sign?: string,
+	pos_sign: string = "",
 	full_format = false
 ): string => {
-	const sign = timestamp >= 0 ? (pos_sign ? pos_sign : "") : "-";
+	const sign = timestamp >= 0 ? pos_sign : "-";
 	const ts = getTimestamp(timestamp);
 
 	const out = (fmt_ts: string) => `${sign}${fmt_ts}`;
@@ -47,24 +47,16 @@ const smart_format = (
 	if (timestamp >= MINUTE_THRES)
 		return full_format
 			? out(`${ts.m}:${ts.s}.${ts.ms}`)
-			: out(`${ts.s}.${ts.ms}`);
+			: out(`${ts.m}:${ts.s}`);
 	return out(`${ts.s}.${ts.ms}`);
 };
 
 export const format_time = (
 	timestamp: number,
-	empty_label: string = "--:--",
-	pos_sign = ""
+	empty_label = "--:--",
+	pos_sign = "",
+	full_fmt = false
 ): string => {
-	if (timestamp !== -1) return smart_format(timestamp, pos_sign);
-	return empty_label;
-};
-
-export const format_time_full = (
-	timestamp: number,
-	empty_label: string = "--:--",
-	pos_sign = ""
-): string => {
-	if (timestamp !== -1) return smart_format(timestamp, pos_sign, true);
+	if (timestamp !== -1) return smart_format(timestamp, pos_sign, full_fmt);
 	return empty_label;
 };
