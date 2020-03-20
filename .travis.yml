@@ -3,7 +3,7 @@ node_js:
   - 12
   - node
 script: yarn ci
-stages:
+jobs:
   include:
     - stage: coverage
       node_js: node
