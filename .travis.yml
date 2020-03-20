@@ -2,6 +2,12 @@ language: node_js
 node_js:
   - 12
   - node
-script:
-  - yarn ci
-  - yarn build
+script: yarn ci
+stages:
+  include:
+    - stage: coverage
+      node_js: node
+      script: yarn coverage
+    - stage: build
+      node_js: node
+      script: yarn build

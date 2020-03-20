@@ -29,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "ci": "CI=true react-scripts test --reporters=jest-spec-reporter --coverage=true --coverageProvider=v8",
+    "ci": "CI=true yarn test --reporters=jest-spec-reporter",
+    "coverage": "yarn ci --coverage=true --coverageProvider=v8",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
