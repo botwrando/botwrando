@@ -1,5 +1,5 @@
 import React from "react";
-import { format_time } from "./lib/time";
+import { FormattedTime } from "./lib/FormattedTime";
 import { RunState } from "./Run";
 
 type ToggleTimer = {
@@ -60,5 +60,5 @@ export const RunTimer = (props: RunTimerProps) => {
 		onUpdatePausedTime(pausedTime);
 	}, [pausedTime]);
 
-	return <>{format_time(timerDisplay, undefined, undefined, true)}</>;
+	return <FormattedTime timestamp={timerDisplay} full_format={true} />;
 };

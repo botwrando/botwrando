@@ -103,10 +103,9 @@ body {
 	.history .shrine,
 	.shrine.current {
 		display: grid;
-		grid-template-columns: 40px 1fr 32px 128px;
+		grid-template-columns: 56px 1fr 32px 180px;
 		gap: 0 8px;
 		align-items: center;
-		width: calc(100% - 16px);
 		@media (max-width: 480px) {
 			grid-template-columns: 40px 1fr 32px 80px;
 			line-height: 32px;

@@ -40,7 +40,7 @@ export const SplitHistory = (props: SplitHistoryProps) => {
 		const other_split = run.wrSplits.get(rando_id);
 		if (curr_split && other_split) return curr_split - other_split;
 
-		return -1;
+		return Number.NEGATIVE_INFINITY;
 	};
 
 	const get_is_pb = (rando_id: number) => {

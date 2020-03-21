@@ -1,11 +1,12 @@
 const HOUR_THRES = 1000 * 60 * 60;
 const MINUTE_THRES = 1000 * 60;
 
-type Timestamp = {
-	h: string;
-	m: string;
-	s: string;
-	ms: string;
+export type Timestamp = {
+	sign?: string;
+	h?: string;
+	m?: string;
+	s?: string;
+	ms?: string;
 };
 
 const trunc = (ts: number) => {
@@ -30,33 +31,26 @@ const getTimestamp = (ts: number): Timestamp => {
 	return { h: pad(h), m: pad(m), s: pad(s), ms: pad(trunc(ms)) };
 };
 
-const smart_format = (
+export const smart_format = (
 	timestamp: number,
+	full_format: boolean,
 	pos_sign: string = "",
-	full_format = false
-): string => {
+): Timestamp => {
+	if (timestamp == Number.NEGATIVE_INFINITY) {
+		return {}
+	}
 	const sign = timestamp >= 0 ? pos_sign : "-";
-	const ts = getTimestamp(timestamp);
+	const { h, m, s, ms } = getTimestamp(timestamp);
 
-	const out = (fmt_ts: string) => `${sign}${fmt_ts}`;
+	let out = {};
 
 	if (timestamp >= HOUR_THRES)
-		return full_format
-			? out(`${ts.h}:${ts.m}:${ts.s}.${ts.ms}`)
-			: out(`${ts.h}:${ts.m}:${ts.s}`);
-	if (timestamp >= MINUTE_THRES)
-		return full_format
-			? out(`${ts.m}:${ts.s}.${ts.ms}`)
-			: out(`${ts.m}:${ts.s}`);
-	return out(`${ts.s}.${ts.ms}`);
-};
+		out = full_format ? { h, m, s, ms } : { h, m, s };
+	if (timestamp >= MINUTE_THRES) 
+		out = full_format ? { m, s, ms } : { m, s };
+	else 
+		out = { s, ms };
+	out = { ...out, sign };
 
-export const format_time = (
-	timestamp: number,
-	empty_label = "--:--",
-	pos_sign = "",
-	full_fmt = false
-): string => {
-	if (timestamp !== -1) return smart_format(timestamp, pos_sign, full_fmt);
-	return empty_label;
+	return out;
 };

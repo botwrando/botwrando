@@ -6,6 +6,7 @@
 	font-size: 24px;
 	.counter {
 		text-align: right;
+		padding: 0 16px 0 0;
 	}
 	.diff {
 		@include f-reg;
@@ -21,7 +22,10 @@
 		font-size: 24px;
 		text-align: right;
 		color: $pale-blue;
-		padding: 0 4px 0 0;
+		.ms {
+			font-size: 75%;
+		}
+
 	}
 }
 
@@ -42,6 +46,7 @@
 	}
 	.desc {
 		@include f-sec;
+		font-size: 20px;
 		line-height: 32px;
 		grid-row: 2;
 		grid-column: 2 / 3;
@@ -58,6 +63,9 @@
 		.delta {
 			@include f-reg;
 			margin: 12px 0 -12px;
+		}
+		.ms {
+			font-size: 66%;
 		}
 	}
 }
