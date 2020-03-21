@@ -46,7 +46,7 @@ export const smart_format = (
 
 	if (timestamp >= HOUR_THRES)
 		out = full_format ? { h, m, s, ms } : { h, m, s };
-	if (timestamp >= MINUTE_THRES) 
+	else if (timestamp >= MINUTE_THRES) 
 		out = full_format ? { m, s, ms } : { m, s };
 	else 
 		out = { s, ms };
