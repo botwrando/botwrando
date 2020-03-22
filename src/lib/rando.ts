@@ -1,6 +1,6 @@
 import { shuffle } from "shuffle-seed";
 
-function range(bound: number, limit: number = 0): number[] {
+export function range(bound: number, limit: number = 0): number[] {
 	const start = limit ? bound : 0;
 	const end = limit ? limit : bound;
 	const base = [...Array.from(Array(end - start + 1).keys())];

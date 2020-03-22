@@ -1,6 +1,6 @@
 import React from "react";
-import { HotkeyList } from "./HotkeyList";
-import { Run } from "./Run";
+import { HotkeyList } from "../HotkeyList/HotkeyList";
+import { Run } from "../../lib/run";
 
 type MobileProps = {
 	run: Run;

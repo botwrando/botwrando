@@ -1,9 +1,9 @@
 import React from "react";
-import { getShrines } from "./lib/rando";
-import { Run, RunState } from "./Run";
-import { RunManager } from "./RunManager";
-import "./styles/style.scss";
-import "./assets/bloodmoon.svg";
+import { getShrines } from "../../lib/rando";
+import { Run, RunState } from "../../lib/run";
+import { RunManager } from "../RunManager/RunManager";
+import "../../styles/style.scss";
+import "../../assets/bloodmoon.svg";
 
 function App() {
 	const testSeed = "420SPECSNLUL69";

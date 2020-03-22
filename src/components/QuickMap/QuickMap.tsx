@@ -1,6 +1,6 @@
 import React from "react";
-import { Shrine } from "./shrines";
-import "./WorldMap.scss";
+import { Shrine } from "../../lib/shrines";
+import "../WorldMap/WorldMap.scss";
 export type QuickMapProps = {
 	shrine?: Shrine;
 };

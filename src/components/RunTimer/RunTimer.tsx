@@ -1,6 +1,6 @@
 import React from "react";
-import { FormattedTime } from "./lib/FormattedTime";
-import { RunState } from "./Run";
+import { FormattedTime } from "../FormattedTime/FormattedTime";
+import { RunState } from "../../lib/run";
 
 type ToggleTimer = {
 	startedAt: number;

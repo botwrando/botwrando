@@ -1,7 +1,7 @@
 import React from "react";
-import { FormattedTime } from "./lib/FormattedTime";
+import { FormattedTime } from "../FormattedTime/FormattedTime";
 import "./ShrineInfo.scss";
-import { getShrine } from "./shrines";
+import { getShrine } from "../../lib/shrines";
 
 export type ShrineInfoProps = {
 	counter: number;

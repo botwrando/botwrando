@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Shrine } from "./shrines";
+import { Shrine } from "../../lib/shrines";
 
 export type WorldMapProps = {
 	shrine?: Shrine;

@@ -1,6 +1,6 @@
 import { groupBy } from "./utils";
 
-type Effect =
+export type Effect =
 	| "addSplit"
 	| "undoSplit"
 	| "skipSplit"
@@ -18,11 +18,11 @@ export type Binding = {
 	callback?: Function;
 };
 
-type BindingMap = {
+export type BindingMap = {
 	[key: string]: Binding;
 };
 
-let bindings: BindingMap = {
+export let bindings: BindingMap = {
 	addSplit: { desc: "Start the run / add a split" },
 	undoSplit: { desc: "Undo last split" },
 	skipSplit: { desc: "Skip a split" },
@@ -75,17 +75,17 @@ const profileDj: Profile = {
 	F6: "pause"
 };
 
-const keyboard_profile: Profile = {
+const keyboardProfile: Profile = {
 	...profileTeetow,
 	...profileLivesplit,
 	...profileSpecs,
 	...profileDj
 };
 
-export const getProfile = () => keyboard_profile;
+export const getProfile = () => keyboardProfile;
 
-export const parse_keypress = (code: string): Function | undefined => {
-	let effect = keyboard_profile[code];
+export const parseKeypress = (code: string): Function | undefined => {
+	let effect = keyboardProfile[code];
 	return bindings[effect]?.callback;
 };
 
@@ -124,7 +124,7 @@ export const getShortKeyname = (keyname: string) => {
 export const getKeyMap = () => {
 	const keys = getProfile();
 	const grouped = groupBy(Object.entries(keys), (value: [string, Effect]) => {
-		const [key, effect] = value;
+		const [, effect] = value;
 		return bindings[effect].desc;
 	});
 	return grouped;

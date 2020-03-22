@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - lts/*
+  - node
+script: yarn ci
+jobs:
+  include:
+    - stage: lint
+      node_js: node
+      script: yarn lint
+    - stage: coverage
+      node_js: node
+      script: yarn coverage
+    - stage: build
+      node_js: node
+      script: yarn build
