@@ -5,6 +5,9 @@ node_js:
 script: yarn ci
 jobs:
   include:
+    - stage: lint
+      node_js: node
+      script: yarn lint
     - stage: coverage
       node_js: node
       script: yarn coverage
