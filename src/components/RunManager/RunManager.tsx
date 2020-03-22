@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import KeyboardEventHandler from "react-keyboard-event-handler";
-import "./assets/bloodmoon.svg";
-import { DesktopHelp, MobileControls } from "./Help";
-import { parse_keypress, registerCallbacks } from "./lib/keyboard";
-import { getShrines } from "./lib/rando";
-import { QuickMap } from "./QuickMap";
-import { Run, RunState } from "./Run";
-import { SeedPicker } from "./SeedPicker";
-import { BLOOD_MOON_SHRINE, Shrine, shrines } from "./shrines";
-import { SplitHistory } from "./SplitHistory";
-import { SplitTimer } from "./SplitTimer";
+import "../../assets/bloodmoon.svg";
+import { DesktopHelp, MobileControls } from "../Help/Help";
+import { parseKeypress, registerCallbacks } from "../../lib/keyboard";
+import { getShrines } from "../../lib/rando";
+import { QuickMap } from "../QuickMap/QuickMap";
+import { Run, RunState } from "../../lib/run";
+import { SeedPicker } from "../SeedPicker/SeedPicker";
+import { BLOOD_MOON_SHRINE, Shrine, shrines } from "../../lib/shrines";
+import { SplitHistory } from "../SplitHistory/SplitHistory";
+import { SplitTimer } from "../SplitTimer/SplitTimer";
 
 type RunManagerProps = {
 	run: Run;
@@ -181,7 +181,7 @@ export const RunManager = (props: RunManagerProps) => {
 			return;
 		}
 		lastCall = ts;
-		const callback = parse_keypress(event.code);
+		const callback = parseKeypress(event.code);
 
 		if (callback) {
 			callback();

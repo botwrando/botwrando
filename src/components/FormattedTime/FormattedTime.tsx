@@ -1,5 +1,5 @@
 import React from "react";
-import { smart_format } from "./time";
+import { smart_format } from "../../lib/time";
 
 export type FormattedTimeProps = {
 	timestamp?: number;
