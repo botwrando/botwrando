@@ -56,7 +56,7 @@ body {
 
 .main {
 	display: grid;
-	grid-template-rows: 64px 24px 1fr 80px 300px auto;
+	grid-template-rows: 64px 24px 3fr 80px 2fr auto;
 	margin: auto;
 	height: 100%;
 	max-width: 960px;
