@@ -3,11 +3,11 @@ import KeyboardEventHandler from "react-keyboard-event-handler";
 import "../../assets/bloodmoon.svg";
 import { DesktopHelp, MobileControls } from "../Help/Help";
 import { parseKeypress, registerCallbacks } from "../../lib/keyboard";
-import { getShrines } from "../../lib/rando";
+import { getRandomizedShrines } from "../../lib/rando";
 import { QuickMap } from "../QuickMap/QuickMap";
 import { Run, RunState } from "../../lib/run";
 import { SeedPicker } from "../SeedPicker/SeedPicker";
-import { BLOOD_MOON_SHRINE, Shrine, shrines } from "../../lib/shrines";
+import { BLOOD_MOON_SHRINE, Shrine, getShrine } from "../../lib/shrines";
 import { SplitHistory } from "../SplitHistory/SplitHistory";
 import { SplitTimer } from "../SplitTimer/SplitTimer";
 
@@ -88,7 +88,7 @@ export const RunManager = (props: RunManagerProps) => {
 	}, [shrinePtr]);
 
 	const skipSplit = () => {
-		if (run.state == RunState.Ended) return;
+		if (run.state === RunState.Ended) return;
 
 		const splits = run.splits;
 		splits.set(shrinePtr, -1);
@@ -157,9 +157,7 @@ export const RunManager = (props: RunManagerProps) => {
 	};
 
 	const getCurrentShrine = (): Shrine | undefined => {
-		const current_shrine = shrines.find(
-			item => item.index === run.shrineIds[shrinePtr]
-		);
+		const current_shrine = getShrine(run.shrineIds[shrinePtr]);
 		return current_shrine;
 	};
 
@@ -189,7 +187,7 @@ export const RunManager = (props: RunManagerProps) => {
 	};
 
 	const onPickedSeed = (seed: string) => {
-		const shrineIds = getShrines(seed);
+		const shrineIds = getRandomizedShrines(seed);
 		setRun(prev => ({ ...prev, seed: seed, shrineIds: shrineIds }));
 		setHasRun(true);
 		setRunState(RunState.Init);
@@ -207,7 +205,7 @@ export const RunManager = (props: RunManagerProps) => {
 		);
 
 	const mainsection = () =>
-		run.state == RunState.None ? (
+		run.state === RunState.None ? (
 			<SeedPicker onPickedSeed={onPickedSeed} />
 		) : (
 			// <div className="splashscreen">Ready to rock!</div>

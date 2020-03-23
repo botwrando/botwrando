@@ -4,7 +4,7 @@ import { getKeyMap, getShortKeyname } from "../../lib/keyboard";
 
 export type HotkeyListProps = {};
 
-export const HotkeyList = (props: HotkeyListProps) => {
+export const HotkeyList = (_props: HotkeyListProps) => {
 	const map = getKeyMap();
 	return (
 		<>
