@@ -1,13 +1,13 @@
 import React from "react";
-import { getShrines } from "../../lib/rando";
+// import { getRandomizedShrines } from "../../lib/rando";
 import { Run, RunState } from "../../lib/run";
 import { RunManager } from "../RunManager/RunManager";
 import "../../styles/style.scss";
 import "../../assets/bloodmoon.svg";
 
 function App() {
-	const testSeed = "420SPECSNLUL69";
-	// getShrines(testSeed)
+	// const testSeed = "420SPECSNLUL69";
+	// getRandomizedShrines(testSeed)
 	const run: Run = {
 		state: RunState.None,
 		runner: "Probably Specs",

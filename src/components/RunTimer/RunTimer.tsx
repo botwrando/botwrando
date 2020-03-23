@@ -24,7 +24,7 @@ export const RunTimer = (props: RunTimerProps) => {
 
 	const request_ref = React.useRef<number>(-1);
 
-	const update_time = (time: number) => {
+	const update_time = (_time: number) => {
 		if (runstate === RunState.Init) {
 			setTimerDisplay(0);
 			setPausedTime(-1);
@@ -43,7 +43,7 @@ export const RunTimer = (props: RunTimerProps) => {
 			if (toggleTimer.startedAt !== -1) {
 			}
 			if (toggleTimer.pausedAt === -1) {
-				setToggleTimer(prev => ({
+				setToggleTimer(_prev => ({
 					startedAt: -1,
 					pausedAt: Date.now()
 				}));

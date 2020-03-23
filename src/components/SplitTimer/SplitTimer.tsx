@@ -14,7 +14,7 @@ export const SplitTimer = (props: SplitTimerProps) => {
 
 	let out = <></>;
 
-	if (run.state == RunState.Ended) {
+	if (run.state === RunState.Ended) {
 		out = <Ended />;
 	} else {
 		out = <RunDisplay {...props} />;
@@ -23,8 +23,8 @@ export const SplitTimer = (props: SplitTimerProps) => {
 	return <>{out}</>;
 };
 
-const NotStarted = () => <>Not started</>;
-const Paused = () => <>Paused</>;
+const _NotStarted = () => <>Not started</>;
+const _Paused = () => <>Paused</>;
 const Ended = () => <>Ended</>;
 
 const RunDisplay = (props: SplitTimerProps) => {

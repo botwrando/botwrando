@@ -14,7 +14,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
 	};
 
 	const handleSelectSeed = (
-		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+		_event: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
 		props.onPickedSeed(seed);
 	};

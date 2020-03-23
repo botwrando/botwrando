@@ -41,7 +41,7 @@ export const smart_format = (
 	full_format: boolean,
 	pos_sign: string = "",
 ): Timestamp => {
-	if (timestamp == Number.NEGATIVE_INFINITY) {
+	if (timestamp === Number.NEGATIVE_INFINITY) {
 		return {}
 	}
 	const sign = timestamp >= 0 ? pos_sign : "-";
