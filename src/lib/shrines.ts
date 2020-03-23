@@ -10,15 +10,23 @@ export type Shrine = {
 	desc: String | null;
 	region: String | null;
 	location: Location;
-	is_blood_moon: Boolean;
-	is_plateau: Boolean;
+	isBloodMoon: Boolean;
+	isPlateau: Boolean;
 };
 
 export const getShrine = (shrine_id: number): Shrine | undefined =>
 	shrines.find(item => item.index === shrine_id);
 
-export const BLOOD_MOON_SHRINE = 78;
-export const PLATEAU_SHRINES = [38, 41, 9, 65];
+export const PLATEAU_SHRINES: number[] = [38, 41, 9, 65];
+export const BLOOD_MOON_SHRINE: number = 78;
+export const EVENTIDE_SHRINE: number = 97;
+
+export const isNormalShrine = (id: number): Boolean => {
+	return (
+		PLATEAU_SHRINES.indexOf(id) === -1 &&
+		BLOOD_MOON_SHRINE !== id && EVENTIDE_SHRINE !== id
+	);
+};
 
 export const shrines = [
 	{
@@ -31,8 +39,8 @@ export const shrines = [
 			y: "173.1039f",
 			z: "1517.671f"
 		},
-		is_blood_moon: false,
-		is_plateau: true
+		isBloodMoon: false,
+		isPlateau: true
 	},
 	{
 		index: 41,
@@ -44,8 +52,8 @@ export const shrines = [
 			y: "180.0318f",
 			z: "1990.182f"
 		},
-		is_blood_moon: false,
-		is_plateau: true
+		isBloodMoon: false,
+		isPlateau: true
 	},
 	{
 		index: 9,
@@ -57,8 +65,8 @@ export const shrines = [
 			y: "274.1815f",
 			z: "2313.729f"
 		},
-		is_blood_moon: false,
-		is_plateau: true
+		isBloodMoon: false,
+		isPlateau: true
 	},
 	{
 		index: 65,
@@ -70,8 +78,8 @@ export const shrines = [
 			y: "337.59f",
 			z: "1988.853f"
 		},
-		is_blood_moon: false,
-		is_plateau: true
+		isBloodMoon: false,
+		isPlateau: true
 	},
 	{
 		index: 7,
@@ -83,8 +91,8 @@ export const shrines = [
 			y: "122.5279f",
 			z: "1651.206f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 15,
@@ -96,8 +104,8 @@ export const shrines = [
 			y: "131.5204f",
 			z: "2471f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 17,
@@ -109,8 +117,8 @@ export const shrines = [
 			y: "525.882f",
 			z: "1938.7f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 47,
@@ -122,8 +130,8 @@ export const shrines = [
 			y: "137.688f",
 			z: "1845.038f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 44,
@@ -135,8 +143,8 @@ export const shrines = [
 			y: "443.3821f",
 			z: "1851.348f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 45,
@@ -148,8 +156,8 @@ export const shrines = [
 			y: "115.5371f",
 			z: "1927.545f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 99,
@@ -161,8 +169,8 @@ export const shrines = [
 			y: "260.1112f",
 			z: "895.7665f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 29,
@@ -174,8 +182,8 @@ export const shrines = [
 			y: "116.9448f",
 			z: "843.1727f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 112,
@@ -187,8 +195,8 @@ export const shrines = [
 			y: "286.0163f",
 			z: "968.0991f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 82,
@@ -200,8 +208,8 @@ export const shrines = [
 			y: "107.1959f",
 			z: "2985.234f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 39,
@@ -213,8 +221,8 @@ export const shrines = [
 			y: "242.6054f",
 			z: "2210.534f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 119,
@@ -226,8 +234,8 @@ export const shrines = [
 			y: "288.1624f",
 			z: "1685.43f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 117,
@@ -239,8 +247,8 @@ export const shrines = [
 			y: "572.8215f",
 			z: "1318.108f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 19,
@@ -252,8 +260,8 @@ export const shrines = [
 			y: "220.9526f",
 			z: "1329.986f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 14,
@@ -265,8 +273,8 @@ export const shrines = [
 			y: "119.1525f",
 			z: "1500.751f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 24,
@@ -278,8 +286,8 @@ export const shrines = [
 			y: "249.373f",
 			z: "386.233f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 33,
@@ -291,8 +299,8 @@ export const shrines = [
 			y: "117.713f",
 			z: "466.3539f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 49,
@@ -304,8 +312,8 @@ export const shrines = [
 			y: "132.8904f",
 			z: "185.6969f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 70,
@@ -317,8 +325,8 @@ export const shrines = [
 			y: "148.4889f",
 			z: "-288.4922f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 23,
@@ -330,8 +338,8 @@ export const shrines = [
 			y: "128.4185f",
 			z: "-378.9013f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 16,
@@ -343,8 +351,8 @@ export const shrines = [
 			y: "119.013f",
 			z: "409f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 114,
@@ -356,8 +364,8 @@ export const shrines = [
 			y: "110.9068f",
 			z: "260.5872f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 101,
@@ -369,8 +377,8 @@ export const shrines = [
 			y: "279.9849f",
 			z: "-421.0394f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 5,
@@ -382,8 +390,8 @@ export const shrines = [
 			y: "239.2957f",
 			z: "-511.9885f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 66,
@@ -395,8 +403,8 @@ export const shrines = [
 			y: "242.5114f",
 			z: "-1304.481f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 115,
@@ -408,8 +416,8 @@ export const shrines = [
 			y: "22.06107f",
 			z: "-2655.765f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 11,
@@ -421,8 +429,8 @@ export const shrines = [
 			y: "275.2352f",
 			z: "-1478.82f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 95,
@@ -434,8 +442,8 @@ export const shrines = [
 			y: "281.3849f",
 			z: "-1938.842f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 98,
@@ -447,8 +455,8 @@ export const shrines = [
 			y: "280.3546f",
 			z: "-2451.597f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 22,
@@ -460,8 +468,8 @@ export const shrines = [
 			y: "250.1614f",
 			z: "-2161.527f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 106,
@@ -473,8 +481,8 @@ export const shrines = [
 			y: "282.2083f",
 			z: "-2412.92f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 108,
@@ -486,8 +494,8 @@ export const shrines = [
 			y: "285.2849f",
 			z: "-3119.6f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 56,
@@ -499,8 +507,8 @@ export const shrines = [
 			y: "127.5614f",
 			z: "-1212.611f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 72,
@@ -512,8 +520,8 @@ export const shrines = [
 			y: "68.85024f",
 			z: "1706.917f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 27,
@@ -525,8 +533,8 @@ export const shrines = [
 			y: "186.7413f",
 			z: "1307.912f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 57,
@@ -538,8 +546,8 @@ export const shrines = [
 			y: "123.0927f",
 			z: "1012.573f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 40,
@@ -551,8 +559,8 @@ export const shrines = [
 			y: "127.6782f",
 			z: "723.2963f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 73,
@@ -564,8 +572,8 @@ export const shrines = [
 			y: "128.8799f",
 			z: "-338.0173f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 74,
@@ -577,8 +585,8 @@ export const shrines = [
 			y: "134.3756f",
 			z: "-624.722f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 89,
@@ -590,8 +598,8 @@ export const shrines = [
 			y: "144.2066f",
 			z: "-1159.346f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 79,
@@ -603,8 +611,8 @@ export const shrines = [
 			y: "188.7375f",
 			z: "-821.9541f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 69,
@@ -616,8 +624,8 @@ export const shrines = [
 			y: "321.2284f",
 			z: "3564.887f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 80,
@@ -629,8 +637,8 @@ export const shrines = [
 			y: "110.6568f",
 			z: "3840.544f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 54,
@@ -642,8 +650,8 @@ export const shrines = [
 			y: "178.9204f",
 			z: "3519.195f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 71,
@@ -655,8 +663,8 @@ export const shrines = [
 			y: "118.0507f",
 			z: "2997.593f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 68,
@@ -668,8 +676,8 @@ export const shrines = [
 			y: "68.03526f",
 			z: "2599.015f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 113,
@@ -681,8 +689,8 @@ export const shrines = [
 			y: "123.0039f",
 			z: "2335.948f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 50,
@@ -694,8 +702,8 @@ export const shrines = [
 			y: "167.0076f",
 			z: "3607.884f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 96,
@@ -707,8 +715,8 @@ export const shrines = [
 			y: "301.5088f",
 			z: "3281.743f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 61,
@@ -720,8 +728,8 @@ export const shrines = [
 			y: "189.808f",
 			z: "2999.198f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 111,
@@ -733,8 +741,8 @@ export const shrines = [
 			y: "318.1523f",
 			z: "2830.081f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 6,
@@ -746,8 +754,8 @@ export const shrines = [
 			y: "152.7675f",
 			z: "3318.359f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 34,
@@ -759,8 +767,8 @@ export const shrines = [
 			y: "120.6614f",
 			z: "3323.639f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 81,
@@ -772,8 +780,8 @@ export const shrines = [
 			y: "350.3494f",
 			z: "3306.286f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 97,
@@ -785,8 +793,8 @@ export const shrines = [
 			y: "217.985f",
 			z: "3768.092f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 78,
@@ -798,8 +806,8 @@ export const shrines = [
 			y: "309.3784f",
 			z: "220.9057f"
 		},
-		is_blood_moon: true,
-		is_plateau: false
+		isBloodMoon: true,
+		isPlateau: false
 	},
 	{
 		index: 37,
@@ -811,8 +819,8 @@ export const shrines = [
 			y: "306.459f",
 			z: "-439.459f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 20,
@@ -824,8 +832,8 @@ export const shrines = [
 			y: "212.3849f",
 			z: "87.74423f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 58,
@@ -837,8 +845,8 @@ export const shrines = [
 			y: "439.5814f",
 			z: "467.7474f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 4,
@@ -850,8 +858,8 @@ export const shrines = [
 			y: "138.332f",
 			z: "-587.0825f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 92,
@@ -863,8 +871,8 @@ export const shrines = [
 			y: "249.8943f",
 			z: "-1464.344f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 21,
@@ -876,8 +884,8 @@ export const shrines = [
 			y: "216.5644f",
 			z: "-908.1f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 53,
@@ -889,8 +897,8 @@ export const shrines = [
 			y: "265.1334f",
 			z: "-2210.389f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 12,
@@ -902,8 +910,8 @@ export const shrines = [
 			y: "275.1873f",
 			z: "-1726.501f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 35,
@@ -915,8 +923,8 @@ export const shrines = [
 			y: "321.7578f",
 			z: "-1764.17f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 8,
@@ -928,8 +936,8 @@ export const shrines = [
 			y: "246.7223f",
 			z: "-1523.225f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 83,
@@ -941,8 +949,8 @@ export const shrines = [
 			y: "384.5054f",
 			z: "-444.4357f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 59,
@@ -954,8 +962,8 @@ export const shrines = [
 			y: "184.3011f",
 			z: "-413.0951f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 88,
@@ -967,8 +975,8 @@ export const shrines = [
 			y: "329.8666f",
 			z: "-3798.386f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 118,
@@ -980,8 +988,8 @@ export const shrines = [
 			y: "288.1042f",
 			z: "-3712.072f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 87,
@@ -993,8 +1001,8 @@ export const shrines = [
 			y: "420.8361f",
 			z: "-3038.48f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 46,
@@ -1006,8 +1014,8 @@ export const shrines = [
 			y: "667.7664f",
 			z: "-3214.465f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 18,
@@ -1019,8 +1027,8 @@ export const shrines = [
 			y: "485.9271f",
 			z: "-3223.752f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 62,
@@ -1032,8 +1040,8 @@ export const shrines = [
 			y: "346.5799f",
 			z: "-3762.813f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 116,
@@ -1045,8 +1053,8 @@ export const shrines = [
 			y: "341.313f",
 			z: "-3535f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 86,
@@ -1058,8 +1066,8 @@ export const shrines = [
 			y: "671.0319f",
 			z: "-2880.443f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 51,
@@ -1071,8 +1079,8 @@ export const shrines = [
 			y: "94.90372f",
 			z: "-2507.55f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 55,
@@ -1084,8 +1092,8 @@ export const shrines = [
 			y: "79.888f",
 			z: "-1571.196f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 104,
@@ -1097,8 +1105,8 @@ export const shrines = [
 			y: "446.0452f",
 			z: "-2067.302f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 52,
@@ -1110,8 +1118,8 @@ export const shrines = [
 			y: "278.1229f",
 			z: "-2260.689f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 42,
@@ -1123,8 +1131,8 @@ export const shrines = [
 			y: "335.7542f",
 			z: "-2555.731f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 3,
@@ -1136,8 +1144,8 @@ export const shrines = [
 			y: "123.756f",
 			z: "3779.511f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 63,
@@ -1149,8 +1157,8 @@ export const shrines = [
 			y: "132.133f",
 			z: "1975.29f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 94,
@@ -1162,8 +1170,8 @@ export const shrines = [
 			y: "135.1122f",
 			z: "2798.968f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 93,
@@ -1175,8 +1183,8 @@ export const shrines = [
 			y: "159.2849f",
 			z: "3124.464f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 107,
@@ -1188,8 +1196,8 @@ export const shrines = [
 			y: "137.6864f",
 			z: "3775.005f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 103,
@@ -1201,8 +1209,8 @@ export const shrines = [
 			y: "164.1974f",
 			z: "3457.891f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 110,
@@ -1214,8 +1222,8 @@ export const shrines = [
 			y: "104.9903f",
 			z: "2816.857f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 10,
@@ -1227,8 +1235,8 @@ export const shrines = [
 			y: "172.0212f",
 			z: "2300.776f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 32,
@@ -1240,8 +1248,8 @@ export const shrines = [
 			y: "146.1268f",
 			z: "2163.97f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 90,
@@ -1253,8 +1261,8 @@ export const shrines = [
 			y: "545.3849f",
 			z: "3455.551f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 1,
@@ -1266,8 +1274,8 @@ export const shrines = [
 			y: "112.8661f",
 			z: "2416.61f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 60,
@@ -1279,8 +1287,8 @@ export const shrines = [
 			y: "150.4598f",
 			z: "2814.629f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 100,
@@ -1292,8 +1300,8 @@ export const shrines = [
 			y: "640.2849f",
 			z: "713.9639f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 43,
@@ -1305,8 +1313,8 @@ export const shrines = [
 			y: "571.5641f",
 			z: "1226.925f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 85,
@@ -1318,8 +1326,8 @@ export const shrines = [
 			y: "619.5056f",
 			z: "905.8175f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 76,
@@ -1331,8 +1339,8 @@ export const shrines = [
 			y: "352.7617f",
 			z: "1959.986f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 30,
@@ -1344,8 +1352,8 @@ export const shrines = [
 			y: "231.6321f",
 			z: "1682.263f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 36,
@@ -1357,8 +1365,8 @@ export const shrines = [
 			y: "395.9859f",
 			z: "1647.67f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 28,
@@ -1370,8 +1378,8 @@ export const shrines = [
 			y: "507.3476f",
 			z: "-3113.807f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 64,
@@ -1383,8 +1391,8 @@ export const shrines = [
 			y: "598.0244f",
 			z: "-2324.726f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 67,
@@ -1396,8 +1404,8 @@ export const shrines = [
 			y: "388.2992f",
 			z: "-1523.532f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 0,
@@ -1409,8 +1417,8 @@ export const shrines = [
 			y: "213.3612f",
 			z: "-936.853f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 31,
@@ -1422,8 +1430,8 @@ export const shrines = [
 			y: "285.4244f",
 			z: "-1159.267f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 2,
@@ -1435,8 +1443,8 @@ export const shrines = [
 			y: "247.925f",
 			z: "-1577.614f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 91,
@@ -1448,8 +1456,8 @@ export const shrines = [
 			y: "470.013f",
 			z: "-3461.803f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 25,
@@ -1461,8 +1469,8 @@ export const shrines = [
 			y: "520.7816f",
 			z: "-2039.409f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 26,
@@ -1474,8 +1482,8 @@ export const shrines = [
 			y: "535.3334f",
 			z: "-2556.751f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 102,
@@ -1487,8 +1495,8 @@ export const shrines = [
 			y: "298.699f",
 			z: "-3427.396f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 48,
@@ -1500,8 +1508,8 @@ export const shrines = [
 			y: "348.6595f",
 			z: "-1669.085f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 77,
@@ -1513,8 +1521,8 @@ export const shrines = [
 			y: "323.1274f",
 			z: "-849.5751f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 109,
@@ -1526,8 +1534,8 @@ export const shrines = [
 			y: "107.7508f",
 			z: "-2134.671f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 84,
@@ -1539,8 +1547,8 @@ export const shrines = [
 			y: "108.9004f",
 			z: "-2698.722f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 105,
@@ -1552,8 +1560,8 @@ export const shrines = [
 			y: "237.413f",
 			z: "-3702.5f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 75,
@@ -1565,8 +1573,8 @@ export const shrines = [
 			y: "354.7871f",
 			z: "-1310.195f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	},
 	{
 		index: 13,
@@ -1578,7 +1586,7 @@ export const shrines = [
 			y: "237.4321f",
 			z: "-2726.834f"
 		},
-		is_blood_moon: false,
-		is_plateau: false
+		isBloodMoon: false,
+		isPlateau: false
 	}
 ];

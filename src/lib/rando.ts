@@ -1,4 +1,5 @@
 import { shuffle } from "shuffle-seed";
+import { PLATEAU_SHRINES, EVENTIDE_SHRINE, isNormalShrine } from "./shrines";
 
 export function range(bound: number, limit: number = 0): number[] {
 	const start = limit ? bound : 0;
@@ -7,28 +8,21 @@ export function range(bound: number, limit: number = 0): number[] {
 	return base.map((idx: number) => start + idx);
 }
 
+export function getRandomSeed(): string {
+  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+  let a;
+  for (a = ''; a.length < 40;) { a += chars[(Math.random() * 60) | 0]; }
+  return a;
+}
+
 export function getShrines(seed: string): number[] {
-	const plateau_shrines = [38, 41, 9, 65];
-	const blood_moon_shrines = [78];
-	const eventide_shrine = [97];
-
-	const is_normal = (id: number): Boolean => {
-		return (
-			plateau_shrines.indexOf(id) === -1 &&
-			blood_moon_shrines.indexOf(id) === -1 &&
-			eventide_shrine.indexOf(id) === -1
-		);
-	};
-
-	const normal_shrines = range(119).filter(item => is_normal(item));
-	const eventide_slots = range(80, 118);
-	const eventide_slot = shuffle(eventide_slots, seed)[0];
+	const normalShrines = range(119).filter(item => isNormalShrine(item));
+	const eventideSlot = shuffle(range(80, 118), seed)[0];
 
 	const shrines: number[] = [];
-
-	shrines.push(...shuffle(plateau_shrines, seed));
-	shrines.push(...shuffle(normal_shrines, seed));
-	shrines.splice(eventide_slot, 0, 97);
+	shrines.push(...shuffle(PLATEAU_SHRINES, seed));
+	shrines.push(...shuffle(normalShrines, seed));
+	shrines.splice(eventideSlot, 0, EVENTIDE_SHRINE);
 
 	return shrines;
 }

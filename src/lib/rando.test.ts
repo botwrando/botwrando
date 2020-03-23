@@ -1,16 +1,5 @@
-import { range, getShrines } from "./rando";
-const plateauShrines = [38, 41, 9, 65];
-const bloodMoonShrine = 78;
-const eventideShrine = 97;
-
-const getRandomSeed = () => {
-  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
-  let a;
-  for (a = ''; a.length < 40;) {
-    a += chars[(Math.random() * 60) | 0];
-  }
-  return a;
-}
+import { range, getRandomSeed, isNormalShrine, getShrines } from "./rando";
+import { PLATEAU_SHRINES, BLOOD_MOON_SHRINE, EVENTIDE_SHRINE } from "./shrines";
 
 describe('rando', () => {
   describe('range', () => {
@@ -59,6 +48,22 @@ describe('rando', () => {
     });
   });
 
+  describe('getRandomSeed', () => {
+    it('generates a 40 character string containing alphanumerics', () => {
+      const seed = getRandomSeed();
+      expect(seed.length).toEqual(40);
+      const regexp = /^[A-Za-z0-9]+$/
+      expect(regexp.test(seed)).toBe(true);
+    });
+    it('generates a unique seed each run', () => {
+      const seeds = Array.from(new Array(10)).map(() => getRandomSeed());
+      const deduped = seeds.filter(function (seed, idx, allSeeds) {
+        return allSeeds.indexOf(seed) === idx;
+      });
+      expect(seeds).toEqual(deduped);
+    });
+  });
+
   describe('getShrines', () => {
     it('shuffles the shrines', () => {
       for (let n = 0; n < 10; n++) {
@@ -76,10 +81,10 @@ describe('rando', () => {
       }
     });
     it('includes all shrines except the blood moon shrine', () => {
-      let allShrines = Array.from(Array(bloodMoonShrine).keys()).map(x => x++);
+      let allShrines = Array.from(Array(BLOOD_MOON_SHRINE).keys()).map(x => x++);
       allShrines = allShrines.concat(
-        Array.from(Array(120 - bloodMoonShrine - 1).keys())
-          .map(x => x += bloodMoonShrine + 1)
+        Array.from(Array(120 - BLOOD_MOON_SHRINE - 1).keys())
+          .map(x => x += BLOOD_MOON_SHRINE + 1)
       );
       for (let n = 0; n < 10; n++) {
         const shrines = getShrines(getRandomSeed());
@@ -91,7 +96,7 @@ describe('rando', () => {
     it('always includes the plateau shrines first', () => {
       for (let n = 0; n < 10; n++) {
         const shrines = getShrines(getRandomSeed());
-        for (const shrineId of plateauShrines) {
+        for (const shrineId of PLATEAU_SHRINES) {
           expect(shrines.slice(0, 4)).toContain(shrineId);
           expect(shrines.slice(4)).not.toContain(shrineId);
         }
@@ -100,15 +105,15 @@ describe('rando', () => {
     it('does not include the blood moon shrine', () => {
       for (let n = 0; n < 10; n++) {
         const shrines = getShrines(getRandomSeed());
-        expect(shrines).not.toContain(bloodMoonShrine);
+        expect(shrines).not.toContain(BLOOD_MOON_SHRINE);
       }
     });
-    it('puts the eventide island shrine toward the end of the run', () => {
+    it('puts the eventide island shrine at position 80 or later in the run', () => {
       for (let n = 0; n < 10; n++) {
-        const shrines = getShrines(getRandomSeed());
-        expect(shrines.slice(80, 118)).toContain(eventideShrine);
-        expect(shrines.slice(0, 80)).not.toContain(eventideShrine);
-        expect(shrines.slice(118)).not.toContain(eventideShrine);
+        const seed = getRandomSeed();
+        const shrines = getShrines(seed);
+        expect(shrines.slice(80)).toContain(EVENTIDE_SHRINE);
+        expect(shrines.slice(0, 80)).not.toContain(EVENTIDE_SHRINE);
       }
     });
   });
