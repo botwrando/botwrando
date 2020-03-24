@@ -1,5 +1,5 @@
-import { range, getRandomSeed, getRandomizedShrines } from "./rando";
-import { PLATEAU_SHRINES, BLOOD_MOON_SHRINE, EVENTIDE_SHRINE } from "./shrines";
+import { range, getRandomSeed, getRandomizedShrines } from './rando';
+import { PLATEAU_SHRINES, BLOOD_MOON_SHRINE, EVENTIDE_SHRINE } from './shrines';
 
 describe('rando', () => {
   describe('range', () => {

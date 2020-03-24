@@ -1,9 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { ShrineInfo } from "./ShrineInfo";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ShrineInfo } from './ShrineInfo';
 
-describe("ShrineInfo", () => {
-  it("renders without crashing", () => {
+describe('ShrineInfo', () => {
+  it('renders without crashing', () => {
     const counter = 34;
     const shrine_id = 23;
     const timestamp = 354;

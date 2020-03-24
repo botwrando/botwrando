@@ -4,7 +4,7 @@ import {
   EVENTIDE_SHRINE,
   isNormalShrine,
   getShrine
-} from "./shrines";
+} from './shrines';
 
 describe('shrines', () => {
   describe('isNormalShrine', () => {
@@ -27,13 +27,13 @@ describe('shrines', () => {
         const shrine = getShrine(27);
         const rotaOoh = {
           index: 27,
-          name: "Rota Ooh",
-          desc: "Passing of the Gates",
-          region: "Central",
+          name: 'Rota Ooh',
+          desc: 'Passing of the Gates',
+          region: 'Central',
           location: {
-            x: "-1556.068f",
-            y: "186.7413f",
-            z: "1307.912f"
+            x: '-1556.068f',
+            y: '186.7413f',
+            z: '1307.912f'
           },
           isBloodMoon: false,
           isPlateau: false

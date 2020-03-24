@@ -1,4 +1,4 @@
-import { Timestamp, trunc, pad, getTimestamp, smart_format } from "./time";
+import { Timestamp, trunc, pad, getTimestamp, smart_format } from './time';
 
 describe('time', () => {
   describe('trunc', () => {
