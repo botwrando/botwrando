@@ -36,7 +36,7 @@ export const RunManager = (props: RunManagerProps) => {
   });
 
   React.useEffect(() => {
-    if (run.state == RunState.None || run.state == RunState.Init) {
+    if (run.state === RunState.None || run.state === RunState.Init) {
       setShrinePtr(-1);
     } else {
       setShrinePtr(run.splits.size);
@@ -93,7 +93,7 @@ export const RunManager = (props: RunManagerProps) => {
     if (shrinePtr >= run.shrineIds.length) {
       setRunState(RunState.Ended);
     } else if (
-      run.state == RunState.Ended &&
+      run.state === RunState.Ended &&
 			shrinePtr > -1 &&
 			shrinePtr < run.shrineIds.length
     ) {

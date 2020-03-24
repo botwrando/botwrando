@@ -114,7 +114,7 @@ export const getShortKeyname = (keyname: string) => {
 
   const numpad_matches = re_shortnumpadnames.exec(outstr);
   if (numpad_matches && numpad_matches.length > 0) {
-    let outstr = numpad_matches[1];
+    let [,outstr] = numpad_matches;
     return `Num ${outstr}`;
   }
 

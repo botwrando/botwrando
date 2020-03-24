@@ -28,4 +28,4 @@ export const getDefaultRun = () => ({
   splits: new Map<number, number>([]),
   wrSplits: new Map<number, number>([]),
   pbSplits: new Map<number, number>([]),
-})
+});

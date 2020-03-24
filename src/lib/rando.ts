@@ -17,7 +17,7 @@ export function getRandomSeed (): string {
 
 export function getRandomizedShrines (seed: string): number[] {
   const normalShrines = range(119).filter(item => isNormalShrine(item));
-  const eventideSlot = shuffle(range(80, 118), seed)[0];
+  const [eventideSlot,] = shuffle(range(80, 118), seed);
 
   const shrines: number[] = [];
   shrines.push(...shuffle(PLATEAU_SHRINES, seed));
