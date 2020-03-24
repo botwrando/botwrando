@@ -4,6 +4,7 @@ import '../../assets/bloodmoon.svg';
 import { handleKey, registerCallbacks } from '../../lib/keyboard';
 import { getRandomizedWaypoints } from '../../lib/rando';
 import { Run, RunState } from '../../lib/run';
+import { encodeRun } from '../../lib/runstorage';
 import { BLOOD_MOON_SHRINE } from '../../lib/waypoints';
 import { AppFooter } from '../AppFooter/AppFooter';
 import { AppHeader } from '../AppHeader/AppHeader';
@@ -72,6 +73,10 @@ export const RunManager = (props: RunManagerProps) => {
     run.splits.delete(run.splits.size - 1);
     updateSplits(run.splits);
   };
+
+  React.useEffect(() => {
+    localStorage.setItem('run', encodeRun(run));
+  });
 
   React.useEffect(() => {
     if (
