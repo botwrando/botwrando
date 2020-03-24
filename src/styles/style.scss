@@ -70,16 +70,18 @@ body {
 		@include f-main;
 		align-items: center;
 		display: flex;
-		line-height: 0;
+		flex-flow: row nowrap;
+		justify-content: space-between;
 		margin: 12px 0 0;
 		@media (max-width: 480px) {
 			@include f-sub;
+		}
+		.caption {
 		}
 	}
 	.seedinfo {
 		@include f-sub;
 		color: $pale-green;
-		margin: 0 0 16px;
 	}
 	.history {
 		flex: 1 1 auto;
@@ -126,9 +128,10 @@ body {
 }
 
 .seedpicker {
+	align-items: center;
 	display: flex;
 	flex-flow: column nowrap;
-	align-items: center;
+	grid-row: 3/6;
 	justify-content: center;
 	label {
 		margin: 16px;
@@ -139,7 +142,6 @@ body {
 	button {
 		margin: 16px;
 	}
-	
 }
 
 .touchpanel {
@@ -159,6 +161,16 @@ button {
 	color: $milky-white;
 	padding: 4px 8px;
 	min-height: 48px;
+	&.btn-text {
+		background-color: transparent;
+		color: $warm-green;
+		cursor: pointer;
+		min-height: initial;
+		padding: 0 4px;
+		&:hover {
+			color: $pale-green;
+		}
+	}
 }
 
 button.split {
