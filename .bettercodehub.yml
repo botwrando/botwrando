@@ -5,7 +5,10 @@ languages:
       include:
         - /src/.*\.ts
         - /src/.*\.tsx
+      exclude:
+        - /src/.*\.test\.ts
+        - /src/.*\.test\.tsx
     test:
       include:
-        - /src/.*\.ts
-        - /src/.*\.tsx
+        - /src/.*\.test\.ts
+        - /src/.*\.test\.tsx
