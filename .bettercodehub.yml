@@ -3,7 +3,9 @@ languages:
   - name: typescript
     production:
       include:
-        - /src/.*.tsx?
+        - /src/.*.ts
+        - /src/.*.tsx
     test:
       include:
-        - /src/.*.tsx?
+        - /src/.*.ts
+        - /src/.*.tsx
