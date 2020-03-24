@@ -1,3 +1,14 @@
 component_depth: 3
 languages:
-  - typescript
+  - name: typescript
+    production:
+      include:
+        - /src/.*\.ts
+        - /src/.*\.tsx
+      exclude:
+        - /src/.*\.test\.ts
+        - /src/.*\.test\.tsx
+    test:
+      include:
+        - /src/.*\.test\.ts
+        - /src/.*\.test\.tsx
