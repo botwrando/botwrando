@@ -2,6 +2,8 @@ component_depth: 3
 languages:
   - name: typescript
     production:
-      - include: /src\/.*.tsx?
+      include:
+        - /src/.*.tsx?
     test:
-      - include: /src\/.*.tsx?
+      include:
+        - /src/.*.tsx?
