@@ -5,7 +5,7 @@ import { DesktopHelp, MobileControls } from "../Help/Help";
 import { parseKeypress, registerCallbacks } from "../../lib/keyboard";
 import { getRandomizedShrines } from "../../lib/rando";
 import { QuickMap } from "../QuickMap/QuickMap";
-import { Run, RunState } from "../../lib/run";
+import { Run, RunState, getDefaultRun } from "../../lib/run";
 import { SeedPicker } from "../SeedPicker/SeedPicker";
 import { BLOOD_MOON_SHRINE, Shrine, getShrine } from "../../lib/shrines";
 import { SplitHistory } from "../SplitHistory/SplitHistory";
@@ -28,6 +28,19 @@ export const RunManager = (props: RunManagerProps) => {
 	const [bloodMoonState, setBloodMoonState] = useState<BloodMoonState>({
 		isDone: false,
 		isActive: false
+	});
+
+
+	React.useEffect(() => {
+		setHasRun(!!run.seed);
+	});
+
+	React.useEffect(() => {
+		if (run.state == RunState.None || run.state == RunState.Init) {
+			setShrinePtr(-1);
+		} else {
+			setShrinePtr(run.splits.size);
+		}
 	});
 
 	const onUpdatePausedTime = (pausedTime: number) => {
@@ -58,14 +71,12 @@ export const RunManager = (props: RunManagerProps) => {
 		}
 		if (run.state === RunState.Ended) return;
 		if (run.state === RunState.Init) {
-			setShrinePtr(0);
 			setRunState(RunState.Running);
 		}
 		if (run.state === RunState.Running) {
 			const splits = run.splits;
 			splits.set(shrinePtr, Date.now() - run.rundate - run.pausedTime);
 			updateSplits(splits);
-			setShrinePtr(prev => prev + 1);
 		}
 	};
 
@@ -76,13 +87,16 @@ export const RunManager = (props: RunManagerProps) => {
 		}
 		splits.delete(shrinePtr - 1);
 		updateSplits(splits);
-		setShrinePtr(prev => prev - 1);
 	};
 
 	React.useEffect(() => {
 		if (shrinePtr >= run.shrineIds.length) {
 			setRunState(RunState.Ended);
-		} else if (shrinePtr > -1 && shrinePtr < run.shrineIds.length) {
+		} else if (
+			run.state == RunState.Ended &&
+			shrinePtr > -1 &&
+			shrinePtr < run.shrineIds.length
+		) {
 			setRunState(RunState.Running);
 		}
 	}, [shrinePtr]);
@@ -93,7 +107,6 @@ export const RunManager = (props: RunManagerProps) => {
 		const splits = run.splits;
 		splits.set(shrinePtr, -1);
 		updateSplits(splits);
-		setShrinePtr(prev => prev + 1);
 	};
 
 	const resetSplits = () => {
@@ -101,7 +114,6 @@ export const RunManager = (props: RunManagerProps) => {
 		splits.clear();
 		updateSplits(splits);
 		setRun(prev => ({ ...prev, pausedTime: -1, rundate: -1 }));
-		setShrinePtr(-1);
 		setRunState(RunState.Init);
 	};
 
@@ -193,13 +205,24 @@ export const RunManager = (props: RunManagerProps) => {
 		setRunState(RunState.Init);
 	};
 
+	const onQuit = () => {
+		setRun(getDefaultRun());
+	};
+
 	const header = () => (
-		<div className="header">Botw All Shrines Randomizer</div>
+		<div className="header">
+			<div className="caption">Botw All Shrines Randomizer</div>
+			<button className="btn-text btn-back" onClick={onQuit}>
+				Quit run
+			</button>
+		</div>
 	);
 
 	const seedinfo = () =>
 		hasRun ? (
-			<div className="seedinfo">Seed: {run.seed}</div>
+			<div className="seedinfo">
+				<div className="seed">Seed: {run.seed}</div>
+			</div>
 		) : (
 			<div className="seedinfo"></div>
 		);
@@ -208,7 +231,6 @@ export const RunManager = (props: RunManagerProps) => {
 		run.state === RunState.None ? (
 			<SeedPicker onPickedSeed={onPickedSeed} />
 		) : (
-			// <div className="splashscreen">Ready to rock!</div>
 			<>
 				<SplitHistory run={run} />
 				<SplitTimer

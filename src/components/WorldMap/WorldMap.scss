@@ -5,7 +5,6 @@
 	margin: 24px 0 0;
 	flex: 1 1 auto;
 	min-height: 1px;
-	max-height: 256px;
 	@media (max-width: 480px) {
 		flex: 0 0 auto;
 		max-width: initial;
@@ -21,8 +20,11 @@
 
 	.mapwrapper {
 		background-position: center;
+		background-size: cover;
 		border-radius: 8px;
 		height: 100%;
+		margin: 0 auto;
+		max-width: 720px;
 		overflow: hidden;
 		width: 100%;
 	}
