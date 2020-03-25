@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
-import App from "./App";
+import App from './App';
 import { RunManager } from '../RunManager/RunManager';
 import { Run, RunState } from '../../lib/run';
 
@@ -13,10 +13,10 @@ describe('App', () => {
   it('renders the RunManager with the default run information', () => {
     const run: Run = {
       state: RunState.None,
-      runner: "Probably Specs",
+      runner: 'Probably Specs',
       rundate: -1,
       pausedTime: -1,
-      seed: "",
+      seed: '',
       shrineIds: [],
       splits: new Map([]),
       pbSplits: new Map([]),
@@ -31,5 +31,4 @@ describe('App', () => {
   it('should render the expected text', () => {
     expect(render(<App />).text()).toMatch(/BotW All Shrines Randomizer/);
   });
-
 });

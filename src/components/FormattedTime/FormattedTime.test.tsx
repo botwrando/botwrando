@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
-import { FormattedTime, FormattedTimeProps } from "./FormattedTime";
+import { FormattedTime, FormattedTimeProps } from './FormattedTime';
 
 describe('FormattedTime', () => {
-  it("renders without crashing", () => {
+  it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<FormattedTime />, div);
   });
