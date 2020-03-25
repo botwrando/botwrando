@@ -6,14 +6,18 @@ import { RunState } from '../../lib/run';
 describe('RunTimer', () => {
   it('renders without crashing', () => {
     const timestamp = 35;
-    const runstate = RunState.Default;
-    const onUpdatePausedTime = () => { };
+    const runstate = RunState.None;
+    const setPausedTime = () => {};
 
     const div = document.createElement('div');
     ReactDOM.render(
-      <RunTimer timestamp={timestamp}
+      <RunTimer
+        timestamp={timestamp}
         runstate={runstate}
-        onUpdatePausedTime={onUpdatePausedTime}
-      />, div);
+        pausedTime={0}
+        setPausedTime={setPausedTime}
+      />,
+      div
+    );
   });
 });
