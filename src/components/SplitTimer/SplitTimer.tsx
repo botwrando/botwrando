@@ -24,24 +24,26 @@ export const SplitTimer = (props: SplitTimerProps) => {
     setTimeclasses(time_classes);
   }, [run.state]);
 
-  const detailsProps =
-    run.state !== RunState.Ended
-      ? {
-          counter: currentShrine > -1 ? currentShrine + 1 : '',
-          name: current_shrine?.name ? current_shrine.name : 'Ready to go',
-          desc: current_shrine?.desc
-            ? current_shrine.desc
-            : 'Start the timer to reveal the first shrine!'
-        }
-      : {
-          counter: '',
-          name: 'Congratulations!',
-          desc: `You've completed ${run.seed}`
-        };
-
+  const getDetailsProps = () => {
+    if (run.state !== RunState.Ended) {
+      return {
+        counter: currentShrine > -1 ? currentShrine + 1 : '',
+        name: current_shrine?.name ? current_shrine.name : 'Ready to go',
+        desc: current_shrine?.desc
+          ? current_shrine.desc
+          : 'Start the timer to reveal the first shrine!'
+      };
+    } else {
+      return {
+        counter: '',
+        name: 'Congratulations!',
+        desc: `You've completed ${run.seed}`
+      };
+    }
+  };
   return (
     <div className="shrine current">
-      <SplitDetails {...detailsProps} />
+      <SplitDetails {...getDetailsProps()} />
       <div className={timeclasses.join(' ')}>
         <RunTimer
           timestamp={run.rundate}
