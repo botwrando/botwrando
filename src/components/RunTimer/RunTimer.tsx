@@ -60,5 +60,5 @@ export const RunTimer = (props: RunTimerProps) => {
 		onUpdatePausedTime(pausedTime);
 	}, [pausedTime]);
 
-	return <FormattedTime timestamp={timerDisplay} full_format={true} />;
+	return <FormattedTime timestamp={timerDisplay} fullFormat={true} />;
 };

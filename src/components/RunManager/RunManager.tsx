@@ -211,7 +211,7 @@ export const RunManager = (props: RunManagerProps) => {
 
 	const header = () => (
 		<div className="header">
-			<div className="caption">Botw All Shrines Randomizer</div>
+			<div className="caption">BotW All Shrines Randomizer</div>
 			<button className="btn-text btn-back" onClick={onQuit}>
 				Quit run
 			</button>

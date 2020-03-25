@@ -36,23 +36,23 @@ export const getTimestamp = (ts: number): Timestamp => {
 	return { h: pad(h), m: pad(m), s: pad(s), ms: pad(trunc(ms)) };
 };
 
-export const smart_format = (
+export const smartFormat = (
 	timestamp: number,
-	full_format: boolean,
-	pos_sign: string = "",
+	fullFormat: boolean,
+	posSign: string = "",
 ): Timestamp => {
 	if (timestamp === Number.NEGATIVE_INFINITY) {
 		return {}
 	}
-	const sign = timestamp >= 0 ? pos_sign : "-";
+	const sign = timestamp >= 0 ? posSign : "-";
 	const { h, m, s, ms } = getTimestamp(timestamp);
 
 	let out = {};
 
 	if (Math.abs(timestamp) >= HOUR_THRES)
-		out = full_format ? { h, m, s, ms } : { h, m, s };
+		out = fullFormat ? { h, m, s, ms } : { h, m, s };
 	else if (Math.abs(timestamp) >= MINUTE_THRES) 
-		out = full_format ? { m, s, ms } : { m, s };
+		out = fullFormat ? { m, s, ms } : { m, s };
 	else 
 		out = { s, ms };
 	out = { ...out, sign };
