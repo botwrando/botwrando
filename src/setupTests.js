@@ -1,3 +1,5 @@
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 // Add setup or global before or after hooks (to be run before/after all test suites) here.
 
 beforeAll(() => {
@@ -17,4 +19,7 @@ beforeAll(() => {
       dispatchEvent: jest.fn(),
     })),
   });
-})
+
+  /* Setup Enzyme component testing */
+  configure({ adapter: new Adapter() });
+});

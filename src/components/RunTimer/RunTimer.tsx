@@ -55,5 +55,5 @@ export const RunTimer = (props: RunTimerProps) => {
     return () => cancelAnimationFrame(request_ref.current);
   });
 
-  return <FormattedTime timestamp={timerDisplay} full_format={true} />;
+  return <FormattedTime timestamp={timerDisplay} fullFormat={true} />;
 };

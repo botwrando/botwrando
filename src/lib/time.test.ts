@@ -1,4 +1,4 @@
-import { Timestamp, trunc, pad, getTimestamp, smart_format } from './time';
+import { Timestamp, trunc, pad, getTimestamp, smartFormat } from './time';
 
 describe('time', () => {
   describe('trunc', () => {
@@ -38,68 +38,74 @@ describe('time', () => {
         ms: '56'
       });
     });
+    it('renders a Timestamp representation of zero', () => {
+      const ts: Timestamp = getTimestamp(0);
+      expect(ts).toHaveProperty('s');
+      expect(ts).toHaveProperty('ms');
+      expect(ts).toMatchObject({ s: '00', ms: '00' });
+    });
   });
 
-  describe('smart_format', () => {
+  describe('smartFormat', () => {
     describe('with full_format = false', () => {
       it('formats positive seconds correctly', () => {
         const expected: Timestamp = { s: '48', ms: '56', sign: '' };
-        const formatted = smart_format(48563, false);
+        const formatted = smartFormat(48563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats positive minutes correctly', () => {
         const expected: Timestamp = { m: '21', s: '48', sign: '' };
-        const formatted = smart_format(1308563, false);
+        const formatted = smartFormat(1308563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours correctly', () => {
         const expected: Timestamp = { h: '07', m: '21', s: '48', sign: '' };
-        const formatted = smart_format(26508563, false);
+        const formatted = smartFormat(26508563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours > 1 day correctly', () => {
         const expected: Timestamp = { h: '55', m: '21', s: '48', sign: '' };
-        const formatted = smart_format(199308563, false);
+        const formatted = smartFormat(199308563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats negative seconds correctly', () => {
         const expected: Timestamp = { s: '48', ms: '56', sign: '-' };
-        const formatted = smart_format(-48563, false);
+        const formatted = smartFormat(-48563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats negative minutes correctly', () => {
         const expected: Timestamp = { m: '21', s: '48', sign: '-' };
-        const formatted = smart_format(-1308563, false);
+        const formatted = smartFormat(-1308563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats negative hours correctly', () => {
         const expected: Timestamp = { h: '07', m: '21', s: '48', sign: '-' };
-        const formatted = smart_format(-26508563, false);
+        const formatted = smartFormat(-26508563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats negative hours of magnitude > 1 day correctly', () => {
         const expected: Timestamp = { h: '55', m: '21', s: '48', sign: '-' };
-        const formatted = smart_format(-199308563, false);
+        const formatted = smartFormat(-199308563, false);
         expect(formatted).toEqual(expected);
       });
       it('formats positive seconds with a specified sign', () => {
         const expected: Timestamp = { s: '48', ms: '56', sign: '+' };
-        const formatted = smart_format(48563, false, '+');
+        const formatted = smartFormat(48563, false, '+');
         expect(formatted).toEqual(expected);
       });
       it('formats positive minutes with a specified sign', () => {
         const expected: Timestamp = { m: '21', s: '48', sign: '+' };
-        const formatted = smart_format(1308563, false, '+');
+        const formatted = smartFormat(1308563, false, '+');
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours with a specified sign', () => {
         const expected: Timestamp = { h: '07', m: '21', s: '48', sign: '+' };
-        const formatted = smart_format(26508563, false, '+');
+        const formatted = smartFormat(26508563, false, '+');
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours > 1 day with a specified sign', () => {
         const expected: Timestamp = { h: '55', m: '21', s: '48', sign: '+' };
-        const formatted = smart_format(199308563, false, '+');
+        const formatted = smartFormat(199308563, false, '+');
         expect(formatted).toEqual(expected);
       });
     });
@@ -107,62 +113,62 @@ describe('time', () => {
     describe('with full_format = true', () => {
       it('formats positive seconds correctly', () => {
         const expected: Timestamp = { s: '48', ms: '56', sign: '' };
-        const formatted = smart_format(48563, true);
+        const formatted = smartFormat(48563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats positive minutes correctly', () => {
         const expected: Timestamp = { m: '21', s: '48', ms: '56', sign: '' };
-        const formatted = smart_format(1308563, true);
+        const formatted = smartFormat(1308563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours correctly', () => {
         const expected: Timestamp = { h: '07', m: '21', s: '48', ms: '56', sign: '' };
-        const formatted = smart_format(26508563, true);
+        const formatted = smartFormat(26508563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours > 1 day correctly', () => {
         const expected: Timestamp = { h: '55', m: '21', s: '48', ms: '56', sign: '' };
-        const formatted = smart_format(199308563, true);
+        const formatted = smartFormat(199308563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats negative seconds correctly', () => {
         const expected: Timestamp = { s: '48', ms: '56', sign: '-' };
-        const formatted = smart_format(-48563, true);
+        const formatted = smartFormat(-48563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats negative minutes correctly', () => {
         const expected: Timestamp = { m: '21', s: '48', ms: '56', sign: '-' };
-        const formatted = smart_format(-1308563, true);
+        const formatted = smartFormat(-1308563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats negative hours correctly', () => {
         const expected: Timestamp = { h: '07', m: '21', s: '48', ms: '56', sign: '-' };
-        const formatted = smart_format(-26508563, true);
+        const formatted = smartFormat(-26508563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats negative hours of magnitude > 1 day correctly', () => {
         const expected: Timestamp = { h: '55', m: '21', s: '48', ms: '56', sign: '-' };
-        const formatted = smart_format(-199308563, true);
+        const formatted = smartFormat(-199308563, true);
         expect(formatted).toEqual(expected);
       });
       it('formats positive seconds with a specified sign', () => {
         const expected: Timestamp = { s: '48', ms: '56', sign: '+' };
-        const formatted = smart_format(48563, true, '+');
+        const formatted = smartFormat(48563, true, '+');
         expect(formatted).toEqual(expected);
       });
       it('formats positive minutes with a specified sign', () => {
         const expected: Timestamp = { m: '21', s: '48', ms: '56', sign: '+' };
-        const formatted = smart_format(1308563, true, '+');
+        const formatted = smartFormat(1308563, true, '+');
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours with a specified sign', () => {
         const expected: Timestamp = { h: '07', m: '21', s: '48', ms: '56', sign: '+' };
-        const formatted = smart_format(26508563, true, '+');
+        const formatted = smartFormat(26508563, true, '+');
         expect(formatted).toEqual(expected);
       });
       it('formats positive hours > 1 day with a specified sign', () => {
         const expected: Timestamp = { h: '55', m: '21', s: '48', ms: '56', sign: '+' };
-        const formatted = smart_format(199308563, true, '+');
+        const formatted = smartFormat(199308563, true, '+');
         expect(formatted).toEqual(expected);
       });
     });
