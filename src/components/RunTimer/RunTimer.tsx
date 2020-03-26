@@ -3,14 +3,14 @@ import { FormattedTime } from '../FormattedTime/FormattedTime';
 import { RunState } from '../../lib/run';
 
 type ToggleTimer = {
-	startedAt: number;
-	pausedAt: number;
+  startedAt: number;
+  pausedAt: number;
 };
 
 export type RunTimerProps = {
-	timestamp: number;
-	runstate: RunState;
-	onUpdatePausedTime: Function;
+  timestamp: number;
+  runstate: RunState;
+  onUpdatePausedTime: Function;
 };
 
 export const RunTimer = (props: RunTimerProps) => {
@@ -60,5 +60,5 @@ export const RunTimer = (props: RunTimerProps) => {
     onUpdatePausedTime(pausedTime);
   }, [pausedTime]);
 
-  return <FormattedTime timestamp={timerDisplay} full_format={true} />;
+  return <FormattedTime timestamp={timerDisplay} fullFormat={true} />;
 };

@@ -1,22 +1,22 @@
 import React from 'react';
-import { smart_format } from '../../lib/time';
+import { smartFormat } from '../../lib/time';
 
 export type FormattedTimeProps = {
-	timestamp?: number;
-	full_format?: boolean;
-	plus_sign?: string;
-	empty_label?: string;
+  timestamp?: number;
+  fullFormat?: boolean;
+  plusSign?: string;
+  emptyLabel?: string;
 };
 
 export const FormattedTime = (props: FormattedTimeProps) => {
   const p = {
     timestamp: 0,
-    full_format: false,
-    plus_sign: '',
-    empty_label: '--:--',
+    fullFormat: false,
+    plusSign: '',
+    emptyLabel: '--:--',
     ...props
   }
-  const { sign, h, m, s, ms } = smart_format(p.timestamp, p.full_format);
+  const { sign, h, m, s, ms } = smartFormat(p.timestamp, p.fullFormat);
   return (
     <>
       {sign && (<><span className="sign">{sign}</span>:</>)}
@@ -24,7 +24,7 @@ export const FormattedTime = (props: FormattedTimeProps) => {
       {m && (<><span className="m">{m}</span>:</>)}
       {s && (<><span className="s">{s}</span></>)}
       {ms && (<><span className="ms">.{ms}</span></>)}
-      {(!h && !m && !s && !ms) && (<span className="empty">{p.empty_label}</span>)}
+      {(!h && !m && !s && !ms) && (<span className="empty">{p.emptyLabel}</span>)}
     </>
   );
 };
