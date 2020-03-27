@@ -89,6 +89,11 @@ export const parseKeypress = (code: string): Function | undefined => {
   return bindings[effect]?.callback;
 };
 
+export const handleKey = (_key: string, event: KeyboardEvent) => {
+  const callback = parseKeypress(event.code);
+  if (callback) callback();
+};
+
 const re_shortkeynames = /Key(.+)/;
 const re_shortnumpadnames = /Numpad(.+)/;
 const stringsubst: any = {
@@ -128,4 +133,13 @@ export const getKeyMap = () => {
     return bindings[effect].desc;
   });
   return grouped;
+};
+
+export default {
+  bindings,
+  registerCallbacks,
+  getKeyMap,
+  getProfile,
+  parseKeypress,
+  handleKey
 };

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import '../../assets/bloodmoon.svg';
-import { DesktopHelp, MobileControls } from '../Help/Help';
-import { parseKeypress, registerCallbacks } from '../../lib/keyboard';
+import { handleKey, registerCallbacks } from '../../lib/keyboard';
 import { getRandomizedShrines } from '../../lib/rando';
-import { QuickMap } from '../QuickMap/QuickMap';
-import { Run, RunState, getDefaultRun } from '../../lib/run';
+import { Run, RunState } from '../../lib/run';
+import { AppHeader } from '../AppHeader/AppHeader';
+import { AppFooter } from '../AppFooter/AppFooter';
+import { SeedInfo } from '../SeedInfo/SeedInfo';
 import { SeedPicker } from '../SeedPicker/SeedPicker';
-import { BLOOD_MOON_SHRINE, getShrine } from '../../lib/shrines';
-import { SplitHistory } from '../SplitHistory/SplitHistory';
-import { SplitTimer } from '../SplitTimer/SplitTimer';
+import { BLOOD_MOON_SHRINE } from '../../lib/shrines';
+import { RunDisplay } from '../RunDisplay/RunDisplay';
 
 type RunManagerProps = {
   run: Run;
@@ -148,24 +148,17 @@ export const RunManager = (props: RunManagerProps) => {
   });
 
   const getClasses = () => {
-    const classes = ['bg'];
+    const classes = ['run-manager', 'bg'];
     if (bloodMoonState.isActive) classes.push('is-blood-moon');
     return classes.join(' ');
   };
 
-  const isTouch = window.matchMedia('(pointer: coarse)').matches;
-  const touchProps = {
-    run: run,
+  const touchCallbacks = {
     onSplit: addSplit,
     onUndo: undoSplit,
     onReset: resetSplits,
     onPause: pause,
     onBloodMoon: toggleBloodMoon
-  };
-
-  const handleKey = (_key: string, event: KeyboardEvent) => {
-    const callback = parseKeypress(event.code);
-    if (callback) callback();
   };
 
   const onPickedSeed = (seed: string) => {
@@ -174,56 +167,25 @@ export const RunManager = (props: RunManagerProps) => {
     setRunState(RunState.Init);
   };
 
-  const onQuit = () => setRun(getDefaultRun());
-
-  const header = () => (
-    <div className="header">
-      <div className="caption">BotW All Shrines Randomizer</div>
-      <button className="btn-text btn-back" onClick={onQuit}>
-        Quit run
-      </button>
-    </div>
-  );
-
-  const seedinfo = () =>
-    run.seed ? (
-      <div className="seedinfo">
-        <div className="seed">Seed: {run.seed}</div>
-      </div>
-    ) : (
-      <div className="seedinfo"></div>
-    );
-
   const mainsection = () =>
     run.state === RunState.None ? (
       <SeedPicker onPickedSeed={onPickedSeed} />
     ) : (
-      <>
-        <SplitHistory run={run} />
-        <SplitTimer
-          run={run}
-          currentShrine={run.splits.size}
-          onUpdatePausedTime={onUpdatePausedTime}
-        />
-        <QuickMap shrine={getShrine(run.shrineIds[run.splits.size])} />
-      </>
-    );
-
-  const footer = () =>
-    isTouch ? (
-      <MobileControls {...touchProps} />
-    ) : (
-      <DesktopHelp run={run} showHelp={showHelp} />
+      <RunDisplay run={run} onUpdatePausedTime={onUpdatePausedTime} />
     );
 
   return (
     <div className={getClasses()}>
       <KeyboardEventHandler handleKeys={['all']} onKeyEvent={handleKey} />
       <div className="main">
-        {header()}
-        {seedinfo()}
+        <AppHeader setRun={setRun} />
+        <SeedInfo run={run} />
         {mainsection()}
-        {footer()}
+        <AppFooter
+          run={run}
+          touchCallbacks={touchCallbacks}
+          showHelp={showHelp}
+        />
       </div>
     </div>
   );

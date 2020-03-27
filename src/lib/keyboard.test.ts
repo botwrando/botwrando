@@ -6,7 +6,8 @@ import {
   getProfile,
   parseKeypress,
   getShortKeyname,
-  getKeyMap
+  getKeyMap,
+  handleKey
 } from './keyboard';
 
 describe('keyboard', () => {
@@ -79,6 +80,17 @@ describe('keyboard', () => {
       expect(typeof cb).toBe('function');
       if (cb) { cb(); } else { throw new Error('It\'s not a function!'); }
       expect(customCallbacks.toggleBloodMoon).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('handleKey', () => {
+    beforeEach(() => {
+      registerCallbacks(customCallbacks);
+    });
+
+    it('calls the callback returned from parseKeypress', () => {
+      handleKey(' ', { code: 'Space' } as KeyboardEvent);
+      expect(customCallbacks.addSplit).toHaveBeenCalledTimes(1);
     });
   });
 
