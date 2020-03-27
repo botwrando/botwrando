@@ -1,5 +1,5 @@
 import React from 'react';
-import { Run, getDefaultRun, RunState } from '../../lib/run';
+import { Run, getDefaultRun } from '../../lib/run';
 
 type AppHeaderProps = {
   hasSeed?: boolean;
