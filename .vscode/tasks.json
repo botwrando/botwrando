@@ -16,6 +16,14 @@
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		{
+			"type": "yarn",
+			"task": "test",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			}
 		}
 	]
 }
