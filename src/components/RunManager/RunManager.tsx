@@ -3,15 +3,13 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import '../../assets/bloodmoon.svg';
 import { handleKey, registerCallbacks } from '../../lib/keyboard';
 import { getRandomizedShrines } from '../../lib/rando';
-import { QuickMap } from '../QuickMap/QuickMap';
 import { Run, RunState } from '../../lib/run';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { AppFooter } from '../AppFooter/AppFooter';
 import { SeedInfo } from '../SeedInfo/SeedInfo';
 import { SeedPicker } from '../SeedPicker/SeedPicker';
-import { BLOOD_MOON_SHRINE, getShrine } from '../../lib/shrines';
-import { SplitHistory } from '../SplitHistory/SplitHistory';
-import { SplitTimer } from '../SplitTimer/SplitTimer';
+import { BLOOD_MOON_SHRINE } from '../../lib/shrines';
+import { RunDisplay } from '../RunDisplay/RunDisplay';
 
 type RunManagerProps = {
   run: Run;
@@ -173,15 +171,7 @@ export const RunManager = (props: RunManagerProps) => {
     run.state === RunState.None ? (
       <SeedPicker onPickedSeed={onPickedSeed} />
     ) : (
-      <>
-        <SplitHistory run={run} />
-        <SplitTimer
-          run={run}
-          currentShrine={run.splits.size}
-          onUpdatePausedTime={onUpdatePausedTime}
-        />
-        <QuickMap shrine={getShrine(run.shrineIds[run.splits.size])} />
-      </>
+      <RunDisplay run={run} onUpdatePausedTime={onUpdatePausedTime} />
     );
 
   return (
