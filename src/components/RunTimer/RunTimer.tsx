@@ -10,17 +10,17 @@ type ToggleTimer = {
 export type RunTimerProps = {
   timestamp: number;
   runstate: RunState;
-  onUpdatePausedTime: Function;
+  pausedTime: number;
+  setPausedTime: Function;
 };
 
 export const RunTimer = (props: RunTimerProps) => {
-  const { timestamp, runstate, onUpdatePausedTime } = props;
+  const { timestamp, runstate, pausedTime, setPausedTime } = props;
   const [toggleTimer, setToggleTimer] = React.useState<ToggleTimer>({
     startedAt: -1,
     pausedAt: -1
   });
   const [timerDisplay, setTimerDisplay] = React.useState(0);
-  const [pausedTime, setPausedTime] = React.useState(0);
 
   const request_ref = React.useRef<number>(-1);
 
@@ -34,8 +34,7 @@ export const RunTimer = (props: RunTimerProps) => {
         setToggleTimer(prev => ({ ...prev, startedAt: Date.now() }));
       }
       if (toggleTimer.pausedAt !== -1) {
-        setPausedTime(prev => prev + Date.now() - toggleTimer.pausedAt);
-        props.onUpdatePausedTime(pausedTime);
+        setPausedTime(pausedTime + Date.now() - toggleTimer.pausedAt);
         setToggleTimer(prev => ({ ...prev, pausedAt: -1 }));
       }
       setTimerDisplay(Date.now() - timestamp - pausedTime);
@@ -55,10 +54,6 @@ export const RunTimer = (props: RunTimerProps) => {
     request_ref.current = requestAnimationFrame(update_time);
     return () => cancelAnimationFrame(request_ref.current);
   });
-
-  React.useEffect(() => {
-    onUpdatePausedTime(pausedTime);
-  }, [pausedTime]);
 
   return <FormattedTime timestamp={timerDisplay} fullFormat={true} />;
 };

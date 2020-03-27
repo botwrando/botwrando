@@ -22,7 +22,7 @@ const ShrineList = (
 );
 
 export type SplitHistoryProps = {
-	run: Run;
+  run: Run;
 };
 
 export const SplitHistory = (props: SplitHistoryProps) => {
@@ -32,7 +32,7 @@ export const SplitHistory = (props: SplitHistoryProps) => {
 
   const get_split = (rando_id: number) => {
     const split = run.splits.get(rando_id);
-    return split ? split : -1;
+    return split ? split : Number.NEGATIVE_INFINITY;
   };
 
   const get_diff = (rando_id: number): number => {
