@@ -7,6 +7,7 @@ import { QuickMap } from '../QuickMap/QuickMap';
 import { Run, RunState } from '../../lib/run';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { AppFooter } from '../AppFooter/AppFooter';
+import { SeedInfo } from '../SeedInfo/SeedInfo';
 import { SeedPicker } from '../SeedPicker/SeedPicker';
 import { BLOOD_MOON_SHRINE, getShrine } from '../../lib/shrines';
 import { SplitHistory } from '../SplitHistory/SplitHistory';
@@ -168,15 +169,6 @@ export const RunManager = (props: RunManagerProps) => {
     setRunState(RunState.Init);
   };
 
-  const seedinfo = () =>
-    run.seed ? (
-      <div className="seedinfo">
-        <div className="seed">Seed: {run.seed}</div>
-      </div>
-    ) : (
-      <div className="seedinfo"></div>
-    );
-
   const mainsection = () =>
     run.state === RunState.None ? (
       <SeedPicker onPickedSeed={onPickedSeed} />
@@ -197,7 +189,7 @@ export const RunManager = (props: RunManagerProps) => {
       <KeyboardEventHandler handleKeys={['all']} onKeyEvent={handleKey} />
       <div className="main">
         <AppHeader setRun={setRun} />
-        {seedinfo()}
+        <SeedInfo run={run} />
         {mainsection()}
         <AppFooter
           run={run}
