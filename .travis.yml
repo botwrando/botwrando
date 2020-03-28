@@ -15,7 +15,7 @@ jobs:
       node_js: node
       script: yarn build
     - stage: deploy
-      script: skip
+      script: yarn build
       nodejs: lts/*
       deploy:
         provider: pages
