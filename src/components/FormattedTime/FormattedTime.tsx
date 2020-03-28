@@ -19,7 +19,7 @@ export const FormattedTime = (props: FormattedTimeProps) => {
   const { sign, h, m, s, ms } = smartFormat(p.timestamp, p.fullFormat);
   return (
     <>
-      {sign && (<><span className="sign">{sign}</span>:</>)}
+      {sign && (<><span className="sign">{sign}</span></>)}
       {h && (<><span className="h">{h}</span>:</>)}
       {m && (<><span className="m">{m}</span>:</>)}
       {s && (<><span className="s">{s}</span></>)}
