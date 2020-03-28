@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/botwrando/static/css/main.844d9308.chunk.css",
-    "main.js": "/botwrando/static/js/main.161e32d6.chunk.js",
-    "main.js.map": "/botwrando/static/js/main.161e32d6.chunk.js.map",
+    "main.js": "/botwrando/static/js/main.0dbf5092.chunk.js",
+    "main.js.map": "/botwrando/static/js/main.0dbf5092.chunk.js.map",
     "runtime-main.js": "/botwrando/static/js/runtime-main.5ab1b9f3.js",
     "runtime-main.js.map": "/botwrando/static/js/runtime-main.5ab1b9f3.js.map",
     "static/js/2.1f960bb4.chunk.js": "/botwrando/static/js/2.1f960bb4.chunk.js",
     "static/js/2.1f960bb4.chunk.js.map": "/botwrando/static/js/2.1f960bb4.chunk.js.map",
     "index.html": "/botwrando/index.html",
-    "precache-manifest.78e15c7e03fdf6ee38fe33eca1251596.js": "/botwrando/precache-manifest.78e15c7e03fdf6ee38fe33eca1251596.js",
+    "precache-manifest.cee64beddf83a27956b64a37638464c1.js": "/botwrando/precache-manifest.cee64beddf83a27956b64a37638464c1.js",
     "service-worker.js": "/botwrando/service-worker.js",
     "static/css/main.844d9308.chunk.css.map": "/botwrando/static/css/main.844d9308.chunk.css.map",
     "static/js/2.1f960bb4.chunk.js.LICENSE.txt": "/botwrando/static/js/2.1f960bb4.chunk.js.LICENSE.txt",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.5ab1b9f3.js",
     "static/js/2.1f960bb4.chunk.js",
     "static/css/main.844d9308.chunk.css",
-    "static/js/main.161e32d6.chunk.js"
+    "static/js/main.0dbf5092.chunk.js"
   ]
 }
