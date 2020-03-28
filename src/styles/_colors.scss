@@ -13,14 +13,27 @@ $warm-green: #538E24;
 $cloudy-gray: rgb(178, 187, 189);
 
 @keyframes color-gold {
-	from {
-		color: $hot-orange;
-	}
-	to {
-		color: $deep-yellow;
-	}
+  from {
+    color: $hot-orange;
+  }
+  to {
+    color: $deep-yellow;
+  }
 }
 
 @mixin gold {
-	animation: color-gold 0.3s infinite alternate;
+  animation: color-gold 0.3s infinite alternate;
+}
+
+@keyframes background-gold {
+  from {
+    background-color: $hot-orange;
+  }
+  to {
+    background-color: $deep-yellow;
+  }
+}
+
+@mixin bg-gold {
+  animation: background-gold 0.3s infinite alternate;
 }

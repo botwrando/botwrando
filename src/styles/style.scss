@@ -1,5 +1,6 @@
 @import 'colors';
 @import 'fonts';
+@import 'blinking_cursor';
 
 html {
   position: fixed;
@@ -132,6 +133,7 @@ body {
 }
 
 .seedpicker {
+  @include blinking-cursor;
   align-items: center;
   display: flex;
   flex-flow: column nowrap;
@@ -141,10 +143,32 @@ body {
     margin: 16px;
   }
   input {
+    @include f-sub;
     margin: 16px;
+    background-color: transparent;
+    border: 2px solid $pale-green;
+    min-height: 32px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: $pale-green;
   }
   button {
     margin: 16px;
+  }
+  #generate-seed {
+    min-height: 32px;
+    &:hover {
+      color: $darker-green;
+      background-color: $pale-green
+    }
+  }
+  #go-button {
+    min-width: 6em;
+    background-color: $hot-orange;
+    color: $darker-red;
+    &:hover {
+      @include bg-gold;
+    }
   }
 }
 
