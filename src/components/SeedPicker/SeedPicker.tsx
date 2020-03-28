@@ -10,6 +10,14 @@ export const SeedPicker = (props: SeedPickerProps) => {
 
   const [seed, setSeed] = useState(exampleValue);
 
+  const queryParams = (new URLSearchParams(window.location.search));
+  if ((!seed || seed === exampleValue) && queryParams.has('seed')) {
+    const querySeed: string | null = queryParams.get('seed');
+    if (querySeed) {
+      setSeed(querySeed);
+    }
+  }
+
   const handleUpdateSeed = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSeed(event.target.value);
   };
@@ -31,8 +39,8 @@ export const SeedPicker = (props: SeedPickerProps) => {
         <input
           type="text"
           id="input-seedpicker"
-          defaultValue={exampleValue}
           value={seed}
+          placeholder={exampleValue}
           onChange={handleUpdateSeed}
         />
         <i></i>
