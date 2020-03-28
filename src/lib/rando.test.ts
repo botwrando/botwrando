@@ -49,8 +49,14 @@ describe('rando', () => {
   });
 
   describe('getRandomSeed', () => {
+    it('generates an 8 character string containing alphanumerics', () => {
+      const seed = getRandomSeed(8);
+      expect(seed.length).toEqual(8);
+      const regexp = /^[A-Za-z0-9]+$/
+      expect(regexp.test(seed)).toBe(true);
+    });
     it('generates a 40 character string containing alphanumerics', () => {
-      const seed = getRandomSeed();
+      const seed = getRandomSeed(40);
       expect(seed.length).toEqual(40);
       const regexp = /^[A-Za-z0-9]+$/
       expect(regexp.test(seed)).toBe(true);

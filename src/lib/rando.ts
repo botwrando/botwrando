@@ -8,10 +8,10 @@ export function range (bound: number, limit: number = 0): number[] {
   return base.map((idx: number) => start + idx);
 }
 
-export function getRandomSeed (): string {
+export function getRandomSeed (numChars = 12): string {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
   let a;
-  for (a = ''; a.length < 40;) { a += chars[(Math.random() * 60) | 0]; }
+  for (a = ''; a.length < numChars;) { a += chars[(Math.random() * 60) | 0]; }
   return a;
 }
 
