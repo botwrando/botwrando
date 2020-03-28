@@ -7,7 +7,10 @@ type AppHeaderProps = {
 };
 
 export function AppHeader({ hasSeed, setRun }: AppHeaderProps) {
-  const onQuit = () => setRun(getDefaultRun());
+  const onQuit = () => {
+    localStorage.removeItem('run');
+    setRun(getDefaultRun());
+  };
   return (
     <div className="header">
       <div className="caption">BotW All Shrines Randomizer</div>
