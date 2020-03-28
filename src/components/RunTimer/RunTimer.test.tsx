@@ -16,8 +16,6 @@ describe('RunTimer', () => {
       pbSplits: new Map<number, number>([]),
       wrSplits: new Map<number, number>([])
     };
-    const timestamp = 35;
-    const runstate = RunState.None;
     const setPausedTime = () => {};
 
     const div = document.createElement('div');
