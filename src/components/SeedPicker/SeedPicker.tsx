@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { getRandomSeed } from '../../lib/rando';
 
 type SeedPickerProps = {
-	onPickedSeed: (seed: string) => void;
+  onPickedSeed: (seed: string) => void;
 };
 
 export const SeedPicker = (props: SeedPickerProps) => {
@@ -10,7 +10,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
 
   const [seed, setSeed] = useState(exampleValue);
 
-  const queryParams = (new URLSearchParams(window.location.search));
+  const queryParams = new URLSearchParams(window.location.search);
   if ((!seed || seed === exampleValue) && queryParams.has('seed')) {
     const querySeed: string | null = queryParams.get('seed');
     if (querySeed) {
@@ -34,20 +34,21 @@ export const SeedPicker = (props: SeedPickerProps) => {
 
   return (
     <div className="seedpicker">
-      <label htmlFor="input-seedpicker">Type in a seed!</label>
-      <div className="cursor">
-        <input
-          type="text"
-          id="input-seedpicker"
-          value={seed}
-          placeholder={exampleValue}
-          onChange={handleUpdateSeed}
-        />
-        <i></i>
-      </div>
-      <span>- or -</span>
-      <button id="generate-seed" onClick={generateSeed}>Generate a seed!</button>
-      <button id="go-button" onClick={handleSelectSeed}>Go!</button>
+      <label htmlFor="input-seedpicker">Choose your seed!</label>
+
+      <button id="generate-seed" onClick={generateSeed}>
+        Randomize
+      </button>
+      <input
+        type="text"
+        id="input-seedpicker"
+        value={seed}
+        placeholder={exampleValue}
+        onChange={handleUpdateSeed}
+      />
+      <button id="go-button" onClick={handleSelectSeed}>
+        Start run
+      </button>
     </div>
   );
 };
