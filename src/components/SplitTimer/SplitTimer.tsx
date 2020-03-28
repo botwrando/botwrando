@@ -45,12 +45,7 @@ export const SplitTimer = (props: SplitTimerProps) => {
     <div className="shrine current">
       <SplitDetails {...getDetailsProps()} />
       <div className={timeclasses.join(' ')}>
-        <RunTimer
-          timestamp={run.rundate}
-          runstate={run.state}
-          pausedTime={run.pausedTime}
-          setPausedTime={props.onUpdatePausedTime}
-        />
+        <RunTimer run={run} setPausedTime={props.onUpdatePausedTime} />
       </div>
     </div>
   );

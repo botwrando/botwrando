@@ -13,22 +13,83 @@ describe('FormattedTime', () => {
     expect(el.contains(<span className="s">00</span>)).toBe(true);
     expect(el.contains(<span className="ms">.00</span>)).toBe(true);
   });
-  it('renders the specified timestamp', () => {
+  it('does not include the sign if not present', () => {
     const props: FormattedTimeProps = {
       timestamp: 9107593,
-      fullFormat: true,
-      plusSign: '+'
+      fullFormat: true
     }
     const el = shallow(<FormattedTime
       timestamp={props.timestamp}
       fullFormat={props.fullFormat}
       plusSign={props.plusSign}
     />);
-    expect(el.contains(<span className="sign">+</span>));
     expect(el.contains(<span className="h">02</span>));
     expect(el.contains(<span className="m">31</span>));
     expect(el.contains(<span className="s">47</span>));
     expect(el.contains(<span className="ms">59</span>));
+  });
+  describe('when fullFormat is true', () => {
+    it('renders the specified timestamp', () => {
+      const props: FormattedTimeProps = {
+        timestamp: 9107593,
+        fullFormat: true,
+        plusSign: '+'
+      }
+      const el = shallow(<FormattedTime
+        timestamp={props.timestamp}
+        fullFormat={props.fullFormat}
+        plusSign={props.plusSign}
+      />);
+      expect(el.contains(<span className="sign">+</span>));
+      expect(el.contains(<span className="h">02</span>));
+      expect(el.contains(<span className="m">31</span>));
+      expect(el.contains(<span className="s">47</span>));
+      expect(el.contains(<span className="ms">59</span>));
+    });
+  });
+  describe('when fullFormat is missing or false', () => {
+    it('renders with the plus sign specified when included', () => {
+      const props: FormattedTimeProps = { timestamp: 47593, plusSign: '+++' };
+      const el = shallow(<FormattedTime
+        timestamp={props.timestamp}
+        fullFormat={props.fullFormat}
+        plusSign={props.plusSign}
+      />);
+      expect(el.contains(<span className="sign">+++</span>));
+      expect(el.contains(<span className="s">47</span>));
+      expect(el.contains(<span className="ms">59</span>));
+    });
+    it('renders only seconds and milliseconds when less than a minute', () => {
+      const props: FormattedTimeProps = { timestamp: 47593 };
+      const el = shallow(<FormattedTime
+        timestamp={props.timestamp}
+        fullFormat={props.fullFormat}
+        plusSign={props.plusSign}
+      />);
+      expect(el.contains(<span className="s">47</span>));
+      expect(el.contains(<span className="ms">59</span>));
+    });
+    it('renders only minutes and seconds when between a minute and an hour', () => {
+      const props: FormattedTimeProps = { timestamp: 167593 };
+      const el = shallow(<FormattedTime
+        timestamp={props.timestamp}
+        fullFormat={props.fullFormat}
+        plusSign={props.plusSign}
+      />);
+      expect(el.contains(<span className="m">02</span>));
+      expect(el.contains(<span className="s">47</span>));
+    });
+    it('renders only hours, minutes and seconds when over an hour', () => {
+      const props: FormattedTimeProps = { timestamp: 9107593 };
+      const el = shallow(<FormattedTime
+        timestamp={props.timestamp}
+        fullFormat={props.fullFormat}
+        plusSign={props.plusSign}
+      />);
+      expect(el.contains(<span className="h">02</span>));
+      expect(el.contains(<span className="m">31</span>));
+      expect(el.contains(<span className="s">47</span>));
+    });
   });
   it('renders the empty label when the timestamp is -Infinity', () => {
     const props: FormattedTimeProps = {

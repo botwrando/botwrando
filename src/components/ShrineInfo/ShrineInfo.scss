@@ -55,9 +55,11 @@
     color: $pale-blue;
     grid-column: 3/5;
     grid-row: 1/3;
-    &.is-paused,
-    &.is-initial {
+    &.is-paused {
       color: $cloudy-gray;
+    }
+    &.is-initial {
+      color: $milky-white;
     }
     .delta {
       @include f-reg;

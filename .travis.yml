@@ -14,3 +14,16 @@ jobs:
     - stage: build
       node_js: node
       script: yarn build
+    - stage: deploy
+      script: yarn build
+      nodejs: lts/*
+      deploy:
+        provider: pages
+        local_dir: ./build
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        keep_history: true
+        committer_from_gh: true
+        verbose: true
+        on:
+          branch: master

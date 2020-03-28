@@ -12,7 +12,7 @@ export function AppHeader ({ hasSeed, setRun }: AppHeaderProps) {
     <div className="header">
       <div className="caption">BotW All Shrines Randomizer</div>
       {hasSeed && (
-        <button className="btn-text btn-back" onClick={onQuit}>
+        <button id="quit" className="btn-text btn-back" onClick={onQuit}>
           Quit run
         </button>
       )}
