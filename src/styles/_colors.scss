@@ -1,0 +1,26 @@
+$cold-green: #017575;
+$dark-brown: #6B5E31;
+$dark-cyan: #316570;
+$dark-green: #3E7531;
+$darker-green: #0C2024;
+$darker-red: rgb(53, 2, 2);
+$deep-yellow: #FEBC28;
+$hot-orange: #FF953F;
+$milky-white: #F9F4CE;
+$pale-blue: #97C8D9;
+$pale-green: #9FC184;
+$warm-green: #538E24;
+$cloudy-gray: rgb(178, 187, 189);
+
+@keyframes color-gold {
+	from {
+		color: $hot-orange;
+	}
+	to {
+		color: $deep-yellow;
+	}
+}
+
+@mixin gold {
+	animation: color-gold 0.3s infinite alternate;
+}

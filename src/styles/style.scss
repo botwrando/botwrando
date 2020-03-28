@@ -1,0 +1,182 @@
+@import 'colors';
+@import 'fonts';
+
+html {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  color: $milky-white;
+  font-family: 'Calamity', Roboto, sans-serif;
+  height: 100vh;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+.bg {
+  height: 100%;
+  &:before,
+  &:after {
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    transition: background-color 0.2s, opacity 0.2s;
+  }
+  &:before {
+    background-color: $darker-green;
+  }
+  &:after {
+    opacity: 0;
+  }
+
+  &.is-blood-moon:after {
+    background-color: $darker-red;
+    background-image: url(../assets/bloodmoon.svg);
+    background-position: center top;
+    background-size: cover;
+    opacity: 1;
+  }
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 64px 24px 3fr 80px 2fr auto;
+  margin: auto;
+  height: 100%;
+  max-width: 960px;
+  overflow: hidden;
+  padding: 0 32px;
+  @media (max-width: 480px) {
+    grid-template-rows: 32px 32px 1fr 64px 200px 128px;
+    padding: 0 16px;
+  }
+  .header {
+    @include f-main;
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 12px 0 0;
+    @media (max-width: 480px) {
+      @include f-sub;
+    }
+  }
+  .seedinfo {
+    @include f-sub;
+    color: $pale-green;
+  }
+  .run-display {
+    display: contents;
+    .history {
+      flex: 1 1 auto;
+      overflow: hidden;
+      .historylist {
+        width: calc(100% + 17px);
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+    }
+    .history,
+    .shrine.current {
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      @media (max-width: 480px) {
+        margin: 0;
+      }
+    }
+    .history .shrine,
+    .shrine.current {
+      display: grid;
+      grid-template-columns: 56px 1fr 48px 180px;
+      gap: 0 8px;
+      align-items: center;
+      @media (max-width: 480px) {
+        grid-template-columns: 40px 1fr 48px 80px;
+        line-height: 32px;
+      }
+    }
+    .shrine.current {
+      @media (max-width: 480px) {
+        width: 100%;
+      }
+    }
+  }
+  .footer {
+    align-self: flex-end;
+  }
+}
+
+.splashscreen {
+  align-items: center;
+  display: flex;
+  grid-row: 3/6;
+  justify-content: center;
+}
+
+.seedpicker {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  grid-row: 3/6;
+  justify-content: center;
+  label {
+    margin: 16px;
+  }
+  input {
+    margin: 16px;
+  }
+  button {
+    margin: 16px;
+  }
+}
+
+.touchpanel {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+  height: 1px;
+}
+button {
+  display: block;
+  @include f-sub;
+  background-color: $warm-green;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: none;
+  color: $milky-white;
+  padding: 4px 8px;
+  min-height: 48px;
+  &.btn-text {
+    background-color: transparent;
+    color: $warm-green;
+    cursor: pointer;
+    min-height: initial;
+    padding: 0 4px;
+    &:hover {
+      color: $pale-green;
+    }
+  }
+}
+
+button.split {
+  grid-column: 1/5;
+}
