@@ -8,13 +8,18 @@ const testrun: Run = {
   state: RunState.Running,
   pausedTime: 0,
   rundate: 1585434255627,
-  splits: new Map<number, number>([]),
+  splits: new Map<number, number>([
+    [1, 1],
+    [2, 2],
+    [3, 3],
+    [4, 4]
+  ]),
   pbSplits: new Map<number, number>([]),
   wrSplits: new Map<number, number>([])
 };
 
 const encoded_testrun =
-  '{"runner":"Jest McJestyface","seed":"AJESTYSEED","shrineIds":[1,2,3,5,8,11,19,40,59],"state":2,"pausedTime":0,"rundate":1585434255627,"splits":[],"pbSplits":[],"wrSplits":[]}';
+  '{"runner":"Jest McJestyface","seed":"AJESTYSEED","shrineIds":[1,2,3,5,8,11,19,40,59],"state":2,"pausedTime":0,"rundate":1585434255627,"splits":[[1,1],[2,2],[3,3],[4,4]],"pbSplits":[],"wrSplits":[]}';
 
 describe('runstorage', () => {
   const encoded = encodeRun(testrun);
