@@ -133,18 +133,43 @@ body {
 
 .seedpicker {
   align-items: center;
-  display: flex;
-  flex-flow: column nowrap;
+  display: grid;
   grid-row: 3/6;
-  justify-content: center;
+  grid-template-columns: 1fr auto auto 1fr;
+  grid-template-rows: 1fr auto auto auto 1fr;
+  justify-items: center;
   label {
+    @include f-majsec;
+    margin: 16px;
+    grid-column: 2/4;
+    grid-row: 2;
     margin: 16px;
   }
-  input {
-    margin: 16px;
+  #generate-seed {
+    grid-column: 2/3;
+    grid-row: 3;
   }
-  button {
+  #input-seedpicker {
+    @include f-sub;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 2px solid $pale-green;
+    color: $pale-green;
+    font-size: 18px;
+    grid-column: 3/4;
+    grid-row: 3;
     margin: 16px;
+    min-height: 36px;
+    padding: 4px 8px;
+    &:focus {
+      box-shadow: 0 0 0 4px $warm-green;
+      outline: none;
+    }
+  }
+  #go-button {
+    grid-column: 2/4;
+    grid-row: 4;
+    margin: 48px;
   }
 }
 
@@ -156,15 +181,22 @@ body {
   height: 1px;
 }
 button {
-  display: block;
   @include f-sub;
   background-color: $warm-green;
-  text-transform: uppercase;
-  border-radius: 4px;
   border: none;
+  border-radius: 4px;
   color: $milky-white;
+  display: block;
+  min-height: 40px;
   padding: 4px 8px;
-  min-height: 48px;
+  text-transform: uppercase;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $pale-green;
+  }
+  &:hover {
+    background-color: lighten($color: $warm-green, $amount: 5);
+  }
   &.btn-text {
     background-color: transparent;
     color: $warm-green;
