@@ -6,7 +6,7 @@ type AppHeaderProps = {
   setRun: (run: Run) => void;
 };
 
-export function AppHeader({ hasSeed, setRun }: AppHeaderProps) {
+export const AppHeader = ({ hasSeed, setRun }: AppHeaderProps) => {
   const onQuit = () => {
     localStorage.removeItem('run');
     setRun(getDefaultRun());
@@ -21,4 +21,4 @@ export function AppHeader({ hasSeed, setRun }: AppHeaderProps) {
       )}
     </div>
   );
-}
+};

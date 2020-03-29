@@ -75,7 +75,7 @@ export const RunManager = (props: RunManagerProps) => {
   };
 
   React.useEffect(() => {
-    if (run.seed != '') localStorage.setItem('run', encodeRun(run));
+    if (run.seed !== '') localStorage.setItem('run', encodeRun(run));
   });
 
   React.useEffect(() => {

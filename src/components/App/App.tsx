@@ -6,7 +6,7 @@ import { decodeRun } from '../../lib/runstorage';
 import '../../styles/style.scss';
 import { RunManager } from '../RunManager/RunManager';
 
-function App() {
+export const App = () => {
   // const testSeed = "420SPECSNLUL69";
   // getRandomizedShrines(testSeed)
   const defaultRun: Run = {
@@ -29,6 +29,6 @@ function App() {
       <RunManager run={run} />
     </>
   );
-}
+};
 
 export default App;
