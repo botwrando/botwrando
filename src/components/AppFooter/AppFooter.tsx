@@ -14,9 +14,13 @@ export type AppFooterProps = {
   showHelp: boolean;
 };
 
-export function AppFooter({ run, touchCallbacks, showHelp }: AppFooterProps) {
+export const AppFooter = ({
+  run,
+  touchCallbacks,
+  showHelp
+}: AppFooterProps) => {
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
-  return run.seed != '' ? (
+  return run.seed !== '' ? (
     <div className="footer">
       {isTouch ? (
         <MobileControls
@@ -34,4 +38,4 @@ export function AppFooter({ run, touchCallbacks, showHelp }: AppFooterProps) {
   ) : (
     <></>
   );
-}
+};
