@@ -3,22 +3,18 @@ import { Run } from '../../lib/run';
 import { DesktopHelp, MobileControls } from '../Help/Help';
 
 export type AppFooterProps = {
-  run: Run;
+  run: Run,
   touchCallbacks: {
-    onSplit: (event: React.MouseEvent) => void;
-    onUndo: (event: React.MouseEvent) => void;
-    onReset: (event: React.MouseEvent) => void;
-    onPause: (event: React.MouseEvent) => void;
-    onBloodMoon: (event: React.MouseEvent) => void;
+    onSplit: (event: React.MouseEvent) => void,
+    onUndo: (event: React.MouseEvent) => void,
+    onReset: (event: React.MouseEvent) => void,
+    onPause: (event: React.MouseEvent) => void,
+    onBloodMoon: (event: React.MouseEvent) => void,
   };
-  showHelp: boolean;
+  showHelp: boolean,
 };
 
-export function AppFooter({
-  run,
-  touchCallbacks,
-  showHelp
-}: AppFooterProps) {
+export function AppFooter({ run, touchCallbacks, showHelp }: AppFooterProps) {
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
   return run.seed !== '' ? (
     <div className="footer">
