@@ -43,6 +43,7 @@
   .time {
     @include f-shrine-min;
     color: $pale-blue;
+    justify-self: end;
     text-align: right;
     .ms {
       font-size: 75%;
