@@ -6,7 +6,7 @@ type AppHeaderProps = {
   setRun: (run: Run) => void;
 };
 
-export function AppHeader ({ hasSeed, setRun }: AppHeaderProps) {
+export function AppHeader({ hasSeed, setRun }: AppHeaderProps) {
   const onQuit = () => setRun(getDefaultRun());
   return (
     <div className="header">

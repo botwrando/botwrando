@@ -14,11 +14,11 @@ export type AppFooterProps = {
   showHelp: boolean;
 };
 
-export const AppFooter = ({
+export function AppFooter({
   run,
   touchCallbacks,
   showHelp
-}: AppFooterProps) => {
+}: AppFooterProps) {
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
   return run.seed !== '' ? (
     <div className="footer">

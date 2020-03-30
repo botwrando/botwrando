@@ -10,7 +10,7 @@ type RunDisplayProps = {
   onUpdatePausedTime: (pausedTime: number) => void
 }
 
-export function RunDisplay ({ run, onUpdatePausedTime }: RunDisplayProps) {
+export function RunDisplay({ run, onUpdatePausedTime }: RunDisplayProps) {
   return (
     <div className="run-display">
       <SplitHistory run={run} />
