@@ -63,7 +63,7 @@ describe('rando', () => {
     });
     it('generates a unique seed each run', () => {
       const seeds = Array.from(new Array(10)).map(() => getRandomSeed());
-      const deduped = seeds.filter(function (seed, idx, allSeeds) {
+      const deduped = seeds.filter(function(seed, idx, allSeeds) {
         return allSeeds.indexOf(seed) === idx;
       });
       expect(seeds).toEqual(deduped);
@@ -80,7 +80,7 @@ describe('rando', () => {
     it('includes each shrine only once', () => {
       for (let n = 0; n < 10; n++) {
         const shrines = getRandomizedShrines(getRandomSeed());
-        const deduped = shrines.filter(function (shrineId, idx, allShrines) {
+        const deduped = shrines.filter(function(shrineId, idx, allShrines) {
           return allShrines.indexOf(shrineId) === idx;
         });
         expect(shrines).toEqual(deduped);

@@ -14,7 +14,7 @@ export type AppFooterProps = {
   showHelp: boolean
 }
 
-export function AppFooter ({ run, touchCallbacks, showHelp }: AppFooterProps) {
+export function AppFooter({ run, touchCallbacks, showHelp }: AppFooterProps) {
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
   return (
     <div className="footer">

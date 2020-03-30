@@ -5,7 +5,7 @@ import { RunManager } from '../RunManager/RunManager';
 import '../../styles/style.scss';
 import '../../assets/bloodmoon.svg';
 
-function App () {
+function App() {
   // const testSeed = "420SPECSNLUL69";
   // getRandomizedShrines(testSeed)
   const run: Run = {

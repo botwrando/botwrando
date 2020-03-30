@@ -1,4 +1,4 @@
-export function groupBy (list: any, keyGetter: any) {
+export function groupBy(list: any, keyGetter: any) {
   const map = new Map();
   list.forEach((item: any) => {
     const key = keyGetter(item);
@@ -12,10 +12,10 @@ export function groupBy (list: any, keyGetter: any) {
   return map;
 }
 
-export function throttle (func: Function, limit: number): Function {
+export function throttle(func: Function, limit: number): Function {
   let inThrottle: boolean;
 
-  return function (this: any): any {
+  return function(this: any): any {
     const args = arguments;
     const context = this;
 
