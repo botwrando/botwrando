@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { getDefaultRun, Run } from '../../lib/run';
@@ -54,11 +54,71 @@ describe('Help', () => {
         onBloodMoon={touchCallbacks.onBloodMoon}
       />, div);
     });
-    it('adds a split', () => { expect(1).toBe(1); })
-    it('skips a split', () => { expect(1).toBe(1); })
-    it('undos a split', () => { expect(1).toBe(1); })
-    it('pauses the timer', () => { expect(1).toBe(1); })
-    it('resumes the timer', () => { expect(1).toBe(1); })
-    it('resets the run', () => { expect(1).toBe(1); })
+    describe('touch handlers setup', () => {
+      let mounted: ReactWrapper;
+      beforeEach(() => {
+        mounted = mount(<MobileControls
+          run={run}
+          onSplit={touchCallbacks.onSplit}
+          onUndo={touchCallbacks.onUndo}
+          onPause={touchCallbacks.onPause}
+          onReset={touchCallbacks.onReset}
+          onBloodMoon={touchCallbacks.onBloodMoon}
+        />);
+      });
+      describe.skip('when tapped', () => {
+        it('calls the split callback', () => {
+          mounted.find('button.split').simulate('touchStart');
+          mounted.find('button.split').simulate('touchEnd');
+          expect(touchCallbacks.onSplit).toHaveBeenCalledTimes(1);
+        });
+        it.skip('calls the skip callback - there is no skip callback?', () => { });
+        it('calls the undo callback', () => {
+          mounted.find('button.undo').simulate('touchStart');
+          mounted.find('button.undo').simulate('touchEnd');
+          expect(touchCallbacks.onUndo).toHaveBeenCalledTimes(1);
+        });
+        it('calls the pause callback', () => {
+          mounted.find('button.pause').simulate('touchStart');
+          mounted.find('button.pause').simulate('touchEnd');
+          expect(touchCallbacks.onPause).toHaveBeenCalledTimes(1);
+        });
+        it.skip('resumes the timer - no way to test this here', () => { });
+        it('calls the reset callback', () => {
+          mounted.find('button.reset').simulate('touchStart');
+          mounted.find('button.reset').simulate('touchEnd');
+          expect(touchCallbacks.onReset).toHaveBeenCalledTimes(1);
+        });
+        it('calls the bloodmoon callback', () => {
+          mounted.find('button.bloodmoon').simulate('touchStart');
+          mounted.find('button.bloodmoon').simulate('touchEnd');
+          expect(touchCallbacks.onBloodMoon).toHaveBeenCalledTimes(1);
+        });
+      });
+      describe('when clicked', () => {
+        it('calls the split callback', () => {
+          mounted.find('button.split').simulate('click');
+          expect(touchCallbacks.onSplit).toHaveBeenCalledTimes(1);
+        });
+        it.skip('calls the skip callback - there is no skip callback?', () => { });
+        it('calls the undo callback', () => {
+          mounted.find('button.undo').simulate('click');
+          expect(touchCallbacks.onUndo).toHaveBeenCalledTimes(1);
+        });
+        it('calls the pause callback', () => {
+          mounted.find('button.pause').simulate('click');
+          expect(touchCallbacks.onPause).toHaveBeenCalledTimes(1);
+        });
+        it.skip('resumes the timer - no way to test this here', () => { });
+        it('calls the reset callback', () => {
+          mounted.find('button.pause').simulate('click');
+          expect(touchCallbacks.onPause).toHaveBeenCalledTimes(1);
+        });
+        it('calls the bloodmoon callback', () => {
+          mounted.find('button.bloodmoon').simulate('click');
+          expect(touchCallbacks.onBloodMoon).toHaveBeenCalledTimes(1);
+        });
+      });
+    });
   });
 });
