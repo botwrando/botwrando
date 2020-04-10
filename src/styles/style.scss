@@ -19,6 +19,17 @@ body {
   font-family: 'Calamity', Roboto, sans-serif;
   height: 100vh;
   margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  @media (max-width: 720px) {
+    font-size: 14px;
+  }
+  @media (max-width: 480px) {
+    font-size: 13px;
+  }
+  @media (max-width: 320px) {
+    font-size: 11px;
+  }
 }
 
 #root {
@@ -56,14 +67,13 @@ body {
 
 .main {
   display: grid;
-  grid-template-rows: 64px 24px 3fr 80px 2fr auto;
+  grid-template-rows: 4em 2em 3fr auto 2fr auto;
   margin: auto;
   height: 100%;
   max-width: 960px;
   overflow: hidden;
   padding: 0 32px;
   @media (max-width: 480px) {
-    grid-template-rows: 32px 32px 1fr 64px 200px 128px;
     padding: 0 16px;
   }
   .header {
@@ -87,10 +97,16 @@ body {
       flex: 1 1 auto;
       overflow: hidden;
       .historylist {
-        width: calc(100% + 17px);
+        scrollbar-width: 0;
+        @media (min-width: 720px) {
+          // width: calc(100% + 17px); // Scrollbar hider for desktop
+        }
         height: 100%;
         overflow-x: hidden;
         overflow-y: scroll;
+      }
+      .historylist::-webkit-scrollbar {
+        display: none;
       }
     }
     .history,
@@ -105,22 +121,14 @@ body {
     .history .shrine,
     .shrine.current {
       display: grid;
-      grid-template-columns: 56px 1fr 48px 180px;
+      grid-template-columns: 2.2em 1fr 3em 5em;
       gap: 0 8px;
       align-items: center;
       @media (max-width: 480px) {
-        grid-template-columns: 40px 1fr 48px 80px;
-        line-height: 32px;
-      }
-    }
-    .shrine.current {
-      @media (max-width: 480px) {
+        grid-template-columns: 1.4em 1fr 3em 3em;
         width: 100%;
       }
     }
-  }
-  .footer {
-    align-self: flex-end;
   }
 }
 
@@ -138,6 +146,12 @@ body {
   grid-template-columns: 1fr auto auto 1fr;
   grid-template-rows: 1fr auto auto auto 1fr;
   justify-items: center;
+  @media (max-width: 480px) {
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: auto;
+  }
   label {
     @include f-majsec;
     margin: 16px;
@@ -155,7 +169,6 @@ body {
     border-radius: 4px;
     border: 2px solid $pale-green;
     color: $pale-green;
-    font-size: 18px;
     grid-column: 3/4;
     grid-row: 3;
     margin: 16px;
@@ -178,7 +191,6 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 8px;
   margin: 12px 0;
-  height: 1px;
 }
 button {
   @include f-sub;

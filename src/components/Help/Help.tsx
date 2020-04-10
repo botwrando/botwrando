@@ -3,30 +3,30 @@ import { HotkeyList } from '../HotkeyList/HotkeyList';
 import { Run } from '../../lib/run';
 
 type MobileProps = {
-	run: Run;
-	onSplit: (event: React.MouseEvent) => void;
-	onUndo: (event: React.MouseEvent) => void;
-	onReset: (event: React.MouseEvent) => void;
-	onPause: (event: React.MouseEvent) => void;
-	onBloodMoon: (event: React.MouseEvent) => void;
+  run: Run;
+  onSplit: (event: React.MouseEvent | React.TouchEvent) => void;
+	onUndo: (event: React.MouseEvent | React.TouchEvent) => void;
+	onReset: (event: React.MouseEvent | React.TouchEvent) => void;
+	onPause: (event: React.MouseEvent | React.TouchEvent) => void;
+	onBloodMoon: (event: React.MouseEvent | React.TouchEvent) => void;
 };
 
 export const MobileControls = (props: MobileProps) => {
   return (
     <div className="touchpanel">
-      <button className="split" onClick={props.onSplit}>
+      <button className="split" onClick={props.onSplit} onTouchEnd={props.onSplit}>
 				Split
       </button>
-      <button className="undo" onClick={props.onUndo}>
+      <button className="undo" onClick={props.onUndo} onTouchEnd={props.onSplit}>
 				Undo
       </button>
-      <button className="pause" onClick={props.onPause}>
+      <button className="pause" onClick={props.onPause} onTouchEnd={props.onSplit}>
 				Pause
       </button>
-      <button className="reset" onClick={props.onReset}>
+      <button className="reset" onClick={props.onReset} onTouchEnd={props.onSplit}>
 				Reset
       </button>
-      <button className="bloodmoon" onClick={props.onBloodMoon}>
+      <button className="bloodmoon" onClick={props.onBloodMoon} onTouchEnd={props.onSplit}>
 				Blood Moon
       </button>
     </div>
