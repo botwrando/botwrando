@@ -154,11 +154,11 @@ export const RunManager = (props: RunManagerProps) => {
   };
 
   const callbacks = {
-    onSplit: (_e: React.PointerEvent) => { addSplit() },
-    onUndo: (_e: React.PointerEvent) => { undoSplit() },
-    onReset: (_e: React.PointerEvent) => { resetSplits() },
-    onPause: (_e: React.PointerEvent) => { pause() },
-    onBloodMoon: (_e: React.PointerEvent) => { toggleBloodMoon() }
+    onSplit: (_e: React.SyntheticEvent) => { addSplit() },
+    onUndo: (_e: React.SyntheticEvent) => { undoSplit() },
+    onReset: (_e: React.SyntheticEvent) => { resetSplits() },
+    onPause: (_e: React.SyntheticEvent) => { pause() },
+    onBloodMoon: (_e: React.SyntheticEvent) => { toggleBloodMoon() }
   };
 
   const onPickedSeed = (seed: string) => {

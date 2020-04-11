@@ -34,13 +34,13 @@ describe('AppHeader', () => {
   describe('when the Quit Run button is clicked', () => {
     it('should call setRun', () => {
       const el = mount(<AppHeader hasSeed={true} setRun={setRun} />);
-      el.find('button#quit').simulate('pointerdown');
+      el.find('button#quit').simulate('click');
       expect(setRun).toHaveBeenCalledTimes(1);
     });
     it('should set the default run', () => {
       const defaultRun = getDefaultRun();
       const el = mount(<AppHeader hasSeed={true} setRun={setRun} />);
-      el.find('button#quit').simulate('pointerdown');
+      el.find('button#quit').simulate('click');
       expect(setRun).toHaveBeenCalledWith(defaultRun);
     });
   });

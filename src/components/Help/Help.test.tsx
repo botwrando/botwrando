@@ -34,7 +34,7 @@ describe('Help', () => {
   });
 
   describe('MobileControls', () => {
-    let callbacks: Record<CallbackMap, (event: React.PointerEvent) => void>;
+    let callbacks: Record<CallbackMap, (event: React.SyntheticEvent) => void>;
     beforeEach(() => {
       callbacks = {
         onSplit: jest.fn(),
@@ -61,74 +61,74 @@ describe('Help', () => {
       });
       describe.skip('when tapped', () => {
         it('calls the split callback', () => {
-          mounted.find('button.split').simulate('pointerdown');
-          mounted.find('button.split').simulate('pointerdown');
+          mounted.find('button.split').simulate('click');
+          mounted.find('button.split').simulate('click');
           expect(callbacks.onSplit).toHaveBeenCalledTimes(1);
         });
         it.skip('calls the skip callback - there is no skip callback?', () => { });
         it('calls the undo callback', () => {
-          mounted.find('button.undo').simulate('pointerdown');
+          mounted.find('button.undo').simulate('click');
           expect(callbacks.onUndo).toHaveBeenCalledTimes(1);
         });
         it('calls the pause callback', () => {
-          mounted.find('button.pause').simulate('pointerdown');
+          mounted.find('button.pause').simulate('click');
           expect(callbacks.onPause).toHaveBeenCalledTimes(1);
         });
         it.skip('resumes the timer - no way to test this here', () => { });
         it('calls the reset callback', () => {
-          mounted.find('button.reset').simulate('pointerdown');
+          mounted.find('button.reset').simulate('click');
           expect(callbacks.onReset).toHaveBeenCalledTimes(1);
         });
         it('calls the bloodmoon callback', () => {
-          mounted.find('button.bloodmoon').simulate('pointerdown');
+          mounted.find('button.bloodmoon').simulate('click');
           expect(callbacks.onBloodMoon).toHaveBeenCalledTimes(1);
         });
       });
       describe('when clicked', () => {
         it('calls the split callback', () => {
-          mounted.find('button.split').simulate('pointerdown');
+          mounted.find('button.split').simulate('click');
           expect(callbacks.onSplit).toHaveBeenCalledTimes(1);
         });
         it.skip('calls the skip callback - there is no skip callback?', () => { });
         it('calls the undo callback', () => {
-          mounted.find('button.undo').simulate('pointerdown');
+          mounted.find('button.undo').simulate('click');
           expect(callbacks.onUndo).toHaveBeenCalledTimes(1);
         });
         it('calls the pause callback', () => {
-          mounted.find('button.pause').simulate('pointerdown');
+          mounted.find('button.pause').simulate('click');
           expect(callbacks.onPause).toHaveBeenCalledTimes(1);
         });
         it.skip('resumes the timer - no way to test this here', () => { });
         it('calls the reset callback', () => {
-          mounted.find('button.pause').simulate('pointerdown');
+          mounted.find('button.pause').simulate('click');
           expect(callbacks.onPause).toHaveBeenCalledTimes(1);
         });
         it('calls the bloodmoon callback', () => {
-          mounted.find('button.bloodmoon').simulate('pointerdown');
+          mounted.find('button.bloodmoon').simulate('click');
           expect(callbacks.onBloodMoon).toHaveBeenCalledTimes(1);
         });
       });
       describe('when tapped', () => {
         it('calls the split callback', () => {
-          mounted.find('button.split').simulate('pointerdown');
+          mounted.find('button.split').simulate('click');
           expect(callbacks.onSplit).toHaveBeenCalledTimes(1);
         });
         it.skip('calls the skip callback - there is no skip callback?', () => { });
         it('calls the undo callback', () => {
-          mounted.find('button.undo').simulate('pointerdown');
+          mounted.find('button.undo').simulate('click');
           expect(callbacks.onUndo).toHaveBeenCalledTimes(1);
         });
         it('calls the pause callback', () => {
-          mounted.find('button.pause').simulate('pointerdown');
+          mounted.find('button.pause').simulate('click');
           expect(callbacks.onPause).toHaveBeenCalledTimes(1);
         });
         it.skip('resumes the timer - no way to test this here', () => { });
         it('calls the reset callback', () => {
-          mounted.find('button.pause').simulate('pointerdown');
+          mounted.find('button.pause').simulate('click');
           expect(callbacks.onPause).toHaveBeenCalledTimes(1);
         });
         it('calls the bloodmoon callback', () => {
-          mounted.find('button.bloodmoon').simulate('pointerdown');
+          mounted.find('button.bloodmoon').simulate('click');
           expect(callbacks.onBloodMoon).toHaveBeenCalledTimes(1);
         });
       });

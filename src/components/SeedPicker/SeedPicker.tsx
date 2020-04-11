@@ -27,7 +27,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
   };
 
   const handleSelectSeed = (
-    _event: React.PointerEvent<HTMLButtonElement>
+    _event: React.SyntheticEvent<HTMLButtonElement>
   ) => {
     props.onPickedSeed(seed);
   };
@@ -36,7 +36,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
     <div className="seedpicker">
       <label htmlFor="input-seedpicker">Choose your seed!</label>
 
-      <button id="generate-seed" onPointerDown={generateSeed}>
+      <button id="generate-seed" onClick={generateSeed}>
         Randomize
       </button>
       <input
@@ -46,7 +46,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
         placeholder={exampleValue}
         onChange={handleUpdateSeed}
       />
-      <button id="go-button" onPointerDown={handleSelectSeed}>
+      <button id="go-button" onClick={handleSelectSeed}>
         Start run
       </button>
     </div>

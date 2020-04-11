@@ -5,11 +5,11 @@ import { HotkeyList } from '../HotkeyList/HotkeyList';
 type MobileProps = {
   run: Run;
   callbacks: {
-    onSplit: (event: React.PointerEvent) => void;
-    onUndo: (event: React.PointerEvent) => void;
-    onReset: (event: React.PointerEvent) => void;
-    onPause: (event: React.PointerEvent) => void;
-    onBloodMoon: (event: React.PointerEvent) => void;
+    onSplit: (event: React.SyntheticEvent) => void;
+    onUndo: (event: React.SyntheticEvent) => void;
+    onReset: (event: React.SyntheticEvent) => void;
+    onPause: (event: React.SyntheticEvent) => void;
+    onBloodMoon: (event: React.SyntheticEvent) => void;
   }
 };
 
@@ -18,19 +18,19 @@ export const MobileControls = (props: MobileProps) => {
 
   return (
     <div className="touchpanel">
-      <button className="split" onPointerDown={callbacks.onSplit}>
+      <button className="split" onClick={callbacks.onSplit}>
         Split
       </button>
-      <button className="undo" onPointerDown={callbacks.onUndo}>
+      <button className="undo" onClick={callbacks.onUndo}>
         Undo
       </button>
-      <button className="pause" onPointerDown={callbacks.onPause}>
+      <button className="pause" onClick={callbacks.onPause}>
         Pause
       </button>
-      <button className="reset" onPointerDown={callbacks.onReset}>
+      <button className="reset" onClick={callbacks.onReset}>
         Reset
       </button>
-      <button className="bloodmoon" onPointerDown={callbacks.onBloodMoon}>
+      <button className="bloodmoon" onClick={callbacks.onBloodMoon}>
         Blood Moon
       </button>
     </div>

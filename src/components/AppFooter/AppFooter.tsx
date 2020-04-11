@@ -5,11 +5,11 @@ import { DesktopHelp, MobileControls } from '../Help/Help';
 export type AppFooterProps = {
   run: Run,
   callbacks: {
-    onSplit: (event: React.PointerEvent) => void,
-    onUndo: (event: React.PointerEvent) => void,
-    onReset: (event: React.PointerEvent) => void,
-    onPause: (event: React.PointerEvent) => void,
-    onBloodMoon: (event: React.PointerEvent) => void,
+    onSplit: (event: React.SyntheticEvent) => void,
+    onUndo: (event: React.SyntheticEvent) => void,
+    onReset: (event: React.SyntheticEvent) => void,
+    onPause: (event: React.SyntheticEvent) => void,
+    onBloodMoon: (event: React.SyntheticEvent) => void,
   },
   showHelp: boolean,
 };
