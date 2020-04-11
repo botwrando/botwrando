@@ -153,12 +153,20 @@ export const RunManager = (props: RunManagerProps) => {
     return classes.join(' ');
   };
 
+  // This insanity is because the conversion from TS to JS can't handle the mixed types.
+  const mouseCallbacks = {
+    onSplit: (_e: React.MouseEvent) => { addSplit() },
+    onUndo: (_e: React.MouseEvent) => { undoSplit() },
+    onReset: (_e: React.MouseEvent) => { resetSplits() },
+    onPause: (_e: React.MouseEvent) => { pause() },
+    onBloodMoon: (_e: React.MouseEvent) => { toggleBloodMoon() }
+  };
   const touchCallbacks = {
-    onSplit: addSplit,
-    onUndo: undoSplit,
-    onReset: resetSplits,
-    onPause: pause,
-    onBloodMoon: toggleBloodMoon
+    onSplit: (_e: React.TouchEvent) => { addSplit() },
+    onUndo: (_e: React.TouchEvent) => { undoSplit() },
+    onReset: (_e: React.TouchEvent) => { resetSplits() },
+    onPause: (_e: React.TouchEvent) => { pause() },
+    onBloodMoon: (_e: React.TouchEvent) => { toggleBloodMoon() }
   };
 
   const onPickedSeed = (seed: string) => {
@@ -184,6 +192,7 @@ export const RunManager = (props: RunManagerProps) => {
         <AppFooter
           run={run}
           touchCallbacks={touchCallbacks}
+          mouseCallbacks={mouseCallbacks}
           showHelp={showHelp}
         />
       </div>
