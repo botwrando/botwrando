@@ -66,7 +66,7 @@ describe('Help', () => {
           run={run}
           touchCallbacks={touchCallbacks}
           mouseCallbacks={mouseCallbacks}
-          />);
+        />);
       });
       describe.skip('when tapped', () => {
         it('calls the split callback', () => {

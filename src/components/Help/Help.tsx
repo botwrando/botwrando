@@ -27,19 +27,19 @@ export const MobileControls = (props: MobileProps) => {
   return (
     <div className="touchpanel">
       <button className="split" onClick={mouse.onSplit} onTouchEnd={touch.onSplit}>
-				Split
+        Split
       </button>
       <button className="undo" onClick={mouse.onUndo} onTouchEnd={touch.onUndo}>
-				Undo
+        Undo
       </button>
       <button className="pause" onClick={mouse.onPause} onTouchEnd={touch.onPause}>
-				Pause
+        Pause
       </button>
       <button className="reset" onClick={mouse.onReset} onTouchEnd={touch.onReset}>
-				Reset
+        Reset
       </button>
       <button className="bloodmoon" onClick={mouse.onBloodMoon} onTouchEnd={touch.onBloodMoon}>
-				Blood Moon
+        Blood Moon
       </button>
     </div>
   );
@@ -58,7 +58,7 @@ export const DesktopHelp = (props: DesktopProps) => {
         <>
           <div className="helphint">
             <span className="key">Space</span> to start / split
-						&nbsp;
+            &nbsp;
             <span className="key">H</span> to show / hide help
           </div>
         </>
