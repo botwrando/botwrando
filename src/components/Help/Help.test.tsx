@@ -33,8 +33,16 @@ describe('Help', () => {
   });
 
   describe('MobileControls', () => {
-    let touchCallbacks: Record<string, (event: React.MouseEvent) => void>;
+    let mouseCallbacks: Record<string, (event: React.MouseEvent) => void>;
+    let touchCallbacks: Record<string, (event: React.TouchEvent) => void>;
     beforeEach(() => {
+      mouseCallbacks = {
+        onSplit: jest.fn(),
+        onUndo: jest.fn(),
+        onPause: jest.fn(),
+        onReset: jest.fn(),
+        onBloodMoon: jest.fn()
+      };
       touchCallbacks = {
         onSplit: jest.fn(),
         onUndo: jest.fn(),
@@ -47,11 +55,8 @@ describe('Help', () => {
       const div = document.createElement('div');
       ReactDOM.render(<MobileControls
         run={run}
-        onSplit={touchCallbacks.onSplit}
-        onUndo={touchCallbacks.onUndo}
-        onPause={touchCallbacks.onPause}
-        onReset={touchCallbacks.onReset}
-        onBloodMoon={touchCallbacks.onBloodMoon}
+        touchCallbacks={touchCallbacks}
+        mouseCallbacks={mouseCallbacks}
       />, div);
     });
     describe('touch handlers setup', () => {
@@ -59,11 +64,8 @@ describe('Help', () => {
       beforeEach(() => {
         mounted = mount(<MobileControls
           run={run}
-          onSplit={touchCallbacks.onSplit}
-          onUndo={touchCallbacks.onUndo}
-          onPause={touchCallbacks.onPause}
-          onReset={touchCallbacks.onReset}
-          onBloodMoon={touchCallbacks.onBloodMoon}
+          touchCallbacks={touchCallbacks}
+          mouseCallbacks={mouseCallbacks}
         />);
       });
       describe.skip('when tapped', () => {
@@ -98,24 +100,48 @@ describe('Help', () => {
       describe('when clicked', () => {
         it('calls the split callback', () => {
           mounted.find('button.split').simulate('click');
-          expect(touchCallbacks.onSplit).toHaveBeenCalledTimes(1);
+          expect(mouseCallbacks.onSplit).toHaveBeenCalledTimes(1);
         });
         it.skip('calls the skip callback - there is no skip callback?', () => { });
         it('calls the undo callback', () => {
           mounted.find('button.undo').simulate('click');
-          expect(touchCallbacks.onUndo).toHaveBeenCalledTimes(1);
+          expect(mouseCallbacks.onUndo).toHaveBeenCalledTimes(1);
         });
         it('calls the pause callback', () => {
           mounted.find('button.pause').simulate('click');
-          expect(touchCallbacks.onPause).toHaveBeenCalledTimes(1);
+          expect(mouseCallbacks.onPause).toHaveBeenCalledTimes(1);
         });
         it.skip('resumes the timer - no way to test this here', () => { });
         it('calls the reset callback', () => {
           mounted.find('button.pause').simulate('click');
-          expect(touchCallbacks.onPause).toHaveBeenCalledTimes(1);
+          expect(mouseCallbacks.onPause).toHaveBeenCalledTimes(1);
         });
         it('calls the bloodmoon callback', () => {
           mounted.find('button.bloodmoon').simulate('click');
+          expect(mouseCallbacks.onBloodMoon).toHaveBeenCalledTimes(1);
+        });
+      });
+      describe('when tapped', () => {
+        it('calls the split callback', () => {
+          mounted.find('button.split').simulate('touchEnd');
+          expect(touchCallbacks.onSplit).toHaveBeenCalledTimes(1);
+        });
+        it.skip('calls the skip callback - there is no skip callback?', () => { });
+        it('calls the undo callback', () => {
+          mounted.find('button.undo').simulate('touchEnd');
+          expect(touchCallbacks.onUndo).toHaveBeenCalledTimes(1);
+        });
+        it('calls the pause callback', () => {
+          mounted.find('button.pause').simulate('touchEnd');
+          expect(touchCallbacks.onPause).toHaveBeenCalledTimes(1);
+        });
+        it.skip('resumes the timer - no way to test this here', () => { });
+        it('calls the reset callback', () => {
+          mounted.find('button.pause').simulate('touchEnd');
+          expect(touchCallbacks.onPause).toHaveBeenCalledTimes(1);
+        });
+        it('calls the bloodmoon callback', () => {
+          mounted.find('button.bloodmoon').simulate('touchEnd');
           expect(touchCallbacks.onBloodMoon).toHaveBeenCalledTimes(1);
         });
       });

@@ -27,6 +27,13 @@ describe('AppFooter', () => {
         onPause: jest.fn(),
         onBloodMoon: jest.fn()
       },
+      mouseCallbacks: {
+        onSplit: jest.fn(),
+        onUndo: jest.fn(),
+        onReset: jest.fn(),
+        onPause: jest.fn(),
+        onBloodMoon: jest.fn()
+      },
       showHelp: false
     }
   });
@@ -36,6 +43,7 @@ describe('AppFooter', () => {
     ReactDOM.render(<AppFooter
       run={props.run}
       touchCallbacks={props.touchCallbacks}
+      mouseCallbacks={props.mouseCallbacks}
       showHelp={props.showHelp}
     />, div);
   });
@@ -43,6 +51,7 @@ describe('AppFooter', () => {
     const el = shallow(<AppFooter
       run={props.run}
       touchCallbacks={props.touchCallbacks}
+      mouseCallbacks={props.mouseCallbacks}
       showHelp={props.showHelp}
     />);
     expect(el.contains(<div className="footer"/>));
@@ -51,6 +60,7 @@ describe('AppFooter', () => {
     expect(mount(<AppFooter
       run={props.run}
       touchCallbacks={props.touchCallbacks}
+      mouseCallbacks={props.mouseCallbacks}
       showHelp={props.showHelp}
     />).find('.footer').length).toBe(1);
   });
@@ -58,6 +68,7 @@ describe('AppFooter', () => {
     expect(render(<AppFooter
       run={props.run}
       touchCallbacks={props.touchCallbacks}
+      mouseCallbacks={props.mouseCallbacks}
       showHelp={props.showHelp}
     />).text()).toMatch(/to start \/ split/);
   });
@@ -71,14 +82,12 @@ describe('AppFooter', () => {
       expect(shallow(<AppFooter
         run={props.run}
         touchCallbacks={props.touchCallbacks}
+        mouseCallbacks={props.mouseCallbacks}
         showHelp={props.showHelp}
       />).containsMatchingElement(<MobileControls
-        run = { props.run }
-        onSplit = { props.touchCallbacks.onSplit }
-        onUndo = { props.touchCallbacks.onUndo }
-        onReset = { props.touchCallbacks.onReset }
-        onPause = { props.touchCallbacks.onPause }
-        onBloodMoon = { props.touchCallbacks.onBloodMoon }
+        run={props.run}
+        touchCallbacks={props.touchCallbacks}
+        mouseCallbacks={props.mouseCallbacks}
       />)).toEqual(true);
     });
   });
@@ -92,6 +101,7 @@ describe('AppFooter', () => {
       expect(shallow(<AppFooter
         run={props.run}
         touchCallbacks={props.touchCallbacks}
+        mouseCallbacks={props.mouseCallbacks}
         showHelp={props.showHelp}
       />).containsMatchingElement(<DesktopHelp
         run={props.run}
