@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { getRandomSeed } from '../../lib/rando';
 
 type SeedPickerProps = {
@@ -27,7 +27,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
   };
 
   const handleSelectSeed = (
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    _event: React.PointerEvent<HTMLButtonElement>
   ) => {
     props.onPickedSeed(seed);
   };
@@ -36,7 +36,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
     <div className="seedpicker">
       <label htmlFor="input-seedpicker">Choose your seed!</label>
 
-      <button id="generate-seed" onClick={generateSeed}>
+      <button id="generate-seed" onPointerDown={generateSeed}>
         Randomize
       </button>
       <input
@@ -46,7 +46,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
         placeholder={exampleValue}
         onChange={handleUpdateSeed}
       />
-      <button id="go-button" onClick={handleSelectSeed}>
+      <button id="go-button" onPointerDown={handleSelectSeed}>
         Start run
       </button>
     </div>

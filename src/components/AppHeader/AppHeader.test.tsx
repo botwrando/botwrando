@@ -1,8 +1,8 @@
+import { mount, render, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, render } from 'enzyme';
+import { getDefaultRun, Run } from '../../lib/run';
 import { AppHeader } from './AppHeader';
-import { Run, getDefaultRun } from '../../lib/run';
 
 describe('AppHeader', () => {
   let setRun: (run: Run) => void;
@@ -34,13 +34,13 @@ describe('AppHeader', () => {
   describe('when the Quit Run button is clicked', () => {
     it('should call setRun', () => {
       const el = mount(<AppHeader hasSeed={true} setRun={setRun} />);
-      el.find('button#quit').simulate('click');
+      el.find('button#quit').simulate('pointerdown');
       expect(setRun).toHaveBeenCalledTimes(1);
     });
     it('should set the default run', () => {
       const defaultRun = getDefaultRun();
       const el = mount(<AppHeader hasSeed={true} setRun={setRun} />);
-      el.find('button#quit').simulate('click');
+      el.find('button#quit').simulate('pointerdown');
       expect(setRun).toHaveBeenCalledWith(defaultRun);
     });
   });

@@ -4,33 +4,22 @@ import { DesktopHelp, MobileControls } from '../Help/Help';
 
 export type AppFooterProps = {
   run: Run,
-  touchCallbacks: {
-    onSplit: (event: React.TouchEvent) => void,
-    onUndo: (event: React.TouchEvent) => void,
-    onReset: (event: React.TouchEvent) => void,
-    onPause: (event: React.TouchEvent) => void,
-    onBloodMoon: (event: React.TouchEvent) => void,
-  },
-  mouseCallbacks: {
-    onSplit: (event: React.MouseEvent) => void,
-    onUndo: (event: React.MouseEvent) => void,
-    onReset: (event: React.MouseEvent) => void,
-    onPause: (event: React.MouseEvent) => void,
-    onBloodMoon: (event: React.MouseEvent) => void,
+  callbacks: {
+    onSplit: (event: React.PointerEvent) => void,
+    onUndo: (event: React.PointerEvent) => void,
+    onReset: (event: React.PointerEvent) => void,
+    onPause: (event: React.PointerEvent) => void,
+    onBloodMoon: (event: React.PointerEvent) => void,
   },
   showHelp: boolean,
 };
 
-export function AppFooter({ run, touchCallbacks, mouseCallbacks, showHelp }: AppFooterProps) {
+export function AppFooter({ run, callbacks, showHelp }: AppFooterProps) {
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
   return run.seed !== '' ? (
     <div className="footer">
       {isTouch ? (
-        <MobileControls
-          run={run}
-          touchCallbacks={touchCallbacks}
-          mouseCallbacks={mouseCallbacks}
-        />
+        <MobileControls run={run} callbacks={callbacks} />
       ) : (
         <DesktopHelp run={run} showHelp={showHelp} />
       )}

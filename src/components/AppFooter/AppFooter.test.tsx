@@ -1,9 +1,9 @@
+import { mount, render, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, render } from 'enzyme';
-import { AppFooter, AppFooterProps } from './AppFooter';
 import { RunState } from '../../lib/run';
 import { DesktopHelp, MobileControls } from '../Help/Help';
+import { AppFooter, AppFooterProps } from './AppFooter';
 
 describe('AppFooter', () => {
   let props: AppFooterProps;
@@ -20,14 +20,7 @@ describe('AppFooter', () => {
         wrSplits: new Map(),
         pbSplits: new Map(),
       },
-      touchCallbacks: {
-        onSplit: jest.fn(),
-        onUndo: jest.fn(),
-        onReset: jest.fn(),
-        onPause: jest.fn(),
-        onBloodMoon: jest.fn()
-      },
-      mouseCallbacks: {
+      callbacks: {
         onSplit: jest.fn(),
         onUndo: jest.fn(),
         onReset: jest.fn(),
@@ -42,16 +35,14 @@ describe('AppFooter', () => {
     const div = document.createElement('div');
     ReactDOM.render(<AppFooter
       run={props.run}
-      touchCallbacks={props.touchCallbacks}
-      mouseCallbacks={props.mouseCallbacks}
+      callbacks={props.callbacks}
       showHelp={props.showHelp}
     />, div);
   });
   it('renders the footer contents', () => {
     const el = shallow(<AppFooter
       run={props.run}
-      touchCallbacks={props.touchCallbacks}
-      mouseCallbacks={props.mouseCallbacks}
+      callbacks={props.callbacks}
       showHelp={props.showHelp}
     />);
     expect(el.contains(<div className="footer"/>));
@@ -59,16 +50,14 @@ describe('AppFooter', () => {
   it('mounts in a full DOM', () => {
     expect(mount(<AppFooter
       run={props.run}
-      touchCallbacks={props.touchCallbacks}
-      mouseCallbacks={props.mouseCallbacks}
+      callbacks={props.callbacks}
       showHelp={props.showHelp}
     />).find('.footer').length).toBe(1);
   });
   it('should render the expected text', () => {
     expect(render(<AppFooter
       run={props.run}
-      touchCallbacks={props.touchCallbacks}
-      mouseCallbacks={props.mouseCallbacks}
+      callbacks={props.callbacks}
       showHelp={props.showHelp}
     />).text()).toMatch(/to start \/ split/);
   });
@@ -81,13 +70,11 @@ describe('AppFooter', () => {
     it('renders MobileControls', () => {
       expect(shallow(<AppFooter
         run={props.run}
-        touchCallbacks={props.touchCallbacks}
-        mouseCallbacks={props.mouseCallbacks}
+        callbacks={props.callbacks}
         showHelp={props.showHelp}
       />).containsMatchingElement(<MobileControls
         run={props.run}
-        touchCallbacks={props.touchCallbacks}
-        mouseCallbacks={props.mouseCallbacks}
+        callbacks={props.callbacks}
       />)).toEqual(true);
     });
   });
@@ -100,8 +87,7 @@ describe('AppFooter', () => {
     it('renders DesktopHelp', () => {
       expect(shallow(<AppFooter
         run={props.run}
-        touchCallbacks={props.touchCallbacks}
-        mouseCallbacks={props.mouseCallbacks}
+        callbacks={props.callbacks}
         showHelp={props.showHelp}
       />).containsMatchingElement(<DesktopHelp
         run={props.run}

@@ -4,12 +4,12 @@ import '../../assets/bloodmoon.svg';
 import { handleKey, registerCallbacks } from '../../lib/keyboard';
 import { getRandomizedShrines } from '../../lib/rando';
 import { Run, RunState } from '../../lib/run';
-import { AppHeader } from '../AppHeader/AppHeader';
+import { BLOOD_MOON_SHRINE } from '../../lib/shrines';
 import { AppFooter } from '../AppFooter/AppFooter';
+import { AppHeader } from '../AppHeader/AppHeader';
+import { RunDisplay } from '../RunDisplay/RunDisplay';
 import { SeedInfo } from '../SeedInfo/SeedInfo';
 import { SeedPicker } from '../SeedPicker/SeedPicker';
-import { BLOOD_MOON_SHRINE } from '../../lib/shrines';
-import { RunDisplay } from '../RunDisplay/RunDisplay';
 
 type RunManagerProps = {
   run: Run;
@@ -153,20 +153,12 @@ export const RunManager = (props: RunManagerProps) => {
     return classes.join(' ');
   };
 
-  // This insanity is because the conversion from TS to JS can't handle the mixed types.
-  const mouseCallbacks = {
-    onSplit: (_e: React.MouseEvent) => { addSplit() },
-    onUndo: (_e: React.MouseEvent) => { undoSplit() },
-    onReset: (_e: React.MouseEvent) => { resetSplits() },
-    onPause: (_e: React.MouseEvent) => { pause() },
-    onBloodMoon: (_e: React.MouseEvent) => { toggleBloodMoon() }
-  };
-  const touchCallbacks = {
-    onSplit: (_e: React.TouchEvent) => { addSplit() },
-    onUndo: (_e: React.TouchEvent) => { undoSplit() },
-    onReset: (_e: React.TouchEvent) => { resetSplits() },
-    onPause: (_e: React.TouchEvent) => { pause() },
-    onBloodMoon: (_e: React.TouchEvent) => { toggleBloodMoon() }
+  const callbacks = {
+    onSplit: (_e: React.PointerEvent) => { addSplit() },
+    onUndo: (_e: React.PointerEvent) => { undoSplit() },
+    onReset: (_e: React.PointerEvent) => { resetSplits() },
+    onPause: (_e: React.PointerEvent) => { pause() },
+    onBloodMoon: (_e: React.PointerEvent) => { toggleBloodMoon() }
   };
 
   const onPickedSeed = (seed: string) => {
@@ -191,8 +183,7 @@ export const RunManager = (props: RunManagerProps) => {
         {mainsection()}
         <AppFooter
           run={run}
-          touchCallbacks={touchCallbacks}
-          mouseCallbacks={mouseCallbacks}
+          callbacks={callbacks}
           showHelp={showHelp}
         />
       </div>

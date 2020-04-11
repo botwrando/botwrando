@@ -1,6 +1,6 @@
+import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
 import { SeedPicker } from './SeedPicker';
 
 describe('SeedPicker', () => {
@@ -14,14 +14,14 @@ describe('SeedPicker', () => {
     const el = mount(<SeedPicker onPickedSeed={onPickedSeed} />);
     expect(el.find('input')).toHaveLength(1);
     expect(el.find('input').props().value).toEqual('CHANGEME');
-    el.find('#generate-seed').simulate('click');
+    el.find('#generate-seed').simulate('pointerdown');
     expect(el.find('input').props().value).not.toEqual('CHANGEME');
   });
   it('calls the callback when the Go button is clicked', () => {
     const onPickedSeed = jest.fn();
     const el = mount(<SeedPicker onPickedSeed={onPickedSeed} />);
     const inputValue = el.find('input').props().value;
-    el.find('#go-button').simulate('click');
+    el.find('#go-button').simulate('pointerdown');
     expect(onPickedSeed).toHaveBeenCalledTimes(1);
     expect(onPickedSeed).toHaveBeenCalledWith(inputValue);
   });
