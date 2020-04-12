@@ -1,8 +1,8 @@
+import { mount, render, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, render } from 'enzyme';
+import { getDefaultRun, Run } from '../../lib/run';
 import { AppHeader } from './AppHeader';
-import { Run, getDefaultRun } from '../../lib/run';
 
 describe('AppHeader', () => {
   let setRun: (run: Run) => void;

@@ -1,6 +1,6 @@
+import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
 import { SeedPicker } from './SeedPicker';
 
 describe('SeedPicker', () => {

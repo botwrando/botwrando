@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { getRandomSeed } from '../../lib/rando';
 
 type SeedPickerProps = {
@@ -27,7 +27,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
   };
 
   const handleSelectSeed = (
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    _event: React.SyntheticEvent<HTMLButtonElement>
   ) => {
     props.onPickedSeed(seed);
   };

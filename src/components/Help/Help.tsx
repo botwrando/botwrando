@@ -1,44 +1,36 @@
 import React from 'react';
-import { HotkeyList } from '../HotkeyList/HotkeyList';
 import { Run } from '../../lib/run';
+import { HotkeyList } from '../HotkeyList/HotkeyList';
 
 type MobileProps = {
   run: Run;
-  touchCallbacks: {
-    onSplit: (event: React.TouchEvent) => void;
-    onUndo: (event: React.TouchEvent) => void;
-    onReset: (event: React.TouchEvent) => void;
-    onPause: (event: React.TouchEvent) => void;
-    onBloodMoon: (event: React.TouchEvent) => void;
-  },
-  mouseCallbacks: {
-    onSplit: (event: React.MouseEvent) => void;
-    onUndo: (event: React.MouseEvent) => void;
-    onReset: (event: React.MouseEvent) => void;
-    onPause: (event: React.MouseEvent) => void;
-    onBloodMoon: (event: React.MouseEvent) => void;
+  callbacks: {
+    onSplit: (event: React.SyntheticEvent) => void;
+    onUndo: (event: React.SyntheticEvent) => void;
+    onReset: (event: React.SyntheticEvent) => void;
+    onPause: (event: React.SyntheticEvent) => void;
+    onBloodMoon: (event: React.SyntheticEvent) => void;
   }
 };
 
 export const MobileControls = (props: MobileProps) => {
-  const mouse = props.mouseCallbacks;
-  const touch = props.touchCallbacks;
+  const { callbacks } = props;
 
   return (
     <div className="touchpanel">
-      <button className="split" onClick={mouse.onSplit} onTouchEnd={touch.onSplit}>
+      <button className="split" onClick={callbacks.onSplit}>
         Split
       </button>
-      <button className="undo" onClick={mouse.onUndo} onTouchEnd={touch.onUndo}>
+      <button className="undo" onClick={callbacks.onUndo}>
         Undo
       </button>
-      <button className="pause" onClick={mouse.onPause} onTouchEnd={touch.onPause}>
+      <button className="pause" onClick={callbacks.onPause}>
         Pause
       </button>
-      <button className="reset" onClick={mouse.onReset} onTouchEnd={touch.onReset}>
+      <button className="reset" onClick={callbacks.onReset}>
         Reset
       </button>
-      <button className="bloodmoon" onClick={mouse.onBloodMoon} onTouchEnd={touch.onBloodMoon}>
+      <button className="bloodmoon" onClick={callbacks.onBloodMoon}>
         Blood Moon
       </button>
     </div>
@@ -46,8 +38,8 @@ export const MobileControls = (props: MobileProps) => {
 };
 
 type DesktopProps = {
-	run: Run;
-	showHelp: boolean;
+  run: Run;
+  showHelp: boolean;
 };
 
 export const DesktopHelp = (props: DesktopProps) => {
@@ -82,11 +74,11 @@ export const Instructions = (props: { run: Run }) => {
   return (
     <>
       <p>
-				All shrines except the Blood Moon shrine has been shuffled using
+        All shrines except the Blood Moon shrine has been shuffled using
 				the seed {run.seed}.
       </p>
       <p>
-				Hit <span className="key">B</span> to insert a Blood Moon shrine
+        Hit <span className="key">B</span> to insert a Blood Moon shrine
 				split.
       </p>
     </>

@@ -195,10 +195,11 @@ body {
 button {
   @include f-sub;
   background-color: $warm-green;
-  border: none;
   border-radius: 4px;
+  border: none;
   color: $milky-white;
   display: block;
+  font-size: 0.8em;
   min-height: 40px;
   padding: 4px 8px;
   text-transform: uppercase;
@@ -207,7 +208,9 @@ button {
     box-shadow: 0 0 0 2px $pale-green;
   }
   &:hover {
-    background-color: lighten($color: $warm-green, $amount: 5);
+    @media (hover: hover) {
+      background-color: lighten($color: $warm-green, $amount: 5);
+    }
   }
   &.btn-text {
     background-color: transparent;

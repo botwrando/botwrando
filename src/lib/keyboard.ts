@@ -1,5 +1,12 @@
 import { groupBy } from './utils';
 
+export type CallbackMap = 
+  | 'onSplit' 
+  | 'onUndo' 
+  | 'onPause' 
+  | 'onReset' 
+  | 'onBloodMoon';
+
 export type Effect =
 	| 'addSplit'
 	| 'undoSplit'
