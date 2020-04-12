@@ -24,6 +24,20 @@
 				"kind": "test",
 				"isDefault": true
 			}
+		},
+		{
+			"type": "yarn",
+			"task": "lint",
+			"problemMatcher": [
+				"$eslint-stylish"
+			]
+		},
+		{
+			"type": "yarn",
+			"task": "lintfix",
+			"problemMatcher": [
+				"$eslint-stylish"
+			]
 		}
 	]
 }
