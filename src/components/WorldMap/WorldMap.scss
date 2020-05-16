@@ -34,6 +34,7 @@
 }
 
 .mapwrapper {
+	&.bg-0   { background-image: url(../../map/0.jpg);  }
 	&.bg-1   { background-image: url(../../map/1.jpg);  }
 	&.bg-2   { background-image: url(../../map/2.jpg);  }
 	&.bg-3   { background-image: url(../../map/3.jpg);  }
