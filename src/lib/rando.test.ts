@@ -1,5 +1,5 @@
-import { range, getRandomSeed, getRandomizedShrines } from './rando';
-import { PLATEAU_SHRINES, BLOOD_MOON_SHRINE, EVENTIDE_SHRINE } from './shrines';
+import { getRandomizedShrines, getRandomSeed, range } from './rando';
+import { BLOOD_MOON_SHRINE, EVENTIDE_SHRINE, GANON, PLATEAU_SHRINES } from './shrines';
 
 describe('rando', () => {
   describe('range', () => {
@@ -122,5 +122,13 @@ describe('rando', () => {
         expect(shrines.slice(0, 80)).not.toContain(EVENTIDE_SHRINE);
       }
     });
+    it('puts the Ganon shrine at the end', () => {
+      for (let n = 0; n < 10; n++) {
+        const seed = getRandomSeed();
+        const shrines = getRandomizedShrines(seed);
+        expect(shrines.slice(119)).toContain(GANON);
+        expect(shrines.slice(0, 119)).not.toContain(GANON);
+      }
+    })
   });
 });
