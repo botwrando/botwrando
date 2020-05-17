@@ -1558,5 +1558,18 @@
     },
     "isBloodMoon": false,
     "isPlateau": false
+  },
+  {
+    "index": 999,
+    "name": "Ganon",
+    "desc": "Make pig ded",
+    "region": "Central",
+    "location": {
+      "x": "-255.855f",
+      "y": "295.6907f",
+      "z": "-1060.8669f"
+    },
+    "isBloodMoon": false,
+    "isPlateau": false
   }
 ]

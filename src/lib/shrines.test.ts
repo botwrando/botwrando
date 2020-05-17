@@ -1,10 +1,4 @@
-import {
-  PLATEAU_SHRINES,
-  BLOOD_MOON_SHRINE,
-  EVENTIDE_SHRINE,
-  isNormalShrine,
-  getShrine
-} from './shrines';
+import { BLOOD_MOON_SHRINE, EVENTIDE_SHRINE, GANON, getShrine, isNormalShrine, PLATEAU_SHRINES } from './shrines';
 
 describe('shrines', () => {
   describe('isNormalShrine', () => {
@@ -18,6 +12,9 @@ describe('shrines', () => {
     });
     it('reports false when the ID is the Eventide Island shrine', () => {
       expect(isNormalShrine(EVENTIDE_SHRINE)).toBe(false);
+    });
+    it('reports false when the ID is the Ganon "shrine"', () => {
+      expect(isNormalShrine(GANON)).toBe(false);
     })
   });
 
@@ -60,6 +57,11 @@ describe('shrines', () => {
         expect(shrine).toHaveProperty('isBloodMoon');
         expect(shrine?.isBloodMoon).toEqual(true);
       });
+      it('returns the Ganon shrine for shine id 999', () => {
+        const shrine = getShrine(GANON);
+        expect(shrine).toHaveProperty('name');
+        expect(shrine?.name).toEqual('Ganon');
+      })
     });
   });
 });

@@ -1,5 +1,5 @@
 import { shuffle } from 'shuffle-seed';
-import { PLATEAU_SHRINES, EVENTIDE_SHRINE, isNormalShrine } from './shrines';
+import { EVENTIDE_SHRINE, GANON, isNormalShrine, PLATEAU_SHRINES } from './shrines';
 
 export function range(bound: number, limit: number = 0): number[] {
   const start = limit ? bound : 0;
@@ -23,6 +23,7 @@ export function getRandomizedShrines(seed: string): number[] {
   shrines.push(...shuffle(PLATEAU_SHRINES, seed));
   shrines.push(...shuffle(normalShrines, seed));
   shrines.splice(eventideSlot, 0, EVENTIDE_SHRINE);
+  shrines.push(GANON);
 
   return shrines;
 }

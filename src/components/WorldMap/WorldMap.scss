@@ -34,6 +34,7 @@
 }
 
 .mapwrapper {
+	&.bg-0   { background-image: url(../../map/0.jpg);  }
 	&.bg-1   { background-image: url(../../map/1.jpg);  }
 	&.bg-2   { background-image: url(../../map/2.jpg);  }
 	&.bg-3   { background-image: url(../../map/3.jpg);  }
@@ -153,4 +154,5 @@
 	&.bg-117 { background-image: url(../../map/117.jpg);}
 	&.bg-118 { background-image: url(../../map/118.jpg);}
 	&.bg-119 { background-image: url(../../map/119.jpg);}
+	&.bg-999 { background-image: url(../../map/999.jpg);}
 }
