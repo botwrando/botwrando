@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f201a5d4e03f6864e3df21bbee8b586b",
+    "revision": "38e0dc6d57ae25861709d5e34a9b65d3",
     "url": "/botwrando/index.html"
   },
   {
-    "revision": "c651e28f5e87fc04bd27",
-    "url": "/botwrando/static/css/main.996e1e41.chunk.css"
+    "revision": "b020baf704387208434c",
+    "url": "/botwrando/static/css/main.bc08dc5b.chunk.css"
   },
   {
     "revision": "57c99db3acab0dea1616",
@@ -16,12 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/botwrando/static/js/2.f52fe4ff.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c651e28f5e87fc04bd27",
-    "url": "/botwrando/static/js/main.64111d4b.chunk.js"
+    "revision": "b020baf704387208434c",
+    "url": "/botwrando/static/js/main.8c82b7e7.chunk.js"
   },
   {
     "revision": "eaef71989cd8cbddf996",
     "url": "/botwrando/static/js/runtime-main.aa334c6c.js"
+  },
+  {
+    "revision": "28091d29beedbd0db3d57ed24b1a7088",
+    "url": "/botwrando/static/media/0.28091d29.jpg"
   },
   {
     "revision": "8500910b2662d2f049bdef0c2bd523a5",
@@ -494,6 +498,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "597efc815b950750733840b6a25f4eb8",
     "url": "/botwrando/static/media/99.597efc81.jpg"
+  },
+  {
+    "revision": "1a1ac04237f68f53dcad473daa6ad1f6",
+    "url": "/botwrando/static/media/999.1a1ac042.jpg"
   },
   {
     "revision": "326de383728f83ecc0a5b14460fa4fad",
