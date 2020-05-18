@@ -1,9 +1,9 @@
+import { mount, render, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, render } from 'enzyme';
-import App from './App';
-import { RunManager } from '../RunManager/RunManager';
 import { Run, RunState } from '../../lib/run';
+import { RunManager } from '../RunManager/RunManager';
+import App from './App';
 
 describe('App', () => {
   it('renders without crashing', () => {
@@ -17,7 +17,7 @@ describe('App', () => {
       rundate: -1,
       pausedTime: -1,
       seed: '',
-      shrineIds: [],
+      waypointIds: [],
       splits: new Map([]),
       pbSplits: new Map([]),
       wrSplits: new Map([])

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { RunTimer } from './RunTimer';
 import { RunState } from '../../lib/run';
+import { RunTimer } from './RunTimer';
 
 describe('RunTimer', () => {
   it('renders without crashing', () => {
@@ -11,7 +11,7 @@ describe('RunTimer', () => {
       rundate: -1,
       pausedTime: -1,
       seed: '1234',
-      shrineIds: [],
+      waypointIds: [],
       splits: new Map<number, number>([]),
       pbSplits: new Map<number, number>([]),
       wrSplits: new Map<number, number>([])

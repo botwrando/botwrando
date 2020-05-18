@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ShrineInfo } from './ShrineInfo';
+import { WaypointInfo } from './WaypointInfo';
 
-describe('ShrineInfo', () => {
+describe('WaypointInfo', () => {
   it('renders without crashing', () => {
     const counter = 34;
-    const shrine_id = 23;
+    const waypoint_id = 23;
     const timestamp = 354;
     const is_main = true;
     const diff = 12;
@@ -14,9 +14,9 @@ describe('ShrineInfo', () => {
 
     const div = document.createElement('div');
     ReactDOM.render(
-      <ShrineInfo
+      <WaypointInfo
         counter={counter}
-        shrine_id={shrine_id}
+        waypoint_id={waypoint_id}
         timestamp={timestamp}
         is_main={is_main}
         diff={diff}

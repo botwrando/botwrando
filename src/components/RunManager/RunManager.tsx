@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import '../../assets/bloodmoon.svg';
 import { handleKey, registerCallbacks } from '../../lib/keyboard';
-import { getRandomizedShrines } from '../../lib/rando';
+import { getRandomizedWaypoints } from '../../lib/rando';
 import { Run, RunState } from '../../lib/run';
-import { BLOOD_MOON_SHRINE } from '../../lib/shrines';
+import { BLOOD_MOON_SHRINE } from '../../lib/waypoints';
 import { AppFooter } from '../AppFooter/AppFooter';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { RunDisplay } from '../RunDisplay/RunDisplay';
@@ -36,8 +36,8 @@ export const RunManager = (props: RunManagerProps) => {
     setRun(prev => ({ ...prev, splits }));
   };
 
-  const updateShrines = (shrineIds: number[]) => {
-    setRun(prev => ({ ...prev, shrineIds }));
+  const updateWaypoints = (waypointIds: number[]) => {
+    setRun(prev => ({ ...prev, waypointIds: waypointIds }));
   };
 
   const setRunState = (state: RunState) => {
@@ -84,10 +84,10 @@ export const RunManager = (props: RunManagerProps) => {
     if (run.rundate && run.splits.size > 0) {
       setRun(prev => ({ ...prev, state: RunState.Running }));
     }
-    if (run.rundate && run.splits.size >= run.shrineIds.length) {
+    if (run.rundate && run.splits.size >= run.waypointIds.length) {
       setRun(prev => ({ ...prev, state: RunState.Ended }));
     }
-  }, [run.state, run.rundate, run.splits.size, run.shrineIds.length]);
+  }, [run.state, run.rundate, run.splits.size, run.waypointIds.length]);
 
   const skipSplit = () => {
     if (run.state === RunState.Ended) return;
@@ -107,19 +107,19 @@ export const RunManager = (props: RunManagerProps) => {
   const toggleHelp = () => setShowHelp(!showHelp);
 
   const toggleBloodMoon = () => {
-    const { shrineIds } = run;
+    const { waypointIds } = run;
 
     if (bloodMoonState.isDone) {
       return;
     }
-    const currentShrine = Math.max(0, run.splits.size);
+    const currentWaypoint = Math.max(0, run.splits.size);
 
-    if (shrineIds[currentShrine] === BLOOD_MOON_SHRINE) {
-      shrineIds.splice(currentShrine, 1);
-      updateShrines(shrineIds);
+    if (waypointIds[currentWaypoint] === BLOOD_MOON_SHRINE) {
+      waypointIds.splice(currentWaypoint, 1);
+      updateWaypoints(waypointIds);
     } else {
-      shrineIds.splice(currentShrine, 0, BLOOD_MOON_SHRINE);
-      updateShrines(shrineIds);
+      waypointIds.splice(currentWaypoint, 0, BLOOD_MOON_SHRINE);
+      updateWaypoints(waypointIds);
     }
   };
 
@@ -127,8 +127,8 @@ export const RunManager = (props: RunManagerProps) => {
   React.useEffect(() => {
     const state = {
       isActive:
-        run.shrineIds[Math.max(0, run.splits.size)] === BLOOD_MOON_SHRINE,
-      isDone: run.splits.has(run.shrineIds.indexOf(BLOOD_MOON_SHRINE))
+        run.waypointIds[Math.max(0, run.splits.size)] === BLOOD_MOON_SHRINE,
+      isDone: run.splits.has(run.waypointIds.indexOf(BLOOD_MOON_SHRINE))
     };
     setBloodMoonState(prev => ({
       ...prev,
@@ -162,8 +162,8 @@ export const RunManager = (props: RunManagerProps) => {
   };
 
   const onPickedSeed = (seed: string) => {
-    const shrineIds = getRandomizedShrines(seed);
-    setRun(prev => ({ ...prev, seed, shrineIds }));
+    const waypointIds = getRandomizedWaypoints(seed);
+    setRun(prev => ({ ...prev, seed, waypointIds }));
     setRunState(RunState.Init);
   };
 

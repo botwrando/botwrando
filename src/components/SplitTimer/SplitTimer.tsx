@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Run, RunState } from '../../lib/run';
+import { getWaypoint } from '../../lib/waypoints';
 import { RunTimer } from '../RunTimer/RunTimer';
-import { getShrine } from '../../lib/shrines';
 
 export type SplitTimerProps = {
   run: Run;
-  currentShrine: number;
+  currentWaypoint: number;
   onUpdatePausedTime: (paused_time: number) => void;
 };
 
 export const SplitTimer = (props: SplitTimerProps) => {
-  const { run, currentShrine } = props;
-  const shrine_id = run.shrineIds[currentShrine];
-  const current_shrine = getShrine(shrine_id);
+  const { run, currentWaypoint } = props;
+  const waypoint_id = run.waypointIds[currentWaypoint];
+  const current_waypoint = getWaypoint(waypoint_id);
 
   const [timeclasses, setTimeclasses] = useState(['time']);
 
@@ -27,10 +27,10 @@ export const SplitTimer = (props: SplitTimerProps) => {
   const getDetailsProps = () => {
     if (run.state !== RunState.Ended) {
       return {
-        counter: currentShrine > -1 ? currentShrine + 1 : '',
-        name: current_shrine?.name ? current_shrine.name : 'Ready to go',
-        desc: current_shrine?.desc
-          ? current_shrine.desc
+        counter: currentWaypoint > -1 ? currentWaypoint + 1 : '',
+        name: current_waypoint?.name ? current_waypoint.name : 'Ready to go',
+        desc: current_waypoint?.desc
+          ? current_waypoint.desc
           : 'Start the timer to reveal the first shrine!'
       };
     } else {
@@ -42,7 +42,7 @@ export const SplitTimer = (props: SplitTimerProps) => {
     }
   };
   return (
-    <div className="shrine current">
+    <div className="waypoint current">
       <SplitDetails {...getDetailsProps()} />
       <div className={timeclasses.join(' ')}>
         <RunTimer run={run} setPausedTime={props.onUpdatePausedTime} />

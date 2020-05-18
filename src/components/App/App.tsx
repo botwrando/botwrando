@@ -1,9 +1,9 @@
 import React from 'react';
+import '../../assets/bloodmoon.svg';
 // import { getRandomizedShrines } from "../../lib/rando";
 import { Run, RunState } from '../../lib/run';
-import { RunManager } from '../RunManager/RunManager';
 import '../../styles/style.scss';
-import '../../assets/bloodmoon.svg';
+import { RunManager } from '../RunManager/RunManager';
 
 function App() {
   // const testSeed = "420SPECSNLUL69";
@@ -14,7 +14,7 @@ function App() {
     rundate: -1,
     pausedTime: -1,
     seed: '',
-    shrineIds: [],
+    waypointIds: [],
     splits: new Map([]),
     pbSplits: new Map([]),
     wrSplits: new Map([])

@@ -1,11 +1,11 @@
 import React from 'react';
+import { getWaypoint } from '../../lib/waypoints';
 import { FormattedTime } from '../FormattedTime/FormattedTime';
-import './ShrineInfo.scss';
-import { getShrine } from '../../lib/shrines';
+import './WaypointInfo.scss';
 
-export type ShrineInfoProps = {
+export type WaypointInfoProps = {
 	counter: number;
-	shrine_id: number;
+	waypoint_id: number;
 	timestamp: number;
 	is_main?: boolean;
 	diff?: number;
@@ -13,8 +13,8 @@ export type ShrineInfoProps = {
 	is_pb?: boolean;
 };
 
-export const ShrineInfo = (props: ShrineInfoProps) => {
-  const current_shrine = getShrine(props.shrine_id);
+export const WaypointInfo = (props: WaypointInfoProps) => {
+  const current_wp = getWaypoint(props.waypoint_id);
 
   const diffProps = {
     timestamp: props.diff,
@@ -29,9 +29,9 @@ export const ShrineInfo = (props: ShrineInfoProps) => {
   if (props.is_pb) diff_classes.push('is-pb');
 
   return (
-    <div className="shrine infolog">
+    <div className="waypoint infolog">
       <div className="counter">{props.counter + 1}</div>
-      <div className="name">{current_shrine?.name}</div>
+      <div className="name">{current_wp?.name}</div>
       <div className={diff_classes.join(' ')}>{diff_ts}</div>
       <div className="time">{ts}</div>
     </div>

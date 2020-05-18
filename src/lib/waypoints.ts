@@ -1,4 +1,4 @@
-import shrines from '../data/shrines.json';
+import waypoints from '../data/waypoints.json';
 
 export type Location = {
 	x: String;
@@ -6,7 +6,7 @@ export type Location = {
 	z: String;
 };
 
-export type Shrine = {
+export type Waypoint = {
 	index: Number;
 	name: String | null;
 	desc: String | null;
@@ -16,8 +16,8 @@ export type Shrine = {
 	isPlateau: Boolean;
 };
 
-export const getShrine = (shrine_id: number): Shrine | undefined =>
-  shrines.find(item => item.index === shrine_id);
+export const getWaypoint = (waypoint_id: number): Waypoint | undefined =>
+  waypoints.find(item => item.index === waypoint_id);
 
 export const PLATEAU_SHRINES: number[] = [38, 41, 9, 65];
 export const BLOOD_MOON_SHRINE: number = 78;

@@ -1,12 +1,12 @@
+import { mount, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
-import { RunDisplay } from './RunDisplay';
 import { Run, RunState } from '../../lib/run';
-import { getShrine } from '../../lib/shrines';
+import { getWaypoint } from '../../lib/waypoints';
+import { QuickMap } from '../QuickMap/QuickMap';
 import { SplitHistory } from '../SplitHistory/SplitHistory';
 import { SplitTimer } from '../SplitTimer/SplitTimer';
-import { QuickMap } from '../QuickMap/QuickMap';
+import { RunDisplay } from './RunDisplay';
 
 describe('RunDisplay', () => {
   let run: Run,
@@ -18,7 +18,7 @@ describe('RunDisplay', () => {
       rundate: 36,
       pausedTime: 23,
       seed: 'xyz',
-      shrineIds: [83, 1, 53, 63, 12],
+      waypointIds: [83, 1, 53, 63, 12],
       splits: new Map(),
       wrSplits: new Map(),
       pbSplits: new Map(),
@@ -53,17 +53,17 @@ describe('RunDisplay', () => {
     />);
     expect(el.contains(<SplitTimer
       run={run}
-      currentShrine={0}
+      currentWaypoint={0}
       onUpdatePausedTime={onUpdatePausedTime}
     />));
   });
   it('renders the QuickMap', () => {
-    run.shrineIds.unshift(9);
-    const shrine = getShrine(9);
+    run.waypointIds.unshift(9);
+    const waypoint = getWaypoint(9);
     const el = shallow(<RunDisplay
       run={run}
       onUpdatePausedTime={onUpdatePausedTime}
     />);
-    expect(el.contains(<QuickMap shrine={shrine} />));
+    expect(el.contains(<QuickMap waypoint={waypoint} />));
   });
 });

@@ -1,17 +1,17 @@
 import React from 'react';
-import { Shrine } from '../../lib/shrines';
+import { Waypoint } from '../../lib/waypoints';
 import '../WorldMap/WorldMap.scss';
 export type QuickMapProps = {
-	shrine?: Shrine;
+	waypoint?: Waypoint;
 };
 
 export const QuickMap = (props: QuickMapProps) => {
-  const { shrine } = props;
-  if (!shrine) {
+  const { waypoint } = props;
+  if (!waypoint) {
     return <></>;
   }
   const bgClasses = ['mapwrapper'];
-  if (shrine) bgClasses.push(`bg-${shrine.index}`);
+  if (waypoint) bgClasses.push(`bg-${waypoint.index}`);
   return (
     <div className="worldmap">
       <div className={bgClasses.join(' ')}></div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { SplitHistory } from './SplitHistory';
 import { Run, RunState } from '../../lib/run';
+import { SplitHistory } from './SplitHistory';
 
 describe('SplitHistory', () => {
   it('renders without crashing', () => {
@@ -11,7 +11,7 @@ describe('SplitHistory', () => {
       rundate: 36,
       pausedTime: 23,
       seed: 'xyz',
-      shrineIds: [83, 1, 53, 63, 12],
+      waypointIds: [83, 1, 53, 63, 12],
       splits: new Map(),
       wrSplits: new Map(),
       pbSplits: new Map(),

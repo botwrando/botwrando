@@ -1,5 +1,5 @@
 import { shuffle } from 'shuffle-seed';
-import { EVENTIDE_SHRINE, GANON, isNormalShrine, PLATEAU_SHRINES } from './shrines';
+import { EVENTIDE_SHRINE, GANON, isNormalShrine, PLATEAU_SHRINES } from './waypoints';
 
 export function range(bound: number, limit: number = 0): number[] {
   const start = limit ? bound : 0;
@@ -15,15 +15,15 @@ export function getRandomSeed(numChars = 12): string {
   return a;
 }
 
-export function getRandomizedShrines(seed: string): number[] {
+export function getRandomizedWaypoints(seed: string): number[] {
   const normalShrines = range(119).filter(item => isNormalShrine(item));
   const [eventideSlot,] = shuffle(range(80, 118), seed);
 
-  const shrines: number[] = [];
-  shrines.push(...shuffle(PLATEAU_SHRINES, seed));
-  shrines.push(...shuffle(normalShrines, seed));
-  shrines.splice(eventideSlot, 0, EVENTIDE_SHRINE);
-  shrines.push(GANON);
+  const waypoints: number[] = [];
+  waypoints.push(...shuffle(PLATEAU_SHRINES, seed));
+  waypoints.push(...shuffle(normalShrines, seed));
+  waypoints.splice(eventideSlot, 0, EVENTIDE_SHRINE);
+  waypoints.push(GANON);
 
-  return shrines;
+  return waypoints;
 }

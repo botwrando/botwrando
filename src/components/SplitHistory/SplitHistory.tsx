@@ -1,18 +1,18 @@
 import React from 'react';
 import ScrollableFeed from 'react-scrollable-feed';
 import { Run } from '../../lib/run';
-import { ShrineInfo } from '../ShrineInfo/ShrineInfo';
+import { WaypointInfo } from '../WaypointInfo/WaypointInfo';
 
-const ShrineList = (
-  shrine_id: number,
+const WaypointList = (
+  waypoint_id: number,
   rando_id: number,
   timestamp: number,
   diff: number,
   is_pb: boolean
 ) => (
-  <ShrineInfo
-    key={shrine_id}
-    shrine_id={shrine_id}
+  <WaypointInfo
+    key={waypoint_id}
+    waypoint_id={waypoint_id}
     counter={rando_id}
     timestamp={timestamp}
     diff={diff}
@@ -54,11 +54,11 @@ export const SplitHistory = (props: SplitHistoryProps) => {
   return (
     <div className="history">
       <ScrollableFeed forceScroll={true} className="historylist">
-        {run.shrineIds
-          .filter((shrine_id, rando_id) => has_split(rando_id))
-          .map((shrine_id, rando_id) =>
-            ShrineList(
-              shrine_id,
+        {run.waypointIds
+          .filter((waypoint_id, rando_id) => has_split(rando_id))
+          .map((waypoint_id, rando_id) =>
+            WaypointList(
+              waypoint_id,
               rando_id,
               get_split(rando_id),
               get_diff(rando_id),

@@ -1,5 +1,5 @@
-import { getRandomizedShrines, getRandomSeed, range } from './rando';
-import { BLOOD_MOON_SHRINE, EVENTIDE_SHRINE, GANON, PLATEAU_SHRINES } from './shrines';
+import { getRandomizedWaypoints, getRandomSeed, range } from './rando';
+import { BLOOD_MOON_SHRINE, EVENTIDE_SHRINE, GANON, PLATEAU_SHRINES } from './waypoints';
 
 describe('rando', () => {
   describe('range', () => {
@@ -70,64 +70,64 @@ describe('rando', () => {
     });
   });
 
-  describe('getRandomizedShrines', () => {
+  describe('getRandomizedWaypoints', () => {
     it('shuffles the shrines', () => {
       for (let n = 0; n < 10; n++) {
-        const shrines = getRandomizedShrines(getRandomSeed());
-        expect(shrines).not.toEqual(Array.from(Array(119).keys()).map(x => x++));
+        const waypoints = getRandomizedWaypoints(getRandomSeed());
+        expect(waypoints).not.toEqual(Array.from(Array(119).keys()).map(x => x++));
       }
     });
     it('includes each shrine only once', () => {
       for (let n = 0; n < 10; n++) {
-        const shrines = getRandomizedShrines(getRandomSeed());
-        const deduped = shrines.filter(function(shrineId, idx, allShrines) {
-          return allShrines.indexOf(shrineId) === idx;
+        const waypoints = getRandomizedWaypoints(getRandomSeed());
+        const deduped = waypoints.filter(function(waypointId, idx, allShrines) {
+          return allShrines.indexOf(waypointId) === idx;
         });
-        expect(shrines).toEqual(deduped);
+        expect(waypoints).toEqual(deduped);
       }
     });
     it('includes all shrines except the blood moon shrine', () => {
-      let allShrines = Array.from(Array(BLOOD_MOON_SHRINE).keys()).map(x => x++);
-      allShrines = allShrines.concat(
+      let allWaypoints = Array.from(Array(BLOOD_MOON_SHRINE).keys()).map(x => x++);
+      allWaypoints = allWaypoints.concat(
         Array.from(Array(120 - BLOOD_MOON_SHRINE - 1).keys())
           .map(x => x += BLOOD_MOON_SHRINE + 1)
       );
       for (let n = 0; n < 10; n++) {
-        const shrines = getRandomizedShrines(getRandomSeed());
-        for (const shrineId of allShrines) {
-          expect(shrines).toContain(shrineId);
+        const waypoints = getRandomizedWaypoints(getRandomSeed());
+        for (const waypointId of allWaypoints) {
+          expect(waypoints).toContain(waypointId);
         }
       }
     });
     it('always includes the plateau shrines first', () => {
       for (let n = 0; n < 10; n++) {
-        const shrines = getRandomizedShrines(getRandomSeed());
-        for (const shrineId of PLATEAU_SHRINES) {
-          expect(shrines.slice(0, 4)).toContain(shrineId);
-          expect(shrines.slice(4)).not.toContain(shrineId);
+        const waypoints = getRandomizedWaypoints(getRandomSeed());
+        for (const waypointId of PLATEAU_SHRINES) {
+          expect(waypoints.slice(0, 4)).toContain(waypointId);
+          expect(waypoints.slice(4)).not.toContain(waypointId);
         }
       }
     });
     it('does not include the blood moon shrine', () => {
       for (let n = 0; n < 10; n++) {
-        const shrines = getRandomizedShrines(getRandomSeed());
-        expect(shrines).not.toContain(BLOOD_MOON_SHRINE);
+        const waypoints = getRandomizedWaypoints(getRandomSeed());
+        expect(waypoints).not.toContain(BLOOD_MOON_SHRINE);
       }
     });
     it('puts the eventide island shrine at position 80 or later in the run', () => {
       for (let n = 0; n < 10; n++) {
         const seed = getRandomSeed();
-        const shrines = getRandomizedShrines(seed);
-        expect(shrines.slice(80)).toContain(EVENTIDE_SHRINE);
-        expect(shrines.slice(0, 80)).not.toContain(EVENTIDE_SHRINE);
+        const waypoints = getRandomizedWaypoints(seed);
+        expect(waypoints.slice(80)).toContain(EVENTIDE_SHRINE);
+        expect(waypoints.slice(0, 80)).not.toContain(EVENTIDE_SHRINE);
       }
     });
-    it('puts the Ganon shrine at the end', () => {
+    it('puts the Ganon waypoint at the end', () => {
       for (let n = 0; n < 10; n++) {
         const seed = getRandomSeed();
-        const shrines = getRandomizedShrines(seed);
-        expect(shrines.slice(119)).toContain(GANON);
-        expect(shrines.slice(0, 119)).not.toContain(GANON);
+        const waypoints = getRandomizedWaypoints(seed);
+        expect(waypoints.slice(119)).toContain(GANON);
+        expect(waypoints.slice(0, 119)).not.toContain(GANON);
       }
     })
   });
