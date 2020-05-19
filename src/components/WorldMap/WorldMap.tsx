@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Shrine } from '../../lib/shrines';
+import React, { useEffect, useState } from 'react';
+import { Waypoint } from '../../lib/waypoints';
 
 export type WorldMapProps = {
-	shrine?: Shrine;
+	waypoint?: Waypoint;
 };
 
 export const WorldMap = (props: WorldMapProps) => {
@@ -11,17 +11,17 @@ export const WorldMap = (props: WorldMapProps) => {
 
   useEffect(() => {
     let zoomLevel = 6;
-    let x = props.shrine?.location.x;
-    let z = props.shrine?.location.z;
+    let x = props.waypoint?.location.x;
+    let z = props.waypoint?.location.z;
     const locationString = `z${zoomLevel},${x},${z}`;
     if (locationString !== location) {
       setLocation(locationString);
     }
-  }, [props.shrine, location]);
+  }, [props.waypoint, location]);
 
   useEffect(() => {
-    setShowMap(!!props.shrine);
-  }, [props.shrine]);
+    setShowMap(!!props.waypoint);
+  }, [props.waypoint]);
 
   return (
     <div className="worldmap">

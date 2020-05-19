@@ -1,13 +1,13 @@
+import { mount, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
-import { RunManager } from './RunManager';
 import { Run, RunState } from '../../lib/run';
-import { AppHeader } from '../AppHeader/AppHeader';
-import { SeedInfo } from '../SeedInfo/SeedInfo';
 import { AppFooter } from '../AppFooter/AppFooter';
-import { SeedPicker } from '../SeedPicker/SeedPicker';
+import { AppHeader } from '../AppHeader/AppHeader';
 import { RunDisplay } from '../RunDisplay/RunDisplay';
+import { SeedInfo } from '../SeedInfo/SeedInfo';
+import { SeedPicker } from '../SeedPicker/SeedPicker';
+import { RunManager } from './RunManager';
 
 describe('RunManager', () => {
   let run: Run;
@@ -18,7 +18,7 @@ describe('RunManager', () => {
       rundate: 36,
       pausedTime: 23,
       seed: 'xyz',
-      shrineIds: [83, 1, 53, 63, 12],
+      waypointIds: [83, 1, 53, 63, 12],
       splits: new Map(),
       wrSplits: new Map(),
       pbSplits: new Map(),

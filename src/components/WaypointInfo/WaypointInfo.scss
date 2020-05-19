@@ -23,7 +23,7 @@
   }
 }
 
-.shrine {
+.waypoint {
   @include f-shrine-reg;
   .counter {
     @include f-shrine-min;
@@ -51,7 +51,7 @@
   }
 }
 
-.shrine.current {
+.waypoint.current {
   margin: 24px auto;
   .counter {
     grid-row: 1/3;
@@ -84,7 +84,7 @@
 }
 
 @media (max-width: 480px) {
-  .shrine.current {
+  .waypoint.current {
     grid-template-rows: 32px 24px;
     .counter {
       grid-row: 1;

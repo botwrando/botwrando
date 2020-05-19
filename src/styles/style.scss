@@ -110,7 +110,7 @@ body {
       }
     }
     .history,
-    .shrine.current {
+    .waypoint.current {
       max-width: 720px;
       margin: 0 auto;
       width: 100%;
@@ -118,8 +118,8 @@ body {
         margin: 0;
       }
     }
-    .history .shrine,
-    .shrine.current {
+    .history .waypoint,
+    .waypoint.current {
       display: grid;
       grid-template-columns: 2.2em 1fr 3em 5em;
       gap: 0 8px;

@@ -12,7 +12,7 @@ export type Run = {
 	rundate: number;
 	pausedTime: number;
 	seed: string;
-	shrineIds: number[];
+	waypointIds: number[];
 	splits: Map<number, number>;
 	wrSplits: Map<number, number>;
 	pbSplits: Map<number, number>;
@@ -24,7 +24,7 @@ export const getDefaultRun = () => ({
   rundate: -1,
   pausedTime: -1,
   seed: '',
-  shrineIds: [],
+  waypointIds: [],
   splits: new Map<number, number>([]),
   wrSplits: new Map<number, number>([]),
   pbSplits: new Map<number, number>([]),

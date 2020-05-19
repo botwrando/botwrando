@@ -1,9 +1,9 @@
 import React from 'react';
 import { Run } from '../../lib/run';
-import { getShrine } from '../../lib/shrines';
+import { getWaypoint } from '../../lib/waypoints';
+import { QuickMap } from '../QuickMap/QuickMap';
 import { SplitHistory } from '../SplitHistory/SplitHistory';
 import { SplitTimer } from '../SplitTimer/SplitTimer';
-import { QuickMap } from '../QuickMap/QuickMap';
 
 type RunDisplayProps = {
   run: Run,
@@ -16,10 +16,10 @@ export function RunDisplay({ run, onUpdatePausedTime }: RunDisplayProps) {
       <SplitHistory run={run} />
       <SplitTimer
         run={run}
-        currentShrine={run.splits.size}
+        currentWaypoint={run.splits.size}
         onUpdatePausedTime={onUpdatePausedTime}
       />
-      <QuickMap shrine={getShrine(run.shrineIds[run.splits.size])} />
+      <QuickMap waypoint={getWaypoint(run.waypointIds[run.splits.size])} />
     </div>
   );
 }
