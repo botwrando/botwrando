@@ -1,0 +1,10 @@
+@import "../../styles/colors";
+
+.seed {
+  .toggle {
+    cursor: pointer;
+    &:hover {
+      color: lighten($color: $pale-green, $amount: 15);
+    }
+  }
+}
