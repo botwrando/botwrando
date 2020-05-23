@@ -1,6 +1,6 @@
+import { mount, render, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, render } from 'enzyme';
 import { SeedInfo, SeedInfoProps } from './SeedInfo';
 
 describe('SeedInfo', () => {
@@ -114,7 +114,7 @@ describe('SeedInfo', () => {
           />
         );
         expect(wrapper
-          .containsMatchingElement(<span className="seednumber">Seed: abc123 </span>))
+          .containsMatchingElement(<span className="seednumber">Seed: <span className="number">abc123</span> </span>))
           .toEqual(true);
       });
       it('renders the seed text', () => {

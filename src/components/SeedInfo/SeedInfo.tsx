@@ -14,7 +14,8 @@ export type SeedInfoProps = {
 export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
   const seedNumber = () => {
     return showSeed ? (
-      <span className='seednumber'>Seed: {seed} </span>
+      <span className='seednumber'>Seed: <span className="number">{seed} </span> </span>
+
     ) : (
       <></>
     );
@@ -29,6 +30,7 @@ export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
   const seedViewer = () => {
     return seed ? (
       <div className='seed'>
+
         {seedNumber()}
         <span className='toggle' onClick={toggleShowSeed}>
           {icon()}

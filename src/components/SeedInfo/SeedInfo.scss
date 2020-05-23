@@ -11,6 +11,16 @@
 
     .seednumber {
       margin: 0 12px 0 0;
+
+      .number {
+        display: inline-block;
+        font-family: monospace;
+        letter-spacing: 0.05em;
+        border: 1px solid $pale-green;
+        border-radius: 4px;
+        padding: 2px 8px;
+        user-select: all;
+      }
     }
 
     svg {
