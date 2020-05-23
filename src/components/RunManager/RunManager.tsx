@@ -40,6 +40,14 @@ export const RunManager = (props: RunManagerProps) => {
     setRun(prev => ({ ...prev, waypointIds: waypointIds }));
   };
 
+  const removeBloodMoonShrine = (waypointIds: number[]) => {
+    const toDelete = waypointIds.indexOf(BLOOD_MOON_SHRINE);
+    if (toDelete > -1) {
+      waypointIds.splice(toDelete, 1);
+      updateWaypoints(waypointIds);
+    }
+  }
+
   const setRunState = (state: RunState) => {
     setRun(prev => ({ ...prev, state: state }));
 
@@ -69,6 +77,12 @@ export const RunManager = (props: RunManagerProps) => {
   };
 
   const undoSplit = () => {
+    const currentWaypoint = Math.max(0, run.splits.size);
+    const shouldRemoveBloodMoon =
+      run.waypointIds[currentWaypoint] === BLOOD_MOON_SHRINE;
+    if (shouldRemoveBloodMoon) {
+      removeBloodMoonShrine(run.waypointIds);
+    }
     run.splits.delete(run.splits.size - 1);
     updateSplits(run.splits);
   };
@@ -96,12 +110,7 @@ export const RunManager = (props: RunManagerProps) => {
   };
 
   const resetSplits = () => {
-    const { waypointIds } = run;
-    const toDelete = waypointIds.indexOf(BLOOD_MOON_SHRINE);
-    if (toDelete > -1) {
-      waypointIds.splice(toDelete, 1);
-      updateWaypoints(waypointIds);
-    }
+    removeBloodMoonShrine(run.waypointIds);
     run.splits.clear();
     updateSplits(run.splits);
     setRun(prev => ({ ...prev, pausedTime: 0, rundate: -1 }));
