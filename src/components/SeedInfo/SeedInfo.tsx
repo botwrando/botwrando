@@ -9,28 +9,34 @@ export type SeedInfoProps = {
 export function SeedInfo({ run }: SeedInfoProps) {
   const [showSeed, setShowSeed] = useState(false);
 
-  const toggleSeed = (isVisible: boolean) => (setShowSeed(isVisible));
+  const toggleShowSeed = () => (setShowSeed(!showSeed));
 
-  const seedViewer = () => (
-    (<div className='seed'>
+  const seedNumber = () => {
+    return showSeed ? (
       <span className='seednumber'>Seed: {run.seed} </span>
-      <span className='toggle' onClick={() => toggleSeed(false)}> Hide </span>
-    </div>)
-  )
+    ) : (
+      <></>
+    );
+  }
+
+  const toggleText = () => {
+    return showSeed ? ' Hide ' : ' Show seed ';
+  }
+
+  const seedViewer = () => {
+    return run.seed ? (
+      <div className='seed'>
+        {seedNumber()}
+        <span className='toggle' onClick={() => toggleShowSeed()}>{toggleText()}</span>
+      </div>
+    ) : (
+      <></>
+    )
+  }
 
   return (
     <div className='seedinfo'>
-      {run.seed ?
-
-        showSeed ?
-          seedViewer() :
-          (
-            <div className='seed'>
-              <div className='toggle' onClick={() => toggleSeed(true)}> Show seed </div>
-            </div>
-          ) :
-        (<></>)
-      }
+      {seedViewer()}
     </div>
   );
 }
