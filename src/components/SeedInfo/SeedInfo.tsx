@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { Run } from '../../lib/run';
+import React from 'react';
 import './SeedInfo.scss';
 
 export type SeedInfoProps = {
-  run: Run
+  seed: string,
+  showSeed: boolean,
+  toggleShowSeed: () => void
 }
 
-export function SeedInfo({ run }: SeedInfoProps) {
-  const [showSeed, setShowSeed] = useState(false);
-
-  const toggleShowSeed = () => (setShowSeed(!showSeed));
-
+export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
   const seedNumber = () => {
     return showSeed ? (
-      <span className='seednumber'>Seed: {run.seed} </span>
+      <span className='seednumber'>Seed: {seed} </span>
     ) : (
       <></>
     );
@@ -24,10 +21,10 @@ export function SeedInfo({ run }: SeedInfoProps) {
   }
 
   const seedViewer = () => {
-    return run.seed ? (
+    return seed ? (
       <div className='seed'>
         {seedNumber()}
-        <span className='toggle' onClick={() => toggleShowSeed()}>{toggleText()}</span>
+        <span className='toggle' onClick={toggleShowSeed}>{toggleText()}</span>
       </div>
     ) : (
       <></>
