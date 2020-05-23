@@ -1,5 +1,9 @@
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import React from 'react';
 import './SeedInfo.scss';
+
+
 
 export type SeedInfoProps = {
   seed: string,
@@ -16,6 +20,8 @@ export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
     );
   }
 
+  const icon = () => showSeed ? <VisibilityOff /> : <Visibility />
+
   const toggleText = () => {
     return showSeed ? ' Hide ' : ' Show seed ';
   }
@@ -24,7 +30,10 @@ export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
     return seed ? (
       <div className='seed'>
         {seedNumber()}
-        <span className='toggle' onClick={toggleShowSeed}>{toggleText()}</span>
+        <span className='toggle' onClick={toggleShowSeed}>
+          {icon()}
+          {toggleText()}
+        </span>
       </div>
     ) : (
       <></>

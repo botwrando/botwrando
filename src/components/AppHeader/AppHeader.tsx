@@ -1,3 +1,4 @@
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import React from 'react';
 import { getDefaultRun, Run } from '../../lib/run';
 
@@ -13,7 +14,8 @@ export function AppHeader({ hasSeed, setRun }: AppHeaderProps) {
       <div className="caption">BotW All Shrines Randomizer</div>
       {hasSeed && (
         <button id="quit" className="btn-text btn-back" onClick={onQuit}>
-          Quit run
+          <ArrowBack />
+          <span className='btn-caption'>Quit run</span>
         </button>
       )}
     </div>
