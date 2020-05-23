@@ -1,3 +1,5 @@
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import Shuffle from '@material-ui/icons/Shuffle';
 import React, { useState } from 'react';
 import { getRandomSeed } from '../../lib/rando';
 
@@ -37,17 +39,20 @@ export const SeedPicker = (props: SeedPickerProps) => {
       <label htmlFor="input-seedpicker">Choose your seed!</label>
 
       <button id="generate-seed" onClick={generateSeed}>
-        Randomize
+        <Shuffle />
+        <span className="btn-caption">Randomize</span>
       </button>
       <input
         type="text"
+        className="seednumberbox"
         id="input-seedpicker"
         value={seed}
         placeholder={exampleValue}
         onChange={handleUpdateSeed}
       />
-      <button id="go-button" onClick={handleSelectSeed}>
-        Start run
+      <button id="go-button" className='btn' onClick={handleSelectSeed}>
+        <PlayArrow />
+        <span className="btn-caption">Start run</span>
       </button>
     </div>
   );

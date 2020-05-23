@@ -1,0 +1,35 @@
+@import "../../styles/colors";
+@import "../../styles/fonts";
+
+.seedinfo {
+  color: $pale-green;
+
+  .seed {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+
+    .seednumber {
+      margin: 0 12px 0 0;
+
+      .seednumberbox {
+        user-select: all;
+      }
+    }
+
+    svg {
+      margin: 0 4px;
+    }
+
+    .toggle {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      flex-flow: row nowrap;
+
+      &:hover {
+        color: lighten($color: $pale-green, $amount: 15);
+      }
+    }
+  }
+}
