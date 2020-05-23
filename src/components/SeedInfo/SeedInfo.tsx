@@ -1,36 +1,39 @@
-import React, { useState } from 'react';
-import { Run } from '../../lib/run';
+import React from 'react';
 import './SeedInfo.scss';
 
 export type SeedInfoProps = {
-  run: Run
+  seed: string,
+  showSeed: boolean,
+  toggleShowSeed: () => void
 }
 
-export function SeedInfo({ run }: SeedInfoProps) {
-  const [showSeed, setShowSeed] = useState(false);
+export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
+  const seedNumber = () => {
+    return showSeed ? (
+      <span className='seednumber'>Seed: {seed} </span>
+    ) : (
+      <></>
+    );
+  }
 
-  const toggleSeed = (isVisible: boolean) => (setShowSeed(isVisible));
+  const toggleText = () => {
+    return showSeed ? ' Hide ' : ' Show seed ';
+  }
 
-  const seedViewer = () => (
-    (<div className='seed'>
-      <span className='seednumber'>Seed: {run.seed} </span>
-      <span className='toggle' onClick={() => toggleSeed(false)}> Hide </span>
-    </div>)
-  )
+  const seedViewer = () => {
+    return seed ? (
+      <div className='seed'>
+        {seedNumber()}
+        <span className='toggle' onClick={toggleShowSeed}>{toggleText()}</span>
+      </div>
+    ) : (
+      <></>
+    )
+  }
 
   return (
     <div className='seedinfo'>
-      {run.seed ?
-
-        showSeed ?
-          seedViewer() :
-          (
-            <div className='seed'>
-              <div className='toggle' onClick={() => toggleSeed(true)}> Show seed </div>
-            </div>
-          ) :
-        (<></>)
-      }
+      {seedViewer()}
     </div>
   );
 }

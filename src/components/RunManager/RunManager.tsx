@@ -173,6 +173,10 @@ export const RunManager = (props: RunManagerProps) => {
     setRunState(RunState.Init);
   };
 
+  const onToggleShowSeed = () => {
+    setRun(prev => ({ ...prev, showSeed: !prev.showSeed }));
+  };
+
   const mainsection = () =>
     run.state === RunState.None ? (
       <SeedPicker onPickedSeed={onPickedSeed} />
@@ -185,7 +189,7 @@ export const RunManager = (props: RunManagerProps) => {
       <KeyboardEventHandler handleKeys={['all']} onKeyEvent={handleKey} />
       <div className="main">
         <AppHeader hasSeed={!!run.seed} setRun={setRun} />
-        <SeedInfo run={run} />
+        <SeedInfo seed={run.seed} showSeed={run.showSeed} toggleShowSeed={onToggleShowSeed} />
         {mainsection()}
         <AppFooter
           run={run}
