@@ -44,6 +44,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
       </button>
       <input
         type="text"
+        className="seednumberbox"
         id="input-seedpicker"
         value={seed}
         placeholder={exampleValue}

@@ -114,7 +114,7 @@ describe('SeedInfo', () => {
           />
         );
         expect(wrapper
-          .containsMatchingElement(<span className="seednumber">Seed: <span className="number">abc123</span> </span>))
+          .containsMatchingElement(<span className="seednumber">Seed: <span className="seednumberbox">abc123</span> </span>))
           .toEqual(true);
       });
       it('renders the seed text', () => {

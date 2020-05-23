@@ -76,6 +76,13 @@ body {
   @media (max-width: 480px) {
     padding: 0 16px;
   }
+  .seednumberbox {
+    font-family: monospace;
+    letter-spacing: 0.05em;
+    border: 1px solid $pale-green;
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
   .header {
     @include f-main;
     align-items: center;
@@ -165,6 +172,7 @@ body {
     border-radius: 4px;
     border: 2px solid $pale-green;
     color: $pale-green;
+    font-size: 1.1em;
     grid-column: 3/4;
     grid-row: 3;
     margin: 16px;
@@ -213,7 +221,7 @@ button {
 
   .btn-caption {
     display: inline-block;
-    padding: 0 8px;
+    padding: 1px 8px 0;
   }
   &.btn-text {
     background-color: transparent;
