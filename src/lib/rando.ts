@@ -15,14 +15,33 @@ export function getRandomSeed(numChars = 12): string {
   return a;
 }
 
-export function getRandomizedWaypoints(seed: string): number[] {
-  const normalShrines = range(119).filter(item => isNormalShrine(item));
-  const [eventideSlot,] = shuffle(range(80, 118), seed);
+enum RandoFlags {
+  None,
+  LateEventide = 1 << 0
+}
 
-  const waypoints: number[] = [];
+export const RandoPresets = {
+  Default: RandoFlags.LateEventide,
+}
+
+const permuteDefault = (waypoints: number[], seed: string): void => {
+  const normalShrines = range(119).filter(item => isNormalShrine(item));
   waypoints.push(...shuffle(PLATEAU_SHRINES, seed));
   waypoints.push(...shuffle(normalShrines, seed));
+}
+
+const permuteLateEventide = (waypoints: number[], seed: string): void => {
+  const [eventideSlot,] = shuffle(range(80, 118), seed);
   waypoints.splice(eventideSlot, 0, EVENTIDE_SHRINE);
+}
+
+export function getRandomizedWaypoints(seed: string, preset = RandoPresets.Default): number[] {
+  const waypoints: number[] = [];
+  permuteDefault(waypoints, seed)
+
+  if (preset & RandoFlags.LateEventide)
+    permuteLateEventide(waypoints, seed)
+
   waypoints.push(GANON);
 
   return waypoints;
