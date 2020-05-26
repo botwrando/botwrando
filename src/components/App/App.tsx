@@ -1,8 +1,18 @@
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import '../../assets/bloodmoon.svg';
+import { getDefaultRun, Run } from '../../lib/run';
 import '../../styles/style.scss';
-import { Run, getDefaultRun } from '../../lib/run';
 import { RunManager } from '../RunManager/RunManager';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#538E24',
+    }
+  }
+})
 
 function App() {
   const run: Run = getDefaultRun();
@@ -10,7 +20,9 @@ function App() {
   return (
     <>
       <link rel="preload" href="assets/bloodmoon.svg" as="image"></link>
-      <RunManager run={run} />
+      <ThemeProvider theme={theme}>
+        <RunManager run={run} />
+      </ThemeProvider>
     </>
   );
 }
