@@ -1,5 +1,6 @@
 @import 'colors';
 @import 'fonts';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 html {
   position: fixed;
@@ -16,24 +17,9 @@ body {
 
 body {
   color: $milky-white;
-  font-family: 'Calamity', Roboto, sans-serif;
   height: 100vh;
   margin: 0;
-  font-size: 16px;
-  line-height: 1.5;
-
-  @media (max-width: 720px) {
-    font-size: 14px;
   }
-
-  @media (max-width: 480px) {
-    font-size: 13px;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 11px;
-  }
-}
 
 #root {
   height: 100%;
@@ -73,7 +59,7 @@ body {
 
 .main {
   display: grid;
-  grid-template-rows: 4em 2em 3fr auto 2fr auto;
+  grid-template-rows: 4em 3fr auto 2fr auto;
   margin: auto;
   height: 100%;
   max-width: 960px;
@@ -88,20 +74,13 @@ body {
     @include f-mono;
     border: 1px solid $pale-green;
     border-radius: 4px;
-    padding: 2px 8px;
+    padding: 0.2em 0.5em;
+    margin: 0 1em;
   }
 
-  .header {
-    @include f-main;
-    align-items: center;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    margin: 12px 0 0;
+  .seedpicker {
+    grid-row: 2/5;
 
-    @media (max-width: 480px) {
-      @include f-sub;
-    }
   }
 
   .run-display {

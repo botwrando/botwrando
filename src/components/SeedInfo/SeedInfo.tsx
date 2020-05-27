@@ -1,7 +1,8 @@
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { Button, Typography } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons/';
 import React from 'react';
 import './SeedInfo.scss';
+import { defaultButtonAttrs } from '../App/App';
 
 
 
@@ -12,10 +13,11 @@ export type SeedInfoProps = {
 }
 
 export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
-  const seedNumber = () => {
+  const seedNumberFrame = () => {
     return showSeed ? (
-      <span className='seednumber'>Seed: <span className="seednumberbox">{seed} </span> </span>
-
+      <span className='seednumber'>
+        <span className="seednumberbox">{seed} </span>
+      </span>
     ) : (
       <></>
     );
@@ -24,18 +26,18 @@ export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
   const icon = () => showSeed ? <VisibilityOff /> : <Visibility />
 
   const toggleText = () => {
-    return showSeed ? ' Hide ' : ' Show seed ';
+    return showSeed ? ' Hide seed ' : ' Show seed ';
   }
 
   const seedViewer = () => {
     return seed ? (
       <div className='seed'>
-
-        {seedNumber()}
-        <span className='toggle' onClick={toggleShowSeed}>
+        <Button {...{ onClick: toggleShowSeed }}>
           {icon()}
           {toggleText()}
-        </span>
+        </Button>
+
+        {seedNumberFrame()}
       </div>
     ) : (
       <></>

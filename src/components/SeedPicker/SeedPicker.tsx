@@ -1,4 +1,4 @@
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
 import { Shuffle } from '@material-ui/icons';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import React, { useState } from 'react';
@@ -40,7 +40,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
 
   return (
     <div className="seedpicker">
-      <label className='headerlabel' htmlFor="input-seedpicker">Choose your seed!</label>
+      <Typography variant='h3' className='headerlabel'>Choose your seed!</Typography>
 
       <Button {...{
         ...defaultButtonAttrs,

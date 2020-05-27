@@ -2,15 +2,16 @@ import React from 'react';
 import { getWaypoint } from '../../lib/waypoints';
 import { FormattedTime } from '../FormattedTime/FormattedTime';
 import './WaypointInfo.scss';
+import { Typography } from '@material-ui/core';
 
 export type WaypointInfoProps = {
-	counter: number;
-	waypoint_id: number;
-	timestamp: number;
-	is_main?: boolean;
-	diff?: number;
-	is_ahead?: boolean;
-	is_pb?: boolean;
+  counter: number;
+  waypoint_id: number;
+  timestamp: number;
+  is_main?: boolean;
+  diff?: number;
+  is_ahead?: boolean;
+  is_pb?: boolean;
 };
 
 export const WaypointInfo = (props: WaypointInfoProps) => {

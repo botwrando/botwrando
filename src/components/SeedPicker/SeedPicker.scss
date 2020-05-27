@@ -4,51 +4,63 @@
 .seedpicker {
   align-items: center;
   column-gap: 2em;
-  row-gap: 2em;
   display: grid;
-  grid-row: 3/6;
   grid-template-columns: 1fr auto auto 1fr;
   grid-template-rows: 1fr auto auto auto auto 1fr;
   justify-items: center;
+  row-gap: 2em;
 
   @media (max-width: 480px) {
-    align-items: center;
-    display: flex;
-    flex-flow: column nowrap;
-    margin: auto;
-    & > * {
-      margin: 2em 0 0;
+    grid-template-columns: auto;
+    grid-template-rows: auto repeat(1fr) auto;
+
+    .headerlabel {}
+
+    #generate-seed {}
+
+    .input-seedpicker {}
+
+    #go-button {
+      margin: 4em;
     }
-    & > #go-button {
-      margin: 4em 0 2em;
+  }
+
+  @media (min-width: 480px) {
+    .headerlabel {
+      grid-column: 2/4;
+      grid-row: 2;
     }
+
+    #generate-seed {
+      grid-column: 2/3;
+      grid-row: 3;
+    }
+
+    .input-seedpicker {
+      grid-column: 3/4;
+      grid-row: 3;
+    }
+
+    #go-button {
+      grid-column: 2/4;
+      grid-row: 5;
+    }
+
   }
 
   .headerlabel {
-    @include f-majsec;
-    margin: 16px;
-    grid-column: 2/4;
-    grid-row: 2;
     margin: 16px;
   }
 
-  #generate-seed {
-    grid-column: 2/3;
-    grid-row: 3;
-  }
+  #generate-seed {}
 
   .input-seedpicker {
-    @include f-sub;
     color: $pale-green;
-    grid-column: 3/4;
-    grid-row: 3;
+
     input {
       @include f-mono;
     }
   }
 
-  #go-button {
-    grid-column: 2/4;
-    grid-row: 5;
-  }
+  #go-button {}
 }
