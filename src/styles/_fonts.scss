@@ -42,7 +42,13 @@
   font-style: normal;
   font-weight: normal;
   @include fz-32;
+
   @media (max-width: 480px) {
     @include fz-24;
   }
+}
+
+@mixin f-mono {
+  font-family: monospace;
+  letter-spacing: 0.05em;
 }

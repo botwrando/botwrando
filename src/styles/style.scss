@@ -21,12 +21,15 @@ body {
   margin: 0;
   font-size: 16px;
   line-height: 1.5;
+
   @media (max-width: 720px) {
     font-size: 14px;
   }
+
   @media (max-width: 480px) {
     font-size: 13px;
   }
+
   @media (max-width: 320px) {
     font-size: 11px;
   }
@@ -39,6 +42,7 @@ body {
 
 .bg {
   height: 100%;
+
   &:before,
   &:after {
     content: '';
@@ -49,9 +53,11 @@ body {
     z-index: -1;
     transition: background-color 0.2s, opacity 0.2s;
   }
+
   &:before {
     background-color: $darker-green;
   }
+
   &:after {
     opacity: 0;
   }
@@ -73,17 +79,18 @@ body {
   max-width: 960px;
   overflow: hidden;
   padding: 0 32px;
+
   @media (max-width: 480px) {
     padding: 0 16px;
   }
 
   .seednumberbox {
-    font-family: monospace;
-    letter-spacing: 0.05em;
+    @include f-mono;
     border: 1px solid $pale-green;
     border-radius: 4px;
     padding: 2px 8px;
   }
+
   .header {
     @include f-main;
     align-items: center;
@@ -91,43 +98,54 @@ body {
     flex-flow: row nowrap;
     justify-content: space-between;
     margin: 12px 0 0;
+
     @media (max-width: 480px) {
       @include f-sub;
     }
   }
+
   .run-display {
     display: contents;
+
     .history {
       flex: 1 1 auto;
       overflow: hidden;
+
       .historylist {
         scrollbar-width: 0;
+
         @media (min-width: 720px) {
           // width: calc(100% + 17px); // Scrollbar hider for desktop
         }
+
         height: 100%;
         overflow-x: hidden;
         overflow-y: scroll;
       }
+
       .historylist::-webkit-scrollbar {
         display: none;
       }
     }
+
     .history,
     .waypoint.current {
       max-width: 720px;
       margin: 0 auto;
       width: 100%;
+
       @media (max-width: 480px) {
         margin: 0;
       }
     }
+
     .history .waypoint,
     .waypoint.current {
       display: grid;
       grid-template-columns: 2.2em 1fr 3em 5em;
       gap: 0 8px;
       align-items: center;
+
       @media (max-width: 480px) {
         grid-template-columns: 1.4em 1fr 3em 3em;
         width: 100%;
@@ -143,100 +161,14 @@ body {
   justify-content: center;
 }
 
-.seedpicker {
-  align-items: center;
-  display: grid;
-  grid-row: 3/6;
-  grid-template-columns: 1fr auto auto 1fr;
-  grid-template-rows: 1fr auto auto auto 1fr;
-  justify-items: center;
-  @media (max-width: 480px) {
-    align-items: center;
-    display: flex;
-    flex-flow: column nowrap;
-    margin: auto;
-  }
-  label {
-    @include f-majsec;
-    margin: 16px;
-    grid-column: 2/4;
-    grid-row: 2;
-    margin: 16px;
-  }
-  #generate-seed {
-    grid-column: 2/3;
-    grid-row: 3;
-  }
-  #input-seedpicker {
-    @include f-sub;
-    background-color: transparent;
-    border-radius: 4px;
-    border: 2px solid $pale-green;
-    color: $pale-green;
-    font-size: 1.1em;
-    grid-column: 3/4;
-    grid-row: 3;
-    margin: 16px;
-    min-height: 36px;
-    padding: 4px 8px;
-    &:focus {
-      box-shadow: 0 0 0 4px $warm-green;
-      outline: none;
-    }
-  }
-  #go-button {
-    grid-column: 2/4;
-    grid-row: 4;
-    margin: 48px;
-  }
-}
-
 .touchpanel {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 8px;
   margin: 12px 0;
 }
-button {
-  @include f-sub;
-  align-items: center;
-  background-color: $warm-green;
-  border-radius: 4px;
-  border: none;
-  color: $milky-white;
-  display: flex;
-  flex-flow: row nowrap;
-  font-size: 0.8em;
-  min-height: 40px;
-  padding: 4px 8px;
-  text-transform: uppercase;
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px $pale-green;
-  }
-  &:hover {
-    @media (hover: hover) {
-      background-color: lighten($color: $warm-green, $amount: 5);
-    }
-  }
-
-  .btn-caption {
-    display: inline-block;
-    padding: 1px 8px 0;
-  }
-  &.btn-text {
-    background-color: transparent;
-    color: $warm-green;
-    cursor: pointer;
-    line-height: 24px;
-    min-height: initial;
-    padding: 0 4px;
-    &:hover {
-      color: $pale-green;
-    }
-  }
-}
 
 button.split {
+  height: 4.7em;
   grid-column: 1/5;
 }

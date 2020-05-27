@@ -1,4 +1,4 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { ButtonProps, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import '../../assets/bloodmoon.svg';
 import { getDefaultRun, Run } from '../../lib/run';
@@ -13,6 +13,12 @@ const theme = createMuiTheme({
     }
   }
 })
+
+export const defaultButtonAttrs: ButtonProps = {
+  color: 'primary',
+  variant: 'contained',
+  size: 'large',
+}
 
 function App() {
   const run: Run = getDefaultRun();
