@@ -193,7 +193,7 @@ export const RunManager = (props: RunManagerProps) => {
     <div className={getClasses()}>
       <KeyboardEventHandler handleKeys={['all']} onKeyEvent={handleKey} />
       <div className="main">
-        <AppHeader run={run} setRun={setRun} />
+        <AppHeader seed={run.seed} showSeed={run.showSeed} setRun={setRun} />
         {mainsection()}
         <AppFooter
           run={run}

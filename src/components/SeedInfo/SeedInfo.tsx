@@ -32,8 +32,7 @@ export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
   const seedViewer = () => {
     return seed ? (
       <div className='seed'>
-        <Button {...{ onClick: toggleShowSeed }}>
-          {icon()}
+        <Button {...{ onClick: toggleShowSeed, startIcon:icon() }}>
           {toggleText()}
         </Button>
 
