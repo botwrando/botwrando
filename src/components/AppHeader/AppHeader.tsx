@@ -30,7 +30,7 @@ export function AppHeader({ run, setRun }: AppHeaderProps) {
         {run && run.seed && (
           <>
             <SeedInfo seed={run.seed} showSeed={run.showSeed} toggleShowSeed={onToggleShowSeed} />
-            <Button {...{ color: 'primary', id: 'quit', startIcon: <ArrowBack />, onClick: onQuit }}>
+            <Button {...{ id: 'quit', startIcon: <ArrowBack />, onClick: onQuit }}>
               Quit run
             </Button>
           </>
