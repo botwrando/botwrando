@@ -1,13 +1,13 @@
 @import 'colors';
 @import 'fonts';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap');
 
 html {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 html,
@@ -35,9 +35,9 @@ body {
     height: 100%;
     position: absolute;
     top: 0;
+    transition: background-color 0.2s, opacity 0.2s;
     width: 100%;
     z-index: -1;
-    transition: background-color 0.2s, opacity 0.2s;
   }
 
   &:before {
@@ -60,22 +60,21 @@ body {
 .main {
   display: grid;
   grid-template-rows: 4em 3fr auto 2fr auto;
-  margin: auto;
   height: 100%;
-  max-width: 960px;
+  margin: auto;
   overflow: hidden;
   padding: 0 32px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     padding: 0 16px;
   }
 
   .seednumberbox {
     @include f-mono;
-    border: 1px solid $pale-green;
     border-radius: 4px;
-    padding: 0.2em 0.5em;
+    border: 1px solid $pale-green;
     margin: 0 1em;
+    padding: 0.2em 0.5em;
   }
 
   .seedpicker {
@@ -91,15 +90,10 @@ body {
       overflow: hidden;
 
       .historylist {
-        scrollbar-width: 0;
-
-        @media (min-width: 720px) {
-          // width: calc(100% + 17px); // Scrollbar hider for desktop
-        }
-
         height: 100%;
         overflow-x: hidden;
         overflow-y: scroll;
+        scrollbar-width: 0;
       }
 
       .historylist::-webkit-scrollbar {
@@ -109,26 +103,18 @@ body {
 
     .history,
     .waypoint.current {
+      margin: 0.5em auto;
       max-width: 720px;
-      margin: 0 auto;
       width: 100%;
-
-      @media (max-width: 480px) {
-        margin: 0;
-      }
     }
 
     .history .waypoint,
     .waypoint.current {
-      display: grid;
-      grid-template-columns: 2.2em 1fr 3em 5em;
-      gap: 0 8px;
       align-items: center;
+      display: grid;
+      gap: 0 8px;
+      grid-template-columns: 3em 1fr 4.5em 8em;
 
-      @media (max-width: 480px) {
-        grid-template-columns: 1.4em 1fr 3em 3em;
-        width: 100%;
-      }
     }
   }
 }
@@ -142,12 +128,12 @@ body {
 
 .touchpanel {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: 12px 0;
 }
 
 button.split {
-  height: 4.7em;
   grid-column: 1/5;
+  height: 4.7em;
 }

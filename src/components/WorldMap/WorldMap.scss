@@ -2,14 +2,9 @@
 @import "../../styles/fonts";
 
 .worldmap {
-	margin: 24px 0 0;
+	margin: 1em 0 0;
 	flex: 1 1 auto;
 	min-height: 1px;
-	@media (max-width: 480px) {
-		flex: 0 0 auto;
-		max-width: initial;
-		margin: 8px 0;
-	}
 
 	.mapframe {
 		background-color: transparent;

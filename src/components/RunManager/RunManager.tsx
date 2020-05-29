@@ -8,7 +8,6 @@ import { BLOOD_MOON_SHRINE } from '../../lib/waypoints';
 import { AppFooter } from '../AppFooter/AppFooter';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { RunDisplay } from '../RunDisplay/RunDisplay';
-import { SeedInfo } from '../SeedInfo/SeedInfo';
 import { SeedPicker } from '../SeedPicker/SeedPicker';
 
 type RunManagerProps = {

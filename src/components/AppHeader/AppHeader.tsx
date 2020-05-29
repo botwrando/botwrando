@@ -21,7 +21,7 @@ export function AppHeader({ seed, showSeed, setRun }: AppHeaderProps) {
 
   return (
     <AppBar elevation={0} color='transparent' position='static'>
-      <Toolbar className='appheader'>
+      <Toolbar disableGutters={true} className='appheader'>
         <Hidden smDown>
           <Box mr={2}>
             <Typography variant='h6' > BOTW All Shrines Randomizer </Typography>

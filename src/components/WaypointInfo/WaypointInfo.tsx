@@ -14,7 +14,7 @@ export type WaypointInfoProps = {
   is_pb?: boolean;
 };
 
-export const WaypointInfo = (props: WaypointInfoProps) => {
+export const WaypointInfo = React.memo((props: WaypointInfoProps) => {
   const current_wp = getWaypoint(props.waypoint_id);
 
   const diffProps = {
@@ -30,11 +30,11 @@ export const WaypointInfo = (props: WaypointInfoProps) => {
   if (props.is_pb) diff_classes.push('is-pb');
 
   return (
-    <div className="waypoint infolog">
-      <div className="counter">{props.counter + 1}</div>
-      <div className="name">{current_wp?.name}</div>
-      <div className={diff_classes.join(' ')}>{diff_ts}</div>
-      <div className="time">{ts}</div>
+    <div key={props.waypoint_id} className="waypoint infolog">
+      <Typography variant="h6" className="counter">{props.counter + 1}</Typography>
+      <Typography variant="h5" className="name">{current_wp?.name}</Typography>
+      <Typography variant="h6" className={diff_classes.join(' ')}>{diff_ts}</Typography>
+      <Typography variant="h4" className="time">{ts}</Typography>
     </div>
   );
-};
+});

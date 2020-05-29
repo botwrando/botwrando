@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Run, RunState } from '../../lib/run';
 import { getWaypoint } from '../../lib/waypoints';
 import { RunTimer } from '../RunTimer/RunTimer';
+import { Typography } from '@material-ui/core';
 
 export type SplitTimerProps = {
   run: Run;
@@ -44,21 +45,21 @@ export const SplitTimer = (props: SplitTimerProps) => {
   return (
     <div className="waypoint current">
       <SplitDetails {...getDetailsProps()} />
-      <div className={timeclasses.join(' ')}>
+      <Typography variant="h2" className={timeclasses.join(' ')}>
         <RunTimer run={run} setPausedTime={props.onUpdatePausedTime} />
-      </div>
+      </Typography>
     </div>
   );
 };
 
-const SplitDetails = (props: {
+const SplitDetails = React.memo((props: {
   counter: String | Number;
   name: String;
   desc: String;
 }) => (
   <>
-    <div className="counter">{props.counter}</div>
-    <div className="name">{props.name}</div>
-    <div className="desc"> {props.desc} </div>
+    <Typography variant="h6" className="counter">{props.counter}</Typography>
+    <Typography variant="h4" className="name">{props.name}</Typography>
+    <Typography variant="h6" className="desc"> {props.desc} </Typography>
   </>
-);
+));

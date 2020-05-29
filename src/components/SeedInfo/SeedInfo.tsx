@@ -1,8 +1,7 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons/';
 import React from 'react';
 import './SeedInfo.scss';
-import { defaultButtonAttrs } from '../App/App';
 
 
 
