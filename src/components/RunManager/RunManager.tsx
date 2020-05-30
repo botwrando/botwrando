@@ -7,6 +7,7 @@ import { Run, RunState } from '../../lib/run';
 import { BLOOD_MOON_SHRINE } from '../../lib/waypoints';
 import { AppFooter } from '../AppFooter/AppFooter';
 import { AppHeader } from '../AppHeader/AppHeader';
+import { playFanfare } from '../Fanfare/Fanfare';
 import { RunDisplay } from '../RunDisplay/RunDisplay';
 import { SeedPicker } from '../SeedPicker/SeedPicker';
 
@@ -98,6 +99,7 @@ export const RunManager = (props: RunManagerProps) => {
       setRun(prev => ({ ...prev, state: RunState.Running }));
     }
     if (run.rundate && run.splits.size >= run.waypointIds.length) {
+      playFanfare();
       setRun(prev => ({ ...prev, state: RunState.Ended }));
     }
   }, [run.state, run.rundate, run.splits.size, run.waypointIds.length]);

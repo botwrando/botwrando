@@ -21,19 +21,19 @@ export const MobileControls = (props: MobileProps) => {
 
   return (
     <div className="touchpanel">
-      <Button {...{...defaultButtonAttrs, className:'split', onClick:callbacks.onSplit}}>
+      <Button {...{ ...defaultButtonAttrs, className: 'split', onClick: callbacks.onSplit }}>
         Split
       </Button>
-      <Button {...{...defaultButtonAttrs, className:'undo' ,onClick:callbacks.onUndo}}>
+      <Button {...{ ...defaultButtonAttrs, className: 'undo', onClick: callbacks.onUndo }}>
         Undo
       </Button>
-      <Button {...{...defaultButtonAttrs, className:'pause', onClick:callbacks.onPause}}>
+      <Button {...{ ...defaultButtonAttrs, className: 'pause', onClick: callbacks.onPause }}>
         Pause
       </Button>
-      <Button {...{...defaultButtonAttrs, className:'reset', onClick:callbacks.onReset}}>
+      <Button {...{ ...defaultButtonAttrs, className: 'reset', onClick: callbacks.onReset }}>
         Reset
       </Button>
-      <Button {...{...defaultButtonAttrs, className:'bloodmoon', onClick:callbacks.onBloodMoon}}>
+      <Button {...{ ...defaultButtonAttrs, className: 'bloodmoon', onClick: callbacks.onBloodMoon }}>
         Blood Moon
       </Button>
     </div>
@@ -77,12 +77,13 @@ export const Instructions = (props: { run: Run }) => {
   return (
     <>
       <p>
-        All shrines except the Blood Moon shrine has been shuffled using
-				the seed {run.seed}.
+        All shrines have been shuffled in a random
+        order{run.showSeed && <> using the seed {run.seed}</>}.
+        The four Great Plateau shrines are guaranteed to appear first.
       </p>
       <p>
-        Hit <span className="key">B</span> to insert a Blood Moon shrine
-				split.
+        When the blood Moon shrine is available, hit <span className="key">B</span>
+        to insert a Blood Moon shrine split, then complete it as normal.
       </p>
     </>
   );

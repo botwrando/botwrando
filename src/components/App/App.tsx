@@ -1,4 +1,4 @@
-import { ButtonProps, createMuiTheme, responsiveFontSizes, ThemeProvider, CssBaseline } from '@material-ui/core';
+import { ButtonProps, createMuiTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import '../../assets/bloodmoon.svg';
 import { getDefaultRun, Run } from '../../lib/run';
