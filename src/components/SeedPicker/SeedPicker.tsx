@@ -66,6 +66,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
         ...defaultButtonAttrs,
         id: 'go-button',
         onClick: handleSelectSeed,
+        disabled: (!seed),
         startIcon: <PlayArrow />
       }}>
         Start run

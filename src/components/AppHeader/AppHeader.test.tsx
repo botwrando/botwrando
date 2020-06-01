@@ -28,23 +28,21 @@ describe('AppHeader', () => {
   });
   it('mounts in a full DOM', () => {
     expect(mount(<AppHeader seed="" showSeed={false} setRun={setRun} />)
-      .find('.appheader').length).toBe(1);
+      .find('div.appheader').length).toBe(1);
   });
   it('should render the expected text', () => {
-    expect(render(<AppHeader seed="" showSeed={false} setRun={setRun} />).text()).toMatch(
-      /BotW All Shrines Randomizer/
-    );
+    expect(render(<AppHeader seed={seed} showSeed={false} setRun={setRun} />).text()).toMatch(/Show seed Quit run/);
   });
   describe('when the Quit Run button is clicked', () => {
     it('should call setRun', () => {
-      const el = mount(<AppHeader seed="" showSeed={true} setRun={setRun} />);
-      el.find('#quit button').simulate('click');
+      const el = mount(<AppHeader seed={seed} showSeed={true} setRun={setRun} />);
+      el.find('button#quit').simulate('click');
       expect(setRun).toHaveBeenCalledTimes(1);
     });
     it('should set the default run', () => {
       const defaultRun = getDefaultRun();
-      const el = mount(<AppHeader seed="" showSeed={true} setRun={setRun} />);
-      el.find('#quit button').simulate('click');
+      const el = mount(<AppHeader seed={seed} showSeed={true} setRun={setRun} />);
+      el.find('button#quit').simulate('click');
       expect(setRun).toHaveBeenCalledWith(defaultRun);
     });
   });
