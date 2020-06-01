@@ -1,7 +1,13 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-// Add setup or global before or after hooks (to be run before/after all test suites) here.
 
+/* Avoid useLayoutEffect warnings in test...
+ * https://stackoverflow.com/questions/58070996/how-to-fix-the-warning-uselayouteffect-does-nothing-on-the-server
+ */
+import React from 'react';
+React.useLayoutEffect = React.useEffect;
+
+// Add setup or global before or after hooks (to be run before/after all test suites) here.
 beforeAll(() => {
   /* Mock window.matchMedia, which doesn't exist in JSDOM testing library
    * https://jestjs.io/docs/en/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom

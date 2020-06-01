@@ -3,8 +3,6 @@ import { Visibility, VisibilityOff } from '@material-ui/icons/';
 import React from 'react';
 import './SeedInfo.scss';
 
-
-
 export type SeedInfoProps = {
   seed: string,
   showSeed: boolean,
@@ -31,7 +29,7 @@ export function SeedInfo({ seed, showSeed, toggleShowSeed }: SeedInfoProps) {
   const seedViewer = () => {
     return seed ? (
       <div className='seed'>
-        <Button {...{ onClick: toggleShowSeed, startIcon:icon() }}>
+        <Button {...{ onClick: toggleShowSeed, startIcon:icon() }} className="seed-toggle">
           {toggleText()}
         </Button>
 

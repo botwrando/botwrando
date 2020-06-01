@@ -24,7 +24,7 @@ export function AppHeader({ seed, showSeed, setRun }: AppHeaderProps) {
       <Toolbar disableGutters={true} className='appheader'>
         <Hidden smDown>
           <Box mr={2}>
-            <Typography variant='h6' > BOTW All Shrines Randomizer </Typography>
+            <Typography variant='h6' > BotW All Shrines Randomizer </Typography>
           </Box>
         </Hidden>
         <Hidden xsDown mdUp>
@@ -35,7 +35,7 @@ export function AppHeader({ seed, showSeed, setRun }: AppHeaderProps) {
         {seed && (
           <>
             <SeedInfo seed={seed} showSeed={showSeed} toggleShowSeed={onToggleShowSeed} />
-            <Button {...{ id: 'quit', startIcon: <ArrowBack />, onClick: onQuit }}>
+            <Button id='quit' startIcon={<ArrowBack />} onClick={onQuit}>
               Quit run
             </Button>
           </>
