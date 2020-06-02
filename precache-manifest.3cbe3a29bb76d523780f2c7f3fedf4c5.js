@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4b5e7a10d5a69d7b20d8699bda74536e",
+    "revision": "c56b1497b4ae93a801b56918b4003607",
     "url": "/botwrando/index.html"
   },
   {
-    "revision": "5db6b3061f5da5c54593",
-    "url": "/botwrando/static/css/main.80f02947.chunk.css"
+    "revision": "e283c8c0c3aea8cdcf86",
+    "url": "/botwrando/static/css/main.9e86cee0.chunk.css"
   },
   {
-    "revision": "0fad087e71e2e07bf76e",
-    "url": "/botwrando/static/js/2.9acf982d.chunk.js"
+    "revision": "1c3ebad4603624d9e7e9",
+    "url": "/botwrando/static/js/2.900c12ce.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/botwrando/static/js/2.9acf982d.chunk.js.LICENSE.txt"
+    "url": "/botwrando/static/js/2.900c12ce.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5db6b3061f5da5c54593",
-    "url": "/botwrando/static/js/main.e73636b4.chunk.js"
+    "revision": "e283c8c0c3aea8cdcf86",
+    "url": "/botwrando/static/js/main.c95e2e1b.chunk.js"
   },
   {
     "revision": "eaef71989cd8cbddf996",
