@@ -1,5 +1,5 @@
-import { getRandomizedWaypoints, getRandomSeed, range } from './rando';
-import { BLOOD_MOON_SHRINE, EVENTIDE_SHRINE, GANON, PLATEAU_SHRINES } from './waypoints';
+import { getRandomizedWaypoints, getRandomSeed, Presets, range } from './rando';
+import { BLOOD_MOON_SHRINE, DUPE_SHRINE, EVENTIDE_SHRINE, GANON, PLATEAU_SHRINES } from './waypoints';
 
 describe('rando', () => {
   describe('range', () => {
@@ -114,13 +114,25 @@ describe('rando', () => {
         expect(waypoints).not.toContain(BLOOD_MOON_SHRINE);
       }
     });
-    it('puts the eventide island shrine at position 80 or later in the run', () => {
-      for (let n = 0; n < 10; n++) {
-        const seed = getRandomSeed();
-        const waypoints = getRandomizedWaypoints(seed);
-        expect(waypoints.slice(80)).toContain(EVENTIDE_SHRINE);
-        expect(waypoints.slice(0, 80)).not.toContain(EVENTIDE_SHRINE);
-      }
+    describe('Default profile', () => {
+      it('puts the eventide island shrine at position 80 or later in the run', () => {
+        for (let n = 0; n < 10; n++) {
+          const seed = getRandomSeed();
+          const waypoints = getRandomizedWaypoints(seed);
+          expect(waypoints.slice(80)).toContain(EVENTIDE_SHRINE);
+          expect(waypoints.slice(0, 80)).not.toContain(EVENTIDE_SHRINE);
+        }
+      });
+    });
+    describe('Runner profile', () => {
+      it('puts the dupe shrine between position 20 and 40', () => {
+        for (let n = 0; n < 10; n++) {
+          const seed = getRandomSeed();
+          const waypoints = getRandomizedWaypoints(seed, Presets.Runner);
+          expect(waypoints.slice(40)).not.toContain(DUPE_SHRINE);
+          expect(waypoints.slice(20, 40)).toContain(DUPE_SHRINE);
+        }
+      });
     });
     it('puts the Ganon waypoint at the end', () => {
       for (let n = 0; n < 10; n++) {

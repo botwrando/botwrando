@@ -1,3 +1,5 @@
+import { RandoFlags } from './rando';
+
 export enum RunState {
   None,
   Init,
@@ -17,6 +19,7 @@ export type Run = {
   splits: Map<number, number>;
   wrSplits: Map<number, number>;
   pbSplits: Map<number, number>;
+  flags: RandoFlags;
 };
 
 export const getDefaultRun = () => ({
@@ -30,4 +33,5 @@ export const getDefaultRun = () => ({
   splits: new Map<number, number>([]),
   wrSplits: new Map<number, number>([]),
   pbSplits: new Map<number, number>([]),
+  flags: {},
 });

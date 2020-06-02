@@ -22,6 +22,7 @@ export const getWaypoint = (waypoint_id: number): Waypoint | undefined =>
 export const PLATEAU_SHRINES: number[] = [38, 41, 9, 65];
 export const BLOOD_MOON_SHRINE: number = 78;
 export const EVENTIDE_SHRINE: number = 97;
+export const DUPE_SHRINE: number = 39;
 export const GANON: number = 999;
 
 export const isNormalShrine = (id: number): Boolean => {

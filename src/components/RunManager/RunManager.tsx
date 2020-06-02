@@ -1,8 +1,9 @@
+import { Grid } from '@material-ui/core';
 import React, { useState } from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import '../../assets/bloodmoon.svg';
 import { handleKey, registerCallbacks } from '../../lib/keyboard';
-import { getRandomizedWaypoints } from '../../lib/rando';
+import { getRandomizedWaypoints, RandoFlags } from '../../lib/rando';
 import { Run, RunState } from '../../lib/run';
 import { BLOOD_MOON_SHRINE } from '../../lib/waypoints';
 import { AppFooter } from '../AppFooter/AppFooter';
@@ -176,14 +177,18 @@ export const RunManager = (props: RunManagerProps) => {
   };
 
   const onPickedSeed = (seed: string) => {
-    const waypointIds = getRandomizedWaypoints(seed);
+    const waypointIds = getRandomizedWaypoints(seed, run.flags);
     setRun(prev => ({ ...prev, seed, waypointIds }));
     setRunState(RunState.Init);
   };
 
+  const onPickedPreset = (preset: RandoFlags) => {
+    setRun(prev => ({ ...prev, flags: preset }));
+  }
+
   const mainsection = () =>
     run.state === RunState.None ? (
-      <SeedPicker onPickedSeed={onPickedSeed} />
+      <SeedPicker onPickedSeed={onPickedSeed} onSetFlags={onPickedPreset} />
     ) : (
       <RunDisplay run={run} onUpdatePausedTime={onUpdatePausedTime} />
     );

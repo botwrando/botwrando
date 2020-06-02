@@ -1,19 +1,21 @@
-import { Button, TextField, Typography } from '@material-ui/core';
+import { Button, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
 import { Shuffle } from '@material-ui/icons';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import React, { useState } from 'react';
-import { getRandomSeed } from '../../lib/rando';
+import { getRandomSeed, Presets, RandoFlags, ValidPreset } from '../../lib/rando';
 import { defaultButtonAttrs } from '../App/App';
 import './SeedPicker.scss';
 
 type SeedPickerProps = {
   onPickedSeed: (seed: string) => void;
+  onSetFlags: (preset: RandoFlags) => void;
 };
 
 export const SeedPicker = (props: SeedPickerProps) => {
   const exampleValue = 'CHANGEME';
 
   const [seed, setSeed] = useState(exampleValue);
+  const [preset, setPresetName] = useState<ValidPreset>('Default')
 
   const queryParams = new URLSearchParams(window.location.search);
   if ((!seed || seed === exampleValue) && queryParams.has('seed')) {
@@ -37,9 +39,22 @@ export const SeedPicker = (props: SeedPickerProps) => {
     props.onPickedSeed(seed);
   };
 
+  const profileElements = Object.keys(Presets).map(key =>
+    <FormControlLabel key={key} value={key} label={key} labelPlacement='end' control={<Radio color='primary' />} />
+  );
+
+  const onSelectPreset = (event: any) => {
+    const val: ValidPreset = event.target.value;
+    const preset = Presets[val];
+    if (preset !== undefined) {
+      setPresetName(val);
+      props.onSetFlags(preset.flags);
+    }
+  }
 
   return (
     <div className="seedpicker">
+
       <Typography variant='h3' className='headerlabel'>Choose your seed!</Typography>
 
       <Button {...{
@@ -61,6 +76,12 @@ export const SeedPicker = (props: SeedPickerProps) => {
         value={seed}
         onChange={handleUpdateSeed}
       />
+
+      <div id="optionsbox">
+        <RadioGroup aria-label='Randomizer profile' value={preset} onChange={onSelectPreset} >
+          {profileElements}
+        </RadioGroup>
+      </div>
 
       <Button {...{
         ...defaultButtonAttrs,
