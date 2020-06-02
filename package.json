@@ -47,8 +47,8 @@
     "test": "react-scripts test",
     "ci": "CI=true yarn test --reporters=jest-spec-reporter",
     "coverage": "yarn ci --coverage=true --coverageProvider=v8 && coveralls < ./coverage/lcov.info",
-    "lint": "node ./node_modules/eslint/bin/eslint.js --ext=ts,tsx src",
-    "lintfix": "node ./node_modules/eslint/bin/eslint.js --ext=ts,tsx src --fix",
+    "lint": "node ./node_modules/eslint/bin/eslint.js --ext=ts,tsx src && node ./node_modules/stylelint/bin/stylelint.js ./**/*.scss",
+    "lintfix": "node ./node_modules/eslint/bin/eslint.js --ext=ts,tsx src --fix && node ./node_modules/stylelint/bin/stylelint.js --fix ./**/*.scss",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
