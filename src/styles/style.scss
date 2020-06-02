@@ -1,12 +1,13 @@
 @import 'colors';
 @import 'fonts';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap');
 
 html {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 html,
@@ -16,20 +17,8 @@ body {
 
 body {
   color: $milky-white;
-  font-family: 'Calamity', Roboto, sans-serif;
   height: 100vh;
   margin: 0;
-  font-size: 16px;
-  line-height: 1.5;
-  @media (max-width: 720px) {
-    font-size: 14px;
-  }
-  @media (max-width: 480px) {
-    font-size: 13px;
-  }
-  @media (max-width: 320px) {
-    font-size: 11px;
-  }
 }
 
 #root {
@@ -39,26 +28,29 @@ body {
 
 .bg {
   height: 100%;
-  &:before,
-  &:after {
+
+  &::before,
+  &::after {
     content: '';
     height: 100%;
     position: absolute;
     top: 0;
+    transition: background-color 0.2s, opacity 0.2s;
     width: 100%;
     z-index: -1;
-    transition: background-color 0.2s, opacity 0.2s;
   }
-  &:before {
+
+  &::before {
     background-color: $darker-green;
   }
-  &:after {
+
+  &::after {
     opacity: 0;
   }
 
-  &.is-blood-moon:after {
+  &.is-blood-moon::after {
     background-color: $darker-red;
-    background-image: url(../assets/bloodmoon.svg);
+    background-image: url('../assets/bloodmoon.svg');
     background-position: center top;
     background-size: cover;
     opacity: 1;
@@ -67,71 +59,62 @@ body {
 
 .main {
   display: grid;
-  grid-template-rows: 4em 2em 3fr auto 2fr auto;
-  margin: auto;
+  grid-template-rows: 4em 3fr auto 2fr auto;
   height: 100%;
-  max-width: 960px;
+  margin: auto;
   overflow: hidden;
   padding: 0 32px;
-  @media (max-width: 480px) {
+
+  @media (max-width: 600px) {
     padding: 0 16px;
   }
 
   .seednumberbox {
-    font-family: monospace;
-    letter-spacing: 0.05em;
+    @include f-mono;
     border: 1px solid $pale-green;
     border-radius: 4px;
-    padding: 2px 8px;
+    margin: 0 1em;
+    padding: 0.2em 0.5em;
   }
-  .header {
-    @include f-main;
-    align-items: center;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    margin: 12px 0 0;
-    @media (max-width: 480px) {
-      @include f-sub;
-    }
+
+  .seedpicker {
+    grid-row: 2/5;
+
   }
+
   .run-display {
     display: contents;
+
     .history {
       flex: 1 1 auto;
       overflow: hidden;
+
       .historylist {
-        scrollbar-width: 0;
-        @media (min-width: 720px) {
-          // width: calc(100% + 17px); // Scrollbar hider for desktop
-        }
         height: 100%;
         overflow-x: hidden;
         overflow-y: scroll;
+        scrollbar-width: 0;
       }
+
       .historylist::-webkit-scrollbar {
         display: none;
       }
     }
+
     .history,
     .waypoint.current {
+      margin: 0.5em auto;
       max-width: 720px;
-      margin: 0 auto;
       width: 100%;
-      @media (max-width: 480px) {
-        margin: 0;
-      }
     }
+
     .history .waypoint,
     .waypoint.current {
-      display: grid;
-      grid-template-columns: 2.2em 1fr 3em 5em;
-      gap: 0 8px;
       align-items: center;
-      @media (max-width: 480px) {
-        grid-template-columns: 1.4em 1fr 3em 3em;
-        width: 100%;
-      }
+      display: grid;
+      gap: 0 8px;
+      grid-template-columns: 3em 1fr 4.5em 8em;
+
     }
   }
 }
@@ -143,100 +126,14 @@ body {
   justify-content: center;
 }
 
-.seedpicker {
-  align-items: center;
-  display: grid;
-  grid-row: 3/6;
-  grid-template-columns: 1fr auto auto 1fr;
-  grid-template-rows: 1fr auto auto auto 1fr;
-  justify-items: center;
-  @media (max-width: 480px) {
-    align-items: center;
-    display: flex;
-    flex-flow: column nowrap;
-    margin: auto;
-  }
-  label {
-    @include f-majsec;
-    margin: 16px;
-    grid-column: 2/4;
-    grid-row: 2;
-    margin: 16px;
-  }
-  #generate-seed {
-    grid-column: 2/3;
-    grid-row: 3;
-  }
-  #input-seedpicker {
-    @include f-sub;
-    background-color: transparent;
-    border-radius: 4px;
-    border: 2px solid $pale-green;
-    color: $pale-green;
-    font-size: 1.1em;
-    grid-column: 3/4;
-    grid-row: 3;
-    margin: 16px;
-    min-height: 36px;
-    padding: 4px 8px;
-    &:focus {
-      box-shadow: 0 0 0 4px $warm-green;
-      outline: none;
-    }
-  }
-  #go-button {
-    grid-column: 2/4;
-    grid-row: 4;
-    margin: 48px;
-  }
-}
-
 .touchpanel {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: 12px 0;
-}
-button {
-  @include f-sub;
-  align-items: center;
-  background-color: $warm-green;
-  border-radius: 4px;
-  border: none;
-  color: $milky-white;
-  display: flex;
-  flex-flow: row nowrap;
-  font-size: 0.8em;
-  min-height: 40px;
-  padding: 4px 8px;
-  text-transform: uppercase;
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px $pale-green;
-  }
-  &:hover {
-    @media (hover: hover) {
-      background-color: lighten($color: $warm-green, $amount: 5);
-    }
-  }
-
-  .btn-caption {
-    display: inline-block;
-    padding: 1px 8px 0;
-  }
-  &.btn-text {
-    background-color: transparent;
-    color: $warm-green;
-    cursor: pointer;
-    line-height: 24px;
-    min-height: initial;
-    padding: 0 4px;
-    &:hover {
-      color: $pale-green;
-    }
-  }
 }
 
 button.split {
   grid-column: 1/5;
+  height: 4.7em;
 }

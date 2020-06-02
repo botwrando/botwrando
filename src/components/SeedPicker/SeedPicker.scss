@@ -1,0 +1,54 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
+.seedpicker {
+  align-items: center;
+  column-gap: 2em;
+  display: grid;
+  grid-template-columns: 1fr auto auto 1fr;
+  grid-template-rows: 1fr repeat(4, auto) 1fr;
+  justify-items: center;
+  row-gap: 2em;
+
+  @media (max-width: 600px) {
+    grid-template-columns: auto;
+    grid-template-rows: 1fr repeat(2, auto) 1fr;
+    margin: auto 0;
+    row-gap: 2em;
+  }
+
+  @media (min-width: 600px) {
+    .headerlabel {
+      grid-column: 2/4;
+      grid-row: 2;
+    }
+
+    #generate-seed {
+      grid-column: 2/3;
+      grid-row: 3;
+    }
+
+    .input-seedpicker {
+      grid-column: 3/4;
+      grid-row: 3;
+    }
+
+    #go-button {
+      grid-column: 2/4;
+      grid-row: 5;
+    }
+
+  }
+
+  .headerlabel {
+    margin: 16px;
+  }
+
+  .input-seedpicker {
+    color: $pale-green;
+
+    input {
+      @include f-mono;
+    }
+  }
+}

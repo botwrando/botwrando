@@ -1,7 +1,10 @@
+import { Button, TextField, Typography } from '@material-ui/core';
+import { Shuffle } from '@material-ui/icons';
 import PlayArrow from '@material-ui/icons/PlayArrow';
-import Shuffle from '@material-ui/icons/Shuffle';
 import React, { useState } from 'react';
 import { getRandomSeed } from '../../lib/rando';
+import { defaultButtonAttrs } from '../App/App';
+import './SeedPicker.scss';
 
 type SeedPickerProps = {
   onPickedSeed: (seed: string) => void;
@@ -34,26 +37,40 @@ export const SeedPicker = (props: SeedPickerProps) => {
     props.onPickedSeed(seed);
   };
 
+
   return (
     <div className="seedpicker">
-      <label htmlFor="input-seedpicker">Choose your seed!</label>
+      <Typography variant='h3' className='headerlabel'>Choose your seed!</Typography>
 
-      <button id="generate-seed" onClick={generateSeed}>
-        <Shuffle />
-        <span className="btn-caption">Randomize</span>
-      </button>
-      <input
-        type="text"
-        className="seednumberbox"
-        id="input-seedpicker"
+      <Button {...{
+        ...defaultButtonAttrs,
+        'aria-label': 'Randomize seed',
+        id: 'generate-seed',
+        startIcon: <Shuffle />,
+        onClick: generateSeed,
+      }} >
+        Randomize
+      </Button>
+
+
+      <TextField
+        color="primary"
+        className="input-seedpicker"
+        label="Seed"
+        variant="outlined"
         value={seed}
-        placeholder={exampleValue}
         onChange={handleUpdateSeed}
       />
-      <button id="go-button" className='btn' onClick={handleSelectSeed}>
-        <PlayArrow />
-        <span className="btn-caption">Start run</span>
-      </button>
+
+      <Button {...{
+        ...defaultButtonAttrs,
+        id: 'go-button',
+        onClick: handleSelectSeed,
+        disabled: (!seed),
+        startIcon: <PlayArrow />
+      }}>
+        Start run
+      </Button>
     </div>
   );
 };

@@ -1,14 +1,14 @@
 $cold-green: #017575;
-$dark-brown: #6B5E31;
+$dark-brown: #6b5e31;
 $dark-cyan: #316570;
-$dark-green: #3E7531;
-$darker-green: #0C2024;
+$dark-green: #3e7531;
+$darker-green: #0c2024;
 $darker-red: rgb(53, 2, 2);
-$deep-yellow: #FEBC28;
-$hot-orange: #FF953F;
-$milky-white: #F9F4CE;
-$pale-blue: #97C8D9;
-$pale-green: #9FC184;
+$deep-yellow: #febc28;
+$hot-orange: #ff953f;
+$milky-white: #f9f4ce;
+$pale-blue: #97c8d9;
+$pale-green: #9fc184;
 $warm-green: #4b7925;
 $cloudy-gray: rgb(178, 187, 189);
 
@@ -16,6 +16,7 @@ $cloudy-gray: rgb(178, 187, 189);
   from {
     color: $hot-orange;
   }
+
   to {
     color: $deep-yellow;
   }
@@ -29,6 +30,7 @@ $cloudy-gray: rgb(178, 187, 189);
   from {
     background-color: $hot-orange;
   }
+
   to {
     background-color: $deep-yellow;
   }

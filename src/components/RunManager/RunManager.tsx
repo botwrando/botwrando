@@ -8,7 +8,6 @@ import { BLOOD_MOON_SHRINE } from '../../lib/waypoints';
 import { AppFooter } from '../AppFooter/AppFooter';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { RunDisplay } from '../RunDisplay/RunDisplay';
-import { SeedInfo } from '../SeedInfo/SeedInfo';
 import { SeedPicker } from '../SeedPicker/SeedPicker';
 
 type RunManagerProps = {
@@ -182,10 +181,6 @@ export const RunManager = (props: RunManagerProps) => {
     setRunState(RunState.Init);
   };
 
-  const onToggleShowSeed = () => {
-    setRun(prev => ({ ...prev, showSeed: !prev.showSeed }));
-  };
-
   const mainsection = () =>
     run.state === RunState.None ? (
       <SeedPicker onPickedSeed={onPickedSeed} />
@@ -197,8 +192,7 @@ export const RunManager = (props: RunManagerProps) => {
     <div className={getClasses()}>
       <KeyboardEventHandler handleKeys={['all']} onKeyEvent={handleKey} />
       <div className="main">
-        <AppHeader hasSeed={!!run.seed} setRun={setRun} />
-        <SeedInfo seed={run.seed} showSeed={run.showSeed} toggleShowSeed={onToggleShowSeed} />
+        <AppHeader seed={run.seed} showSeed={run.showSeed} setRun={setRun} />
         {mainsection()}
         <AppFooter
           run={run}

@@ -14,14 +14,20 @@ describe('SeedPicker', () => {
     const el = mount(<SeedPicker onPickedSeed={onPickedSeed} />);
     expect(el.find('input')).toHaveLength(1);
     expect(el.find('input').props().value).toEqual('CHANGEME');
-    el.find('#generate-seed').simulate('click');
+    el.find('button#generate-seed').simulate('click');
     expect(el.find('input').props().value).not.toEqual('CHANGEME');
+  });
+  it('does not allow the run to start with an empty seed string', () => {
+    const onPickedSeed = () => {};
+    const el = mount(<SeedPicker onPickedSeed={onPickedSeed} />);
+    el.find('input').simulate('change', {target: {value: ''}});
+    expect(el.find('button#go-button').props().disabled).toBe(true);
   });
   it('calls the callback when the Go button is clicked', () => {
     const onPickedSeed = jest.fn();
     const el = mount(<SeedPicker onPickedSeed={onPickedSeed} />);
     const inputValue = el.find('input').props().value;
-    el.find('#go-button').simulate('click');
+    el.find('button#go-button').simulate('click');
     expect(onPickedSeed).toHaveBeenCalledTimes(1);
     expect(onPickedSeed).toHaveBeenCalledWith(inputValue);
   });

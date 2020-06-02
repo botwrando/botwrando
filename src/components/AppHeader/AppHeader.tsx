@@ -1,23 +1,46 @@
+import { AppBar, Button, Toolbar, Typography, Hidden, Box } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import React from 'react';
 import { getDefaultRun, Run } from '../../lib/run';
+import { SeedInfo } from '../SeedInfo/SeedInfo';
+import './AppHeader.scss';
 
 type AppHeaderProps = {
-  hasSeed?: boolean;
-  setRun: (run: Run) => void;
+  seed: string;
+  showSeed: boolean;
+  setRun: (value: React.SetStateAction<Run>) => void;
 };
 
-export function AppHeader({ hasSeed, setRun }: AppHeaderProps) {
+
+export function AppHeader({ seed, showSeed, setRun }: AppHeaderProps) {
   const onQuit = () => setRun(getDefaultRun());
+
+  const onToggleShowSeed = () => {
+    setRun(prev => ({ ...prev, showSeed: !prev.showSeed }));
+  };
+
   return (
-    <div className="header">
-      <div className="caption">BotW All Shrines Randomizer</div>
-      {hasSeed && (
-        <button id="quit" className="btn-text btn-back" onClick={onQuit}>
-          <ArrowBack />
-          <span className='btn-caption'>Quit run</span>
-        </button>
-      )}
-    </div>
-  );
+    <AppBar elevation={0} color='transparent' position='static'>
+      <Toolbar disableGutters={true} className='appheader'>
+        <Hidden smDown>
+          <Box mr={2}>
+            <Typography variant='h6' > BotW All Shrines Randomizer </Typography>
+          </Box>
+        </Hidden>
+        <Hidden xsDown mdUp>
+          <Box mr={2}>
+            <Typography variant='h6' > Randomizer </Typography>
+          </Box>
+        </Hidden>
+        {seed && (
+          <>
+            <SeedInfo seed={seed} showSeed={showSeed} toggleShowSeed={onToggleShowSeed} />
+            <Button id='quit' startIcon={<ArrowBack />} onClick={onQuit}>
+              Quit run
+            </Button>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
+  )
 }

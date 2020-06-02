@@ -29,6 +29,6 @@ describe('App', () => {
     expect(mount(<App />).find('link').length).toBe(1);
   });
   it('should render the expected text', () => {
-    expect(render(<App />).text()).toMatch(/BotW All Shrines Randomizer/);
+    expect(render(<App />).text()).toMatch(/Choose your seed!RandomizeSeedSeedStart run/);
   });
 });

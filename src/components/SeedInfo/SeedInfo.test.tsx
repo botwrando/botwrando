@@ -88,7 +88,7 @@ describe('SeedInfo', () => {
             showSeed={props.showSeed}
             toggleShowSeed={props.toggleShowSeed}
           />
-        ).find('span.toggle').text()).toMatch(/Show seed/);
+        ).find('.seed-toggle').text()).toMatch(/Show seed/);
       });
     });
     describe('when showSeed is true', () => {
@@ -113,9 +113,11 @@ describe('SeedInfo', () => {
             toggleShowSeed={props.toggleShowSeed}
           />
         );
-        expect(wrapper
-          .containsMatchingElement(<span className="seednumber">Seed: <span className="seednumberbox">abc123</span> </span>))
-          .toEqual(true);
+        expect(wrapper.containsMatchingElement((
+          <span className="seednumber">
+            <span className="seednumberbox">abc123 </span>
+          </span>
+        ))).toEqual(true);
       });
       it('renders the seed text', () => {
         expect(render(
@@ -133,7 +135,7 @@ describe('SeedInfo', () => {
             showSeed={props.showSeed}
             toggleShowSeed={props.toggleShowSeed}
           />
-        ).find('span.toggle').text()).toMatch(/Hide/);
+        ).find('.seed-toggle').text()).toMatch(/Hide/);
       });
     });
     describe('when the Show Seed link is clicked', () => {
@@ -145,7 +147,7 @@ describe('SeedInfo', () => {
             toggleShowSeed={props.toggleShowSeed}
           />
         );
-        wrapper.find('span.toggle').simulate('click');
+        wrapper.find('.seed-toggle button').simulate('click');
         expect(props.toggleShowSeed).toHaveBeenCalledTimes(1);
       });
     });
@@ -158,7 +160,7 @@ describe('SeedInfo', () => {
             toggleShowSeed={props.toggleShowSeed}
           />
         );
-        wrapper.find('span.toggle').simulate('click');
+        wrapper.find('.seed-toggle button').simulate('click');
         expect(props.toggleShowSeed).toHaveBeenCalledTimes(1);
       });
     });

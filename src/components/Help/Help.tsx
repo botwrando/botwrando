@@ -1,6 +1,9 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { Run } from '../../lib/run';
+import { defaultButtonAttrs } from '../App/App';
 import { HotkeyList } from '../HotkeyList/HotkeyList';
+
 
 type MobileProps = {
   run: Run;
@@ -18,21 +21,21 @@ export const MobileControls = (props: MobileProps) => {
 
   return (
     <div className="touchpanel">
-      <button className="split" onClick={callbacks.onSplit}>
+      <Button {...{...defaultButtonAttrs, className:'split', onClick:callbacks.onSplit}}>
         Split
-      </button>
-      <button className="undo" onClick={callbacks.onUndo}>
+      </Button>
+      <Button {...{...defaultButtonAttrs, className:'undo' ,onClick:callbacks.onUndo}}>
         Undo
-      </button>
-      <button className="pause" onClick={callbacks.onPause}>
+      </Button>
+      <Button {...{...defaultButtonAttrs, className:'pause', onClick:callbacks.onPause}}>
         Pause
-      </button>
-      <button className="reset" onClick={callbacks.onReset}>
+      </Button>
+      <Button {...{...defaultButtonAttrs, className:'reset', onClick:callbacks.onReset}}>
         Reset
-      </button>
-      <button className="bloodmoon" onClick={callbacks.onBloodMoon}>
+      </Button>
+      <Button {...{...defaultButtonAttrs, className:'bloodmoon', onClick:callbacks.onBloodMoon}}>
         Blood Moon
-      </button>
+      </Button>
     </div>
   );
 };
