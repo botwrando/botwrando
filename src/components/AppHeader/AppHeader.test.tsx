@@ -7,7 +7,6 @@ import { AppHeader } from './AppHeader';
 describe('AppHeader', () => {
   let setRun: (value: React.SetStateAction<Run>) => void;
   let seed: string;
-  let showSeed: boolean;
   beforeEach(() => {
     setRun = jest.fn();
     seed = 'abcdefg1234567890';
