@@ -50,7 +50,7 @@ body {
 
   &.is-blood-moon::after {
     background-color: $darker-red;
-    background-image: url(../assets/bloodmoon.svg);
+    background-image: url('../assets/bloodmoon.svg');
     background-position: center top;
     background-size: cover;
     opacity: 1;
