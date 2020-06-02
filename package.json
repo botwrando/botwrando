@@ -36,7 +36,10 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "jest-enzyme": "^7.1.2",
-    "jest-spec-reporter": "^1.0.12"
+    "jest-spec-reporter": "^1.0.12",
+    "stylelint": "^13.5.0",
+    "stylelint-config-sass-guidelines": "^7.0.0",
+    "stylelint-scss": "^3.17.2"
   },
   "scripts": {
     "start": "react-scripts start",
