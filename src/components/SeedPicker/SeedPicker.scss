@@ -13,8 +13,8 @@
   @media (max-width: 600px) {
     grid-template-columns: auto;
     grid-template-rows: 1fr repeat(2, auto) 1fr;
-    row-gap: 2em;
     margin: auto 0;
+    row-gap: 2em;
   }
 
   @media (min-width: 600px) {

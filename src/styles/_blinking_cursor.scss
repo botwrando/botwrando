@@ -4,18 +4,20 @@
   .cursor {
     position: relative;
   }
+
   .cursor i {
-    position: absolute;
-    width: 2px;
-    height: 40%;
-    background-color: $pale-green;
-    left: 25px;
-    top: 30%;
-    animation-name: blink;
     animation-duration: 1200ms;
     animation-iteration-count: infinite;
+    animation-name: blink;
+    background-color: $pale-green;
+    height: 40%;
+    left: 25px;
     opacity: 1;
+    position: absolute;
+    top: 30%;
+    width: 2px;
   }
+
   .cursor input:focus + i {
     display: none;
   }

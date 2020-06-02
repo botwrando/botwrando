@@ -29,8 +29,8 @@ body {
 .bg {
   height: 100%;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: '';
     height: 100%;
     position: absolute;
@@ -40,15 +40,15 @@ body {
     z-index: -1;
   }
 
-  &:before {
+  &::before {
     background-color: $darker-green;
   }
 
-  &:after {
+  &::after {
     opacity: 0;
   }
 
-  &.is-blood-moon:after {
+  &.is-blood-moon::after {
     background-color: $darker-red;
     background-image: url(../assets/bloodmoon.svg);
     background-position: center top;
@@ -71,8 +71,8 @@ body {
 
   .seednumberbox {
     @include f-mono;
-    border-radius: 4px;
     border: 1px solid $pale-green;
+    border-radius: 4px;
     margin: 0 1em;
     padding: 0.2em 0.5em;
   }
