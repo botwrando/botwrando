@@ -1,10 +1,27 @@
 import waypoints from '../data/waypoints.json';
 
 export type Location = {
-  x: String;
-  y: String;
-  z: String;
+  x: string;
+  y: string;
+  z: string;
 };
+
+export type Coord = {
+  x: number;
+  y: number;
+  z: number;
+}
+
+export const calcDist = (hereId: number, thereId: number): number => {
+  const [here, there] = [waypoints[hereId], waypoints[thereId]];
+  const diff = {
+    x: parseInt(there.location.x) - parseInt(here.location.x),
+    y: parseInt(there.location.y) - parseInt(here.location.y),
+    z: parseInt(there.location.z) - parseInt(here.location.z),
+  };
+
+  return Math.sqrt(Math.pow(diff.x, 2) + Math.pow(diff.y, 2) + Math.pow(diff.z, 2));
+}
 
 export type Waypoint = {
   index: Number;

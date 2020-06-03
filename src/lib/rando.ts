@@ -1,5 +1,5 @@
 import { shuffle } from 'shuffle-seed';
-import { DUPE_SHRINE, EVENTIDE_SHRINE, GANON, isNormalShrine, MAJOR_TEST_SHRINES, PLATEAU_SHRINES } from './waypoints';
+import { calcDist, DUPE_SHRINE, EVENTIDE_SHRINE, GANON, isNormalShrine, MAJOR_TEST_SHRINES, PLATEAU_SHRINES } from './waypoints';
 
 export function range(bound: number, limit: number = 0): number[] {
   const start = limit ? bound : 0;
@@ -97,6 +97,18 @@ const permuteLateMajortests = (waypoints: number[], seed: string): number[] => {
   return waypoints;
 }
 
+const permuteClampDist = (waypoints: number[], seed: string): number[] => {
+  waypoints = [...waypoints.filter(item => isNormalShrine(item))];
+  const deltas = waypoints.map((item, index): number => {
+    if (index !== waypoints.length - 1)
+      return calcDist(item, waypoints[index + 1]);
+    return Number.MAX_SAFE_INTEGER;
+  });
+  deltas.sort();
+  console.log(deltas[0], deltas[deltas.length - 1]);
+  return waypoints;
+}
+
 export function getRandomizedWaypoints(seed: string, flags: RandoFlags = Presets.Default!.flags): number[] {
   let waypoints = generateDefault(seed);
 
@@ -108,6 +120,9 @@ export function getRandomizedWaypoints(seed: string, flags: RandoFlags = Presets
 
   if (flags.LateMajorTests)
     waypoints = permuteLateMajortests(waypoints, seed);
+
+  if (flags.ClampDist)
+    waypoints = permuteClampDist(waypoints, seed);
 
   waypoints.push(GANON);
 
