@@ -10,8 +10,8 @@ describe('waypoints', () => {
     it('reports false when the ID is the blood moon shrine', () => {
       expect(isNormalShrine(BLOOD_MOON_SHRINE)).toBe(false);
     });
-    it('reports false when the ID is the Eventide Island shrine', () => {
-      expect(isNormalShrine(EVENTIDE_SHRINE)).toBe(false);
+    it('reports true when the ID is the Eventide Island shrine', () => {
+      expect(isNormalShrine(EVENTIDE_SHRINE)).toBe(true);
     });
     it('reports false when the ID is the Ganon waypoint', () => {
       expect(isNormalShrine(GANON)).toBe(false);

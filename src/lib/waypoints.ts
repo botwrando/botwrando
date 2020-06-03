@@ -29,6 +29,6 @@ export const GANON: number = 999;
 export const isNormalShrine = (id: number): Boolean => {
   return (
     PLATEAU_SHRINES.indexOf(id) === -1 &&
-    BLOOD_MOON_SHRINE !== id && EVENTIDE_SHRINE !== id && GANON !== id
+    BLOOD_MOON_SHRINE !== id && GANON !== id
   );
 };
