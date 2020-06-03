@@ -118,7 +118,7 @@ describe('rando', () => {
       it('puts the eventide island shrine at position 80 or later in the run', () => {
         for (let n = 0; n < 10; n++) {
           const seed = getRandomSeed();
-          const waypoints = getRandomizedWaypoints(seed);
+          const waypoints = getRandomizedWaypoints(seed, Presets.Default?.flags);
           expect(waypoints.slice(80)).toContain(EVENTIDE_SHRINE);
           expect(waypoints.slice(0, 80)).not.toContain(EVENTIDE_SHRINE);
         }
@@ -128,7 +128,7 @@ describe('rando', () => {
       it('puts the dupe shrine between position 20 and 40', () => {
         for (let n = 0; n < 10; n++) {
           const seed = getRandomSeed();
-          const waypoints = getRandomizedWaypoints(seed, Presets.Runner);
+          const waypoints = getRandomizedWaypoints(seed, Presets.Default?.flags);
           expect(waypoints.slice(40)).not.toContain(DUPE_SHRINE);
           expect(waypoints.slice(20, 40)).toContain(DUPE_SHRINE);
         }
@@ -138,8 +138,8 @@ describe('rando', () => {
       for (let n = 0; n < 10; n++) {
         const seed = getRandomSeed();
         const waypoints = getRandomizedWaypoints(seed);
-        expect(waypoints.slice(119)).toContain(GANON);
-        expect(waypoints.slice(0, 119)).not.toContain(GANON);
+        expect(waypoints.slice(118)).toContain(GANON);
+        expect(waypoints.slice(0, 118)).not.toContain(GANON);
       }
     })
   });

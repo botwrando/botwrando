@@ -70,6 +70,7 @@ export const SeedPicker = (props: SeedPickerProps) => {
 
       <TextField
         color="primary"
+        id="js-seed-textinput"
         className="input-seedpicker"
         label="Seed"
         variant="outlined"

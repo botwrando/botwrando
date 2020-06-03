@@ -1,5 +1,5 @@
 import { shuffle } from 'shuffle-seed';
-import { DUPE_SHRINE, EVENTIDE_SHRINE, GANON, isNormalShrine, PLATEAU_SHRINES } from './waypoints';
+import { DUPE_SHRINE, EVENTIDE_SHRINE, GANON, isNormalShrine, MAJOR_TEST_SHRINES, PLATEAU_SHRINES } from './waypoints';
 
 export function range(bound: number, limit: number = 0): number[] {
   const start = limit ? bound : 0;
@@ -69,14 +69,31 @@ const permuteEarlyDupe = (waypoints: number[], seed: string): number[] => {
   return waypoints
 }
 
-export function getRandomizedWaypoints(seed: string, flags: RandoFlags): number[] {
-  let waypoints = generateDefault(seed)
+const isMajorTest = (shrineId: number): boolean => {
+  return (MAJOR_TEST_SHRINES.indexOf(shrineId) > -1)
+}
+
+const permuteLateMajortests = (waypoints: number[], seed: string): number[] => {
+  waypoints = waypoints.filter(item => isMajorTest(item));
+  const majorTestShrines = shuffle([...MAJOR_TEST_SHRINES], seed);
+  const majorTestShrineSlots = shuffle(range(80, 119), seed);
+  majorTestShrineSlots.forEach((slot, index) => {
+    waypoints.splice(slot, majorTestShrines[index]);
+  })
+  return waypoints;
+}
+
+export function getRandomizedWaypoints(seed: string, flags: RandoFlags = Presets.Default!.flags): number[] {
+  let waypoints = generateDefault(seed);
 
   if (flags.LateEventide)
-    waypoints = permuteLateEventide(waypoints, seed)
+    waypoints = permuteLateEventide(waypoints, seed);
 
   if (flags.EarlyDupe)
-    waypoints = permuteEarlyDupe(waypoints, seed)
+    waypoints = permuteEarlyDupe(waypoints, seed);
+
+  if (flags.LateMajorTests)
+    waypoints = permuteLateMajortests(waypoints, seed);
 
   waypoints.push(GANON);
 
