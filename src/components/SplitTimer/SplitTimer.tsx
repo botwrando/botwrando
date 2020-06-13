@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Run, RunState } from '../../lib/run';
-import { getWaypoint } from '../../lib/waypoints';
+import { Waypoint } from '../../lib/waypoint';
 import { RunTimer } from '../RunTimer/RunTimer';
 import { Typography } from '@material-ui/core';
 
@@ -13,7 +13,7 @@ export type SplitTimerProps = {
 export const SplitTimer = (props: SplitTimerProps) => {
   const { run, currentWaypoint } = props;
   const waypoint_id = run.waypointIds[currentWaypoint];
-  const current_waypoint = getWaypoint(waypoint_id);
+  const current_waypoint = Waypoint.byId(waypoint_id);
 
   const [timeclasses, setTimeclasses] = useState(['time']);
 

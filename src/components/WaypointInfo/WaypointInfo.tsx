@@ -1,5 +1,5 @@
 import React from 'react';
-import { getWaypoint } from '../../lib/waypoints';
+import { Waypoint } from '../../lib/waypoint';
 import { FormattedTime } from '../FormattedTime/FormattedTime';
 import './WaypointInfo.scss';
 import { Typography } from '@material-ui/core';
@@ -15,7 +15,7 @@ export type WaypointInfoProps = {
 };
 
 export const WaypointInfo = React.memo((props: WaypointInfoProps) => {
-  const current_wp = getWaypoint(props.waypoint_id);
+  const current_wp = Waypoint.byId(props.waypoint_id);
 
   const diffProps = {
     timestamp: props.diff,

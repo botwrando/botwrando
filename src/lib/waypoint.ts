@@ -18,8 +18,10 @@ export interface WaypointData {
   desc: string | null;
   region: string | null;
   location: Location;
-  isBloodMoon: boolean;
-  isPlateau: boolean;
+}
+
+export interface WaypointCollections {
+  [key: string]: number[]
 }
 
 export class Waypoint {
@@ -29,19 +31,13 @@ export class Waypoint {
   region: string | null;
   location: Coord;
   private ordering: number | null;
-  private collections: { [key: string]: boolean };
-  private static collection_ids: { [key: string]: number[] };
-  private static all: Waypoint[];
+  private _collections: { [key: string]: boolean } = {};
+  private static collection_ids: WaypointCollections =
+    waypoints_data.collections as WaypointCollections;
+  private static _all: Waypoint[] = (waypoints_data.waypoints as WaypointData[])
+    .map((data: WaypointData) => { return new Waypoint(data); });
 
   constructor(data: WaypointData) {
-    if (!Waypoint.collection_ids) {
-      Waypoint.collection_ids = waypoints_data.collections as { [key: string]: number[] };
-    }
-    if (!Waypoint.all) {
-      Waypoint.all = (waypoints_data.waypoints as WaypointData[])
-        .map((data: WaypointData) => { return new Waypoint(data); });
-    }
-
     this.id = data.id;
     this.name = data.name;
     this.desc = data.desc;
@@ -52,10 +48,13 @@ export class Waypoint {
       z: parseFloat(data.location.z)
     };
     this.ordering = null;
-    this.collections = {};
-    for (const key: string in Waypoint.collection_ids) {
-      this.collections[key] = Waypoint.collection_ids[key].indexOf(this.id) > -1;
+    for (const key in Waypoint.collection_ids) {
+      this._collections[key] = Waypoint.collection_ids[key].indexOf(this.id) > -1;
     }
+  }
+
+  static get all(): Waypoint[] {
+    return this._all;
   }
 
   static byId(id: number): Waypoint | undefined {
@@ -65,6 +64,18 @@ export class Waypoint {
   static byCollection(collection: string): Waypoint[] {
     return this.collection_ids[collection]
       .map((id: number): Waypoint | undefined => Waypoint.byId(id)) as Waypoint[];
+  }
+
+  static forEach(callback: (w: Waypoint) => void): void {
+    Waypoint.all.forEach(callback);
+  }
+
+  static map(callback: (w: Waypoint) => any): any[] {
+    Waypoint.all.map(callback);
+  }
+
+  get collections(): { [key: string]: boolean } {
+    return this._collections;
   }
 
   get placement(): number | null {
@@ -93,7 +104,7 @@ export class Waypoint {
     return (
       this.inCollection('MINOR_TEST') ||
       this.inCollection('MODEST_TEST') ||
-      this.inCollection('MAJOR_TEST');
+      this.inCollection('MAJOR_TEST')
     );
   }
 
@@ -116,13 +127,5 @@ export class Waypoint {
     return Math.sqrt(
       diff.x * diff.x + diff.y * diff.y + diff.z * diff.z
     );
-  }
-
-  forEach(callback: (w: Waypoint) => void) {
-    Waypoint.all.forEach(callback);
-  }
-
-  map(callback: (w: Waypoint) => Waypoint) {
-    return Waypoint.all.map(callback);
   }
 };

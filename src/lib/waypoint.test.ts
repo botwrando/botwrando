@@ -1,5 +1,12 @@
-import waypoints_data from '../data/waypoints.json';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import { Location, Coord, WaypointData, Waypoint } from './waypoint';
+
+const { waypoints } = JSON.parse(
+  readFileSync(
+    resolve(__dirname, '../data/waypoints.json')
+  )
+);
 
 describe('waypoint (definitions)', () => {
   describe('Location', () => {
@@ -28,7 +35,7 @@ describe('waypoint (definitions)', () => {
 
   describe('WaypointData', () => {
     test('matches the format of incoming JSON data', () => {
-      const waypoint_data = waypoints_data.waypoints[2] as WaypointData;
+      const waypoint_data = waypoints[2] as WaypointData;
       expect(waypoint_data).toHaveProperty('id');
       expect(waypoint_data.id).toEqual(9);
       expect(waypoint_data).toHaveProperty('name');
@@ -72,7 +79,24 @@ describe('waypoint (definitions)', () => {
         expect(wp).toHaveProperty('location');
         expect(wp.location).toEqual({ x: 1.23, y: 2.34, z: 3.45 } as Coord);
         expect(wp).toHaveProperty('collections');
-        expect(wp.collections).toEqual([]);
+        expect(wp.collections).toHaveProperty('PLATEAU');
+        expect(wp.collections.PLATEAU).toEqual(false);
+        expect(wp.collections).toHaveProperty('DUPE_GLITCH');
+        expect(wp.collections.DUPE_GLITCH).toEqual(false);
+        expect(wp.collections).toHaveProperty('APPARATUS');
+        expect(wp.collections.APPARATUS).toEqual(false);
+        expect(wp.collections).toHaveProperty('MINOR_TEST');
+        expect(wp.collections.MINOR_TEST).toEqual(false);
+        expect(wp.collections).toHaveProperty('MODEST_TEST');
+        expect(wp.collections.MODEST_TEST).toEqual(false);
+        expect(wp.collections).toHaveProperty('MAJOR_TEST');
+        expect(wp.collections.MAJOR_TEST).toEqual(false);
+        expect(wp.collections).toHaveProperty('BLOOD_MOON');
+        expect(wp.collections.BLOOD_MOON).toEqual(false);
+        expect(wp.collections).toHaveProperty('EVENTIDE');
+        expect(wp.collections.EVENTIDE).toEqual(false);
+        expect(wp.collections).toHaveProperty('GANON');
+        expect(wp.collections.GANON).toEqual(false);
       });
     });
   });

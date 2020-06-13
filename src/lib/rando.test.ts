@@ -1,7 +1,18 @@
 import { getRandomizedWaypoints, getRandomSeed, range, Ranges } from './rando';
-import { BLOOD_MOON_SHRINE, DUPE_SHRINE, EVENTIDE_SHRINE, GANON, MAJOR_TEST_SHRINES, PLATEAU_SHRINES } from './waypoints';
+import { Waypoint, Presets } from './waypoint';
 
-const allFlags = {ClampDist: true, EarlyDupe: true, LateEventide: true, LateMajorTests: true};
+const allFlags = {
+  // ClampDist: true, // TODO: Not ready yet!
+  EarlyDupe: true,
+  LateEventide: true,
+  LateMajorTests: true
+};
+
+const getNonBloodShrineWaypoints = () => {
+  return Waypoint.all
+    .filter((w) => !w.inCollection('BLOOD_MOON'))
+    .map((w) => w.id);
+};
 
 describe('rando', () => {
   describe('range', () => {
@@ -89,11 +100,7 @@ describe('rando', () => {
       }
     });
     it('includes all shrines except the blood moon shrine', () => {
-      let allWaypoints = Array.from(Array(BLOOD_MOON_SHRINE).keys()).map(x => x++);
-      allWaypoints = allWaypoints.concat(
-        Array.from(Array(120 - BLOOD_MOON_SHRINE - 1).keys())
-          .map(x => x += BLOOD_MOON_SHRINE + 1)
-      );
+      const allWaypoints = getNonBloodShrineWaypoints();
       for (let n = 0; n < 10; n++) {
         const waypoints = getRandomizedWaypoints(getRandomSeed(), allFlags);
         for (const waypointId of allWaypoints) {
@@ -104,48 +111,60 @@ describe('rando', () => {
     it('always includes the plateau shrines first', () => {
       for (let n = 0; n < 10; n++) {
         const waypoints = getRandomizedWaypoints(getRandomSeed(), allFlags);
-        for (const waypointId of PLATEAU_SHRINES) {
+        const plateauShrines = Waypoint.all.filter((w) => {
+          return (new Waypoint(w)).isPlateau;
+        }).map((w) => w.id);
+        for (const waypointId of plateauShrines) {
           expect(waypoints.slice(0, 4)).toContain(waypointId);
           expect(waypoints.slice(4)).not.toContain(waypointId);
         }
       }
     });
     it('does not include the blood moon shrine', () => {
+      const [ bloodMoonShrine, ] = Waypoint.byCollection('BLOOD_MOON');
       for (let n = 0; n < 10; n++) {
         const waypoints = getRandomizedWaypoints(getRandomSeed(), allFlags);
-        expect(waypoints).not.toContain(BLOOD_MOON_SHRINE);
-      }
-    });
-    it('puts the eventide island shrine at position 80 or later in the run', () => {
-      for (let n = 0; n < 10; n++) {
-        const seed = getRandomSeed();
-        const waypoints = getRandomizedWaypoints(seed, { LateEventide: true });
-        expect(waypoints.indexOf(EVENTIDE_SHRINE)).toBeGreaterThanOrEqual(Ranges.Eventide.bound);
-      }
-    });
-    it('puts Major Test Shrines at position 80 or later in the run', () => {
-      for (let n = 0; n < 10; n++) {
-        const seed = getRandomSeed()
-        const waypoints = getRandomizedWaypoints(seed, { LateMajorTests: true });
-        for (const waypointId of MAJOR_TEST_SHRINES) {
-          expect(waypoints.indexOf(waypointId)).toBeGreaterThanOrEqual(Ranges.MajorTest.bound);
-        }
-      }
-    });
-    it('puts the dupe shrine between position 20 and 40 (inclusive)', () => {
-      for (let n = 0; n < 10; n++) {
-        const seed = getRandomSeed();
-        const waypoints = getRandomizedWaypoints(seed, { EarlyDupe: true });
-        expect(waypoints.indexOf(DUPE_SHRINE)).toBeGreaterThanOrEqual(Ranges.Dupe.bound);
-        expect(waypoints.indexOf(DUPE_SHRINE)).toBeLessThanOrEqual(Ranges.Dupe.limit);
+        expect(waypoints).not.toContain(bloodMoonShrine);
       }
     });
     it('puts the Ganon waypoint at the end', () => {
+      const [ ganon, ] = Waypoint.byCollection('GANON');
       for (let n = 0; n < 10; n++) {
         const seed = getRandomSeed();
         const waypoints = getRandomizedWaypoints(seed);
-        expect(waypoints.slice(118)).toContain(GANON);
-        expect(waypoints.slice(0, 118)).not.toContain(GANON);
+        expect(waypoints.slice(118)).toContain(ganon.id);
+        expect(waypoints.slice(0, 118)).not.toContain(ganon.id);
+      }
+    });
+    it('puts the eventide island shrine late in the run if LateEventide flag', () => {
+      const [ eventideShrine, ] = Waypoint.byCollection('EVENTIDE');
+      for (let n = 0; n < 10; n++) {
+        const seed = getRandomSeed();
+        const waypoints = getRandomizedWaypoints(seed, { LateEventide: true });
+        expect(waypoints.indexOf(eventideShrine.id))
+          .toBeGreaterThanOrEqual(Ranges.Late.bound);
+      }
+    });
+    it('puts Major Test Shrines late in the run if LateMajorTests flag', () => {
+      const majorTests = Waypoint.byCollection('MAJOR_TEST');
+      for (let n = 0; n < 10; n++) {
+        const seed = getRandomSeed()
+        const waypoints = getRandomizedWaypoints(seed, { LateMajorTests: true });
+        for (const waypoint of majorTests) {
+          expect(waypoints.indexOf(waypoint.id))
+            .toBeGreaterThanOrEqual(Ranges.Late.bound);
+        }
+      }
+    });
+    it('puts the dupe shrine early in the run if EarlyDupe flag', () => {
+      const [ dupeShrine, ] = Waypoint.byCollection('DUPE_GLITCH');
+      for (let n = 0; n < 10; n++) {
+        const seed = getRandomSeed();
+        const waypoints = getRandomizedWaypoints(seed, { EarlyDupe: true });
+        expect(waypoints.indexOf(dupeShrine.id))
+          .toBeGreaterThanOrEqual(Ranges.Early.bound);
+        expect(waypoints.indexOf(dupeShrine.id))
+          .toBeLessThanOrEqual(Ranges.Early.limit as number);
       }
     });
   });

@@ -5,7 +5,7 @@ import '../../assets/bloodmoon.svg';
 import { handleKey, registerCallbacks } from '../../lib/keyboard';
 import { getRandomizedWaypoints, RandoFlags } from '../../lib/rando';
 import { Run, RunState } from '../../lib/run';
-import { BLOOD_MOON_SHRINE } from '../../lib/waypoints';
+import { Waypoint } from '../../lib/waypoint';
 import { AppFooter } from '../AppFooter/AppFooter';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { RunDisplay } from '../RunDisplay/RunDisplay';
@@ -40,8 +40,18 @@ export const RunManager = (props: RunManagerProps) => {
     setRun(prev => ({ ...prev, waypointIds: waypointIds }));
   };
 
+  const bloodMoonShrineId = () => {
+    return Waypoint.byCollection('BLOOD_MOON')[0].id;
+  }
+
+  const currentWaypointIsBloodMoon = (run: Run) => {
+    const currentWaypointIndex = Math.max(0, run.splits.size);
+    const currentWaypoint = Waypoint.byId(run.waypointIds[currentWaypointIndex]);
+    return currentWaypoint ? currentWaypoint.isBloodMoon : false;
+  };
+
   const removeBloodMoonShrine = (waypointIds: number[]) => {
-    const toDelete = waypointIds.indexOf(BLOOD_MOON_SHRINE);
+    const toDelete = Waypoint.byCollection('BLOOD_MOON')[0].id;
     if (toDelete > -1) {
       waypointIds.splice(toDelete, 1);
       updateWaypoints(waypointIds);
@@ -77,10 +87,7 @@ export const RunManager = (props: RunManagerProps) => {
   };
 
   const undoSplit = () => {
-    const currentWaypoint = Math.max(0, run.splits.size);
-    const shouldRemoveBloodMoon =
-      run.waypointIds[currentWaypoint] === BLOOD_MOON_SHRINE;
-    if (shouldRemoveBloodMoon) {
+    if (currentWaypointIsBloodMoon(run)) {
       removeBloodMoonShrine(run.waypointIds);
     }
     run.splits.delete(run.splits.size - 1);
@@ -129,11 +136,11 @@ export const RunManager = (props: RunManagerProps) => {
     }
     const currentWaypoint = Math.max(0, run.splits.size);
 
-    if (waypointIds[currentWaypoint] === BLOOD_MOON_SHRINE) {
+    if (currentWaypointIsBloodMoon(run)) {
       waypointIds.splice(currentWaypoint, 1);
       updateWaypoints(waypointIds);
     } else {
-      waypointIds.splice(currentWaypoint, 0, BLOOD_MOON_SHRINE);
+      waypointIds.splice(currentWaypoint, 0, bloodMoonShrineId());
       updateWaypoints(waypointIds);
     }
   };
@@ -141,9 +148,8 @@ export const RunManager = (props: RunManagerProps) => {
   // Blood moon state
   React.useEffect(() => {
     const state = {
-      isActive:
-        run.waypointIds[Math.max(0, run.splits.size)] === BLOOD_MOON_SHRINE,
-      isDone: run.splits.has(run.waypointIds.indexOf(BLOOD_MOON_SHRINE))
+      isActive: currentWaypointIsBloodMoon(run),
+      isDone: run.splits.has(run.waypointIds.indexOf(bloodMoonShrineId()))
     };
     setBloodMoonState(prev => ({
       ...prev,

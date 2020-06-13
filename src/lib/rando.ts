@@ -1,7 +1,12 @@
 import { shuffle } from 'shuffle-seed';
 import { Waypoint } from './waypoint';
 
-export function range(bound: number, limit: number = 0): number[] {
+export type RangeLimit = {
+  bound: number,
+  limit: number | undefined
+};
+
+export function range(bound: number, limit:number = 0): number[] {
   const start = limit ? bound : 0;
   const end = limit ? limit : bound;
   const base = [...Array.from(Array(end - start + 1).keys())];
@@ -30,14 +35,15 @@ export type RandoPreset = {
   flags: RandoFlags
 }
 
-export const Ranges = {
+export const Ranges: {[key: string]: RangeLimit} = {
   Plateau: { bound:   0, limit:   3 },
+  Any:     { bound:   4, limit: 118 },
   Early:   { bound:  20, limit:  40 },
   Late:    { bound:  80, limit: 118 },
   Ganon:   { bound: 119, limit: 119 }
 }
-function inRange(ordering: number, { bound: number, limit: number }): boolean {
-  return ordering >= bound && ordering <= limit;
+function inRange(ordering: number, { bound, limit }: RangeLimit): boolean {
+  return ordering >= bound && ordering <= (limit ? limit : bound);
 }
 function validPlateau(ordering: number): boolean {
   return inRange(ordering, Ranges.Plateau);
@@ -51,7 +57,6 @@ function validLate(ordering: number): boolean {
 function validGanon(ordering: number): boolean {
   return inRange(ordering, Ranges.Ganon);
 }
-
 
 export const Presets: Partial<Record<ValidPreset, RandoPreset>> = {
   'Default': {
@@ -76,7 +81,7 @@ export function getRandomizedWaypoints(
   flags: RandoFlags = Presets.Default!.flags
 ): number[] {
   const placements = shuffle(range(120), seed);
-  if (flags.ClampDist) { return generateClampDistOrdering(seed, flags); }
+  if (flags.ClampDist) { return generateClampDistOrdering(placements, flags); }
   else {
     Waypoint.forEach((waypoint: Waypoint) => {
       let valid = [...placements];
@@ -91,65 +96,70 @@ export function getRandomizedWaypoints(
         // should not happen, but just in case...
         throw new Error(`Error placing waypoint ${waypoint.id}: ${waypoint.name} using seed ${seed}`);
       }
-      waypoint.placeAt(valid[0]);
+      let placed: boolean = false, i: number = 0;
+      while (!placed) {
+        if (isValidForPlacement(waypoint, valid[i], flags)) {
+          waypoint.placeAt(valid[i]);
+          placed = true;
+        }
+        i++;
+        if (i === valid.length) {
+          // should not happen, but just in case...
+          throw new Error(`Error placing waypoint ${waypoint.id}: ${waypoint.name} using seed ${seed}`);
+        }
+      }
     });
     return Waypoint.all
-      .sort((a: Waypoint, b: Waypoint) => a.placement - b.placement)
+      .sort((a: Waypoint, b: Waypoint) => {
+        if (a.placement !== null && b.placement !== null) {
+          return a.placement - b.placement
+        }
+        if (a.placement === null) { return -1; }
+        if (a.placement === null) { return 1; }
+        return 0;
+      })
       .map((w: Waypoint) => w.id);
   }
 }
 
 function generateClampDistOrdering(
-  seed: string,
+  placements: number[],
   flags: RandoFlags = Presets.Default!.flags
 ): number[] {
-  // For each plaecment, find all waypoints in box of prior that meet conditions,
-  // and place first candidate there.
+  for (const placement: number of placements) {
+    // For each plaecment, find all waypoints in box of prior that meet conditions,
+    // and place first candidate there.
+
+  }
   return [];
 }
 
-// const generateDefault = (seed: string): number[] => {
-//   const normalShrines = range(119).filter(item => isNormalShrine(item));
-//   const waypoints: number[] = [];
-//   waypoints.push(...shuffle(PLATEAU_SHRINES, seed));
-//   waypoints.push(...shuffle(normalShrines, seed));
-//   return waypoints;
-// }
-
-// const permuteLateEventide = (waypoints: number[], seed: string): number[] => {
-//   if (waypoints.indexOf(EVENTIDE_SHRINE) > Ranges.Eventide.bound)
-//     return waypoints;
-
-//   waypoints = waypoints.filter(item => item !== EVENTIDE_SHRINE);
-//   const [eventideSlot,] = shuffle(range(Ranges.Eventide.bound, Ranges.Eventide.limit), seed);
-//   waypoints.splice(eventideSlot, 0, EVENTIDE_SHRINE);
-//   return waypoints;
-// }
-
-// const permuteEarlyDupe = (waypoints: number[], seed: string): number[] => {
-//   const dupe_index = waypoints.indexOf(DUPE_SHRINE);
-//   if (dupe_index >= Ranges.Dupe.bound && dupe_index <= Ranges.Dupe.limit)
-//     return waypoints;
-
-//   waypoints = waypoints.filter(item => item !== DUPE_SHRINE)
-//   const [dupeSlot,] = shuffle(range(Ranges.Dupe.bound, Ranges.Dupe.limit), seed);
-//   waypoints.splice(dupeSlot, 0, DUPE_SHRINE);
-//   return waypoints;
-// }
-
-// const isMajorTest = (shrineId: number): boolean => {
-//   return (MAJOR_TEST_SHRINES.indexOf(shrineId) > -1);
-// }
-
-// const permuteLateMajortests = (waypoints: number[], seed: string): number[] => {
-//   waypoints = waypoints.filter(item => !isMajorTest(item));
-//   const majorTestShrines = shuffle([...MAJOR_TEST_SHRINES], seed);
-//   const majorTestShrineSlots = shuffle(range(Ranges.MajorTest.bound, Ranges.MajorTest.limit), seed);
-//   majorTestShrines.forEach((shrineId, index) => {
-//     waypoints.splice(majorTestShrineSlots[index], 0, shrineId);
-//   });
-//   return waypoints;
-// }
+function isValidForPlacement(waypoint: Waypoint, placement: number, flags: RandoFlags) {
+  const constraints = {
+    isPlateau: Ranges.Plateau,
+    isDupeGlitch: {
+      bound: flags.EarlyDupe ? Ranges.Early.bound : Ranges.Any.bound,
+      range: flags.EarlyDupe ? Ranges.Early.limit : Ranges.Any.limit
+    },
+    isEventide: {
+      bound: flags.LateEventide ? Ranges.Late.bound : Ranges.Any.bound,
+      limit: flags.LateEventide ? Ranges.Late.limit : Ranges.Any.limit
+    },
+    isMajorTestOfStrength: {
+      bound: flags.LateMajorTests ? Ranges.Late.bound : Ranges.Any.bound,
+      limit: flags.LateMajorTests ? Ranges.Late.limit : Ranges.Any.limit
+    },
+    isGanon: Ranges.Ganon
+  };
+  let maxBound: number = -1, minLimit: number = 9999;
+  Object.entries(constraints).forEach(([ key, { bound, limit } ]) => {
+    if (waypoint[key]) {
+      maxBound = Math.max(maxBound, bound);
+      minLimit = Math.min(minLimit, limit as number);
+    }
+  });
+  return placement >= maxBound && placement <= minLimit;
+}
 
 // const permuteClampDist = (waypoints: number[], seed: string): number[] => {
 //   waypoints = [...waypoints.filter(item => isNormalShrine(item))];
@@ -160,25 +170,5 @@ function generateClampDistOrdering(
 //   });
 //   deltas.sort();
 //   console.log(deltas[0], deltas[deltas.length - 1]);
-//   return waypoints;
-// }
-
-// export function getRandomizedWaypoints(seed: string, flags: RandoFlags = Presets.Default!.flags): number[] {
-//   let waypoints = generateDefault(seed);
-
-//   if (flags.LateEventide)
-//     waypoints = permuteLateEventide(waypoints, seed);
-
-//   if (flags.EarlyDupe)
-//     waypoints = permuteEarlyDupe(waypoints, seed);
-
-//   if (flags.LateMajorTests)
-//     waypoints = permuteLateMajortests(waypoints, seed);
-
-//   if (flags.ClampDist)
-//     waypoints = permuteClampDist(waypoints, seed);
-
-//   waypoints.push(GANON);
-
 //   return waypoints;
 // }

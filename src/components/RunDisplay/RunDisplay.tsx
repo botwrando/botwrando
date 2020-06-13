@@ -1,6 +1,6 @@
 import React from 'react';
 import { Run } from '../../lib/run';
-import { getWaypoint } from '../../lib/waypoints';
+import { Waypoint } from '../../lib/waypoint';
 import { QuickMap } from '../QuickMap/QuickMap';
 import { SplitHistory } from '../SplitHistory/SplitHistory';
 import { SplitTimer } from '../SplitTimer/SplitTimer';
@@ -19,7 +19,7 @@ export function RunDisplay({ run, onUpdatePausedTime }: RunDisplayProps) {
         currentWaypoint={run.splits.size}
         onUpdatePausedTime={onUpdatePausedTime}
       />
-      <QuickMap waypoint={getWaypoint(run.waypointIds[run.splits.size])} />
+      <QuickMap waypoint={Waypoint.byId(run.waypointIds[run.splits.size])} />
     </div>
   );
 }
