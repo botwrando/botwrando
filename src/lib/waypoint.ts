@@ -24,7 +24,35 @@ export interface WaypointCollections {
   [key: string]: number[]
 }
 
-export class Waypoint {
+export interface WaypointObject {
+  id: number,
+  name: string | null,
+  desc: string | null,
+  region: string | null,
+  location: Coord,
+  collections: { [key: string]: boolean },
+  isPlateau: boolean,
+  isDupeGlitch: boolean,
+  isApparatus: boolean,
+  isBloodMoon: boolean,
+  isEventide: boolean,
+  isGanon: boolean,
+  isMinorTestOfStrength: boolean,
+  isModestTestOfStrength: boolean,
+  isMajorTestOfStrength: boolean,
+  isTestOfStrength: boolean,
+  placement: number | null,
+  isPlaced: boolean,
+  placeAt: (placement: number) => void,
+  inCollection: (collectionName: string) => boolean,
+  inBox: (size: number, other: WaypointObject) => boolean,
+  inRadius: (radius: number, other: WaypointObject) => boolean,
+  dist: (other: WaypointObject) => number
+}
+
+export type WaypointKey = keyof WaypointObject;
+
+export class Waypoint implements WaypointObject {
   id: number;
   name: string | null;
   desc: string | null;
@@ -61,6 +89,10 @@ export class Waypoint {
     return Waypoint.all.find((w) => w.id === id);
   }
 
+  static byPlacement(placement: number): Waypoint | undefined {
+    return Waypoint.all.find((w) => w.placement === placement);
+  }
+
   static byCollection(collection: string): Waypoint[] {
     return this.collection_ids[collection]
       .map((id: number): Waypoint | undefined => Waypoint.byId(id)) as Waypoint[];
@@ -71,7 +103,7 @@ export class Waypoint {
   }
 
   static map(callback: (w: Waypoint) => any): any[] {
-    Waypoint.all.map(callback);
+    return Waypoint.all.map(callback);
   }
 
   get collections(): { [key: string]: boolean } {
@@ -80,6 +112,10 @@ export class Waypoint {
 
   get placement(): number | null {
     return this.ordering;
+  }
+
+  get isPlaced(): boolean {
+    return typeof this.ordering === 'number';
   }
 
   placeAt(placement: number) {
@@ -108,17 +144,17 @@ export class Waypoint {
     );
   }
 
-  inBox(size: number, other: Waypoint): boolean {
+  inBox(size: number, other: WaypointObject): boolean {
     const xInBox = Math.abs(this.location.x - other.location.x) < size;
     const yInBox = Math.abs(this.location.y - other.location.y) < size;
     return xInBox && yInBox;
   }
 
-  inRadius(radius: number, other: Waypoint): boolean {
+  inRadius(radius: number, other: WaypointObject): boolean {
     return this.dist(other) < radius;
   }
 
-  dist(other: Waypoint): number {
+  dist(other: WaypointObject): number {
     const diff = {
       x: other.location.x - this.location.x,
       y: other.location.y - this.location.y,
