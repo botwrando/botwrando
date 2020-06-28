@@ -4,6 +4,7 @@ import '../../assets/bloodmoon.svg';
 import { getDefaultRun, Run } from '../../lib/run';
 import '../../styles/style.scss';
 import { RunManager } from '../RunManager/RunManager';
+import { DistanceExplorer } from '../DistanceExplorer/DistanceExplorer';
 
 
 let theme = createMuiTheme({
@@ -39,14 +40,18 @@ export const defaultButtonAttrs: ButtonProps = {
   size: 'large',
 };
 
-function App() {
-  const run: Run = getDefaultRun();
+function App(props: { type: string }) {
   return (
     <>
       <link rel="preload" href="assets/bloodmoon.svg" as="image"></link>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <RunManager run={run} />
+        {
+          (props.type === 'distances') ?
+            <DistanceExplorer /> :
+            <RunManager run={getDefaultRun()} />
+        }
+      }
       </ThemeProvider>
     </>
   );

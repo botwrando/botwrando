@@ -1,5 +1,5 @@
 import React from 'react';
-import { Waypoint } from '../../lib/waypoints';
+import { Waypoint } from '../../lib/waypoint';
 import '../WorldMap/WorldMap.scss';
 export type QuickMapProps = {
 	waypoint?: Waypoint;
@@ -11,7 +11,7 @@ export const QuickMap = (props: QuickMapProps) => {
     return <></>;
   }
   const bgClasses = ['mapwrapper'];
-  if (waypoint) bgClasses.push(`bg-${waypoint.index}`);
+  if (waypoint) bgClasses.push(`bg-${waypoint.placement}`);
   return (
     <div className="worldmap">
       <div className={bgClasses.join(' ')}></div>

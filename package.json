@@ -39,12 +39,14 @@
     "jest-spec-reporter": "^1.0.12",
     "stylelint": "^13.5.0",
     "stylelint-config-sass-guidelines": "^7.0.0",
-    "stylelint-scss": "^3.17.2"
+    "stylelint-scss": "^3.17.2",
+    "ts-node": "^8.10.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "console": "ts-node --interactive",
     "ci": "CI=true yarn test --reporters=jest-spec-reporter",
     "coverage": "yarn ci --coverage=true --coverageProvider=v8 && coveralls < ./coverage/lcov.info",
     "lint": "node ./node_modules/eslint/bin/eslint.js --ext=ts,tsx src && node ./node_modules/stylelint/bin/stylelint.js ./**/*.scss",

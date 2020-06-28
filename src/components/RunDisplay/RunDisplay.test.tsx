@@ -2,7 +2,7 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Run, RunState } from '../../lib/run';
-import { getWaypoint } from '../../lib/waypoints';
+import { Waypoint } from '../../lib/waypoint';
 import { QuickMap } from '../QuickMap/QuickMap';
 import { SplitHistory } from '../SplitHistory/SplitHistory';
 import { SplitTimer } from '../SplitTimer/SplitTimer';
@@ -59,7 +59,7 @@ describe('RunDisplay', () => {
   });
   it('renders the QuickMap', () => {
     run.waypointIds.unshift(9);
-    const waypoint = getWaypoint(9);
+    const waypoint = Waypoint.byId(9);
     const el = shallow(<RunDisplay
       run={run}
       onUpdatePausedTime={onUpdatePausedTime}
