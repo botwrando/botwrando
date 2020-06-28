@@ -1,0 +1,21 @@
+html,
+body,
+#root {
+  overflow: scroll;
+}
+
+.distance-explorer {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  table {
+    tbody {
+      td {
+        padding: 4px;
+        .right {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
