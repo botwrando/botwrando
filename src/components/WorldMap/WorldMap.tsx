@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Waypoint } from '../../lib/waypoints';
+import { Waypoint } from '../../lib/waypoint';
 
 export type WorldMapProps = {
 	waypoint?: Waypoint;
