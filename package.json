@@ -11,7 +11,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/shuffle-seed": "^1.1.0",
     "gh-pages": "^2.2.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-keyboard-event-handler": "^1.5.4",
